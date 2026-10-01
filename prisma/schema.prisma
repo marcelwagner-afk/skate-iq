@@ -1,0 +1,104 @@
+// SKATE IQ – Phase-2 relational blueprint (PostgreSQL). Mirrors src/core/types.ts.
+// Not wired in Phase 1; reviewed now so the static preview's data shapes stay compatible.
+
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+
+model Sport      { id String @id; nameKey String; enabled Boolean @default(false)
+                   disciplines Discipline[] }
+model Discipline { id String @id; sportId String; nameKey String
+                   sport Sport @relation(fields: [sportId], references: [id]); categories Category[] }
+model Category   { id String @id; disciplineId String; nameKey String; ageGroup String?; gender String?; order Int
+                   discipline Discipline @relation(fields: [disciplineId], references: [id])
+                   events Event[]; @@index([disciplineId]) }
+model Season     { id String @id; label String; start DateTime; end DateTime }
+model Country    { code String @id; nameKey String; continent String; flag String; athletes Athlete[] }
+model Club       { id String @id; name String; countryCode String; athletes Athlete[] }
+
+model Athlete {
+  id String @id
+  displayName String
+  nameVariants String[]
+  countryCode String
+  country Country @relation(fields: [countryCode], references: [code])
+  clubId String?
+  club Club? @relation(fields: [clubId], references: [id])
+  sportIds String[]
+  profileVisibility String @default("restricted")
+  claimed Boolean @default(false)
+  isTeam Boolean @default(false)
+  memberIds String[]
+  performances Performance[]
+  consents ConsentRecord[]
+  @@index([countryCode])
+  @@index([displayName])
+}
+model ConsentRecord { id String @id @default(cuid()); athleteId String; grantedBy String; scope String
+                      grantedAt DateTime; revokedAt DateTime?
+                      athlete Athlete @relation(fields: [athleteId], references: [id]); @@index([athleteId]) }
+
+model Competition {
+  id String @id; name String; sportId String; level String; seriesKey String?
+  seasonId String; startDate DateTime; endDate DateTime?; countryCode String?; venueId String?
+  events Event[]
+  @@index([seasonId, level]); @@index([startDate])
+}
+model Event { id String @id; competitionId String; categoryId String; fieldSize Int
+              competition Competition @relation(fields: [competitionId], references: [id])
+              category Category @relation(fields: [categoryId], references: [id])
+              performances Performance[]
+              @@index([categoryId]); @@index([competitionId]) }
+
+model Performance {
+  id String @id; eventId String; athleteId String
+  metrics Json          // MetricValue[] (adapter-declared keys)
+  segments Json?
+  placement Int?
+  status String @default("ok")
+  sourceId String
+  event Event @relation(fields: [eventId], references: [id])
+  athlete Athlete @relation(fields: [athleteId], references: [id])
+  source DataSource @relation(fields: [sourceId], references: [id])
+  @@index([athleteId]); @@index([eventId]); @@index([sourceId])
+}
+
+model DataSource { id String @id; organization String; type String; url String?; documentId String?
+                   retrievedAt DateTime; parserVersion String; confidence Float
+                   validationStatus String; licensed Boolean
+                   performances Performance[]; jobs ImportJob[] }
+model ImportJob  { id String @id @default(cuid()); sourceId String; startedAt DateTime; finishedAt DateTime?
+                   status String; stats Json
+                   source DataSource @relation(fields: [sourceId], references: [id]) }
+model DataQualityRecord { id String @id @default(cuid()); entity String; entityId String; check String
+                          severity String; detail String; resolvedBy String?; resolvedAt DateTime?
+                          @@index([entity, entityId]) }
+
+// -------- append-only computed snapshots --------
+model RankingSnapshot { id String @id @default(cuid()); athleteId String; categoryId String; seasonId String
+                        scope String; scopeKey String; kind String; position Int; of Int; percentile Float?
+                        computedAt DateTime; modelVersion String
+                        @@index([categoryId, seasonId, scope, scopeKey, computedAt])
+                        @@index([athleteId, computedAt]) }
+model SpiSnapshot     { id String @id @default(cuid()); athleteId String; sportId String; categoryId String
+                        value Float; confidence String; computedAt DateTime; modelVersion String
+                        contributions Json
+                        @@index([athleteId, computedAt]) }
+model BenchmarkSnapshot { id String @id @default(cuid()); categoryId String; seasonId String
+                          groupKind String; groupKey String; metricKey String; stats Json
+                          computedAt DateTime; modelVersion String
+                          @@index([categoryId, seasonId, groupKind, groupKey, computedAt]) }
+model CompetitionStrengthSnapshot { id String @id @default(cuid()); competitionId String; index Float
+                                    factors Json; computedAt DateTime; modelVersion String
+                                    @@index([competitionId, computedAt]) }
+
+// -------- tenancy & commerce --------
+model Organization { id String @id @default(cuid()); type String; name String; countryCode String?
+                     branding Json?; dataScope Json; users User[]; subscriptions Subscription[] }
+model User   { id String @id @default(cuid()); email String @unique; locale String @default("en")
+               organizationId String?; roles String[]; athleteId String?; guardianOf String[]
+               organization Organization? @relation(fields: [organizationId], references: [id]) }
+model Subscription { id String @id @default(cuid()); organizationId String?; userId String?
+                     plan String; status String; periodEnd DateTime; foundingMember Boolean @default(false)
+                     organization Organization? @relation(fields: [organizationId], references: [id]) }
+model AuditLog { id String @id @default(cuid()); userId String?; action String; entity String?; entityId String?
+                 detail Json?; at DateTime @default(now()); @@index([at]) }
