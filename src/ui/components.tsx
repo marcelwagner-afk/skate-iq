@@ -17,17 +17,27 @@ export function SectionTitle({ children, sub }: { children: ReactNode; sub?: Rea
     </div>
   );
 }
-export function Kpi({ label, value, sub, tone }: { label: string; value: ReactNode; sub?: ReactNode; tone?: 'good' | 'bad' }) {
+export function Kpi({ label, value, sub, tone, delta }: {
+  label: string; value: ReactNode; sub?: ReactNode; tone?: 'good' | 'bad';
+  /** Veränderungs-Badge wie in der Designvorlage: "+2" grün / "−3" rot / "–" neutral */
+  delta?: { text: string; dir: 'up' | 'down' | 'flat' };
+}) {
   return (
     <div className="card p-3 sm:p-4 min-w-0">
       <div className="text-[11px] uppercase tracking-wider ink-3 truncate">{label}</div>
-      <div className="hero-num text-2xl sm:text-3xl font-extrabold mt-1"
-        style={tone ? { color: tone === 'good' ? 'var(--good)' : 'var(--critical)' } : undefined}>
-        {value}
+      <div className="flex items-baseline gap-2 mt-1 min-w-0">
+        <div className="hero-num text-2xl sm:text-3xl font-extrabold truncate"
+          style={tone ? { color: tone === 'good' ? 'var(--good)' : 'var(--critical)' } : undefined}>
+          {value}
+        </div>
+        {delta && <span className={`delta ${delta.dir}`}>{delta.text}</span>}
       </div>
       {sub && <div className="text-xs ink-3 mt-0.5 truncate">{sub}</div>}
     </div>
   );
+}
+export function SecLabel({ children }: { children: ReactNode }) {
+  return <div className="seclabel mb-2">{children}</div>;
 }
 export function Badge({ children, color }: { children: ReactNode; color?: string }) {
   return (

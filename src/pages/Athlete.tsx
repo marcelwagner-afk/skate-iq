@@ -16,6 +16,12 @@ const TARGETS: { key: string; group: BenchmarkGroup }[] = [
   { key: 'bench.group.podium', group: { kind: 'podium' } },
 ];
 
+const RANGES: { key: string; months: number | null }[] = [
+  { key: 'athlete.range.3m', months: 3 }, { key: 'athlete.range.6m', months: 6 },
+  { key: 'athlete.range.12m', months: 12 }, { key: 'athlete.range.24m', months: 24 },
+  { key: 'athlete.range.career', months: null },
+];
+
 export default function Athlete() {
   const { id } = useParams();
   const { store } = useApp();
@@ -23,6 +29,7 @@ export default function Athlete() {
   const cats = a ? store.categoriesOfAthlete(a.id) : [];
   const [catSel, setCatSel] = useState<string | null>(null);
   const [target, setTarget] = useState(2);           // default Top 10
+  const [range, setRange] = useState(4);             // default Karriere
   const catId = catSel ?? cats[0];
   const season = store.currentSeason();
 
@@ -64,31 +71,46 @@ export default function Athlete() {
   const parts = catParts(store, catId);
   const f = (v: number | null | undefined): string => fmtOriented(v, data.sportId);
 
+  const TABS: [string, string][] = [
+    ['sec-overview', 'athlete.tab.overview'], ['sec-development', 'athlete.tab.development'],
+    ['sec-benchmarks', 'athlete.tab.benchmarks'], ['sec-results', 'athlete.tab.results'],
+  ];
   return (
     <div className="space-y-5">
-      {/* Header – international position readable in 5 seconds (§65) */}
-      <Card>
+      {/* Hero-Header (Designvorlage: großer Name, Meta-Zeile, Tabs) */}
+      <div className="hero-band p-5 sm:p-7" id="sec-overview">
         <div className="flex flex-wrap items-start gap-4">
-          <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl" style={{ background: 'var(--surface-2)' }}>{c?.flag}</div>
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-4xl flex-none"
+            style={{ background: 'color-mix(in srgb, var(--surface-2) 70%, transparent)', border: '1px solid var(--border)' }}>{c?.flag}</div>
           <div className="min-w-0 flex-1">
-            <h1 className="text-2xl font-extrabold tracking-tight">{a.displayName}</h1>
-            <div className="text-sm ink-2 mt-0.5">
-              {c && t(c.nameKey)} · {parts.sport} · {parts.discipline} · {parts.category}
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tight">{a.displayName}</h1>
+            <div className="text-sm ink-2 mt-1">
+              {c && t(c.nameKey)} · {parts.sport} · {parts.discipline} · <b className="ink-2">{parts.category}</b>
               {a.clubId && <> · {store.club(a.clubId)?.name}</>}
             </div>
             {cats.length > 1 && (
-              <div className="flex gap-1.5 mt-2 flex-wrap">
+              <div className="flex gap-1.5 mt-2.5 flex-wrap">
                 {cats.map(cid => (
                   <button key={cid} className={`chip ${cid === catId ? 'font-bold' : ''}`}
-                    style={cid === catId ? { borderColor: 'var(--accent)', color: 'var(--accent)' } : undefined}
+                    style={cid === catId ? { borderColor: 'var(--accent)', color: 'var(--seq-600)' } : undefined}
                     onClick={() => setCatSel(cid)}>{catLabel(store, cid)}</button>
                 ))}
               </div>
             )}
           </div>
-          <button className="btn text-sm" onClick={() => downloadShareCard(store, a, catId)}>{t('athlete.share')} ⬇</button>
+          <button className="btn btn-primary text-sm" onClick={() => downloadShareCard(store, a, catId)}>{t('athlete.share')} ⬇</button>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 mt-4">
+        <div className="tabbar mt-5 -mb-1">
+          {TABS.map(([sec, key], i) => (
+            <a key={sec} href={`#/athlete/${a.id}`} className={`tab ${i === 0 ? 'on' : ''}`}
+              onClick={e => { e.preventDefault(); document.getElementById(sec)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}>
+              {t(key)}
+            </a>
+          ))}
+        </div>
+      </div>
+      <Card>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
           <Kpi label={t('kpi.world')} value={data.world ? `#${data.world.position}` : t('common.na')} sub={data.world ? `/ ${data.world.of}` : undefined} />
           <Kpi label={t('kpi.percentile')} value={data.pct?.percentile != null ? fmtNum(data.pct.percentile, 1) : t('common.na')}
             sub={data.pct?.percentile == null && data.pct ? t('bench.tooFewAthletes', { n: data.pct.n }) : `${t('common.n')}=${data.pct?.n ?? 0}`} />
@@ -121,25 +143,43 @@ export default function Athlete() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        {/* Development chart with corridor + major-competition emphasis */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5" id="sec-development">
+        {/* Development chart with corridor + major-competition emphasis + range pills */}
         <Card>
-          <SectionTitle sub={data.corridorT10 ? t('athlete.corridor', { group: t('bench.group.top10'), n: data.corridorT10.n }) : undefined}>
-            {t('athlete.development')}
-          </SectionTitle>
+          <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
+            <div>
+              <h2 className="text-base font-bold tracking-tight">{t('athlete.development')}</h2>
+              {data.corridorT10 && <p className="text-xs ink-3 mt-0.5">{t('athlete.corridor', { group: t('bench.group.top10'), n: data.corridorT10.n })}</p>}
+            </div>
+            <div className="tabbar">
+              {RANGES.map((r, i) => (
+                <button key={r.key} className={`tab !px-2.5 !py-1 !text-xs ${i === range ? 'on' : ''}`} onClick={() => setRange(i)}>
+                  {t(r.key)}
+                </button>
+              ))}
+            </div>
+          </div>
           <Gate feature="athlete.history">
-            <LineChart
-              series={[{
-                name: t(data.info.adapter.metrics.find(m => m.isPrimary)!.nameKey),
-                color: 'var(--series-1)',
-                pts: data.series.map(s => ({
-                  x: new Date(s.date).getTime(), y: s.value,
-                  label: s.competition, emphasis: s.level === 'world' || s.level === 'continental',
-                })),
-              }]}
-              corridor={data.corridorT10 ? { ...data.corridorT10, label: t('bench.group.top10') } : null}
-              fmtY={v => f(v)} fmtX={v => fmtDate(new Date(v).toISOString())}
-            />
+            {(() => {
+              const months = RANGES[range].months;
+              const cutoff = months == null ? null
+                : new Date(new Date(store.today).getTime() - months * 30.44 * 86400e3).toISOString().slice(0, 10);
+              const pts = data.series.filter(s => cutoff == null || s.date >= cutoff);
+              return pts.length >= 2 ? (
+                <LineChart
+                  series={[{
+                    name: t(data.info.adapter.metrics.find(m => m.isPrimary)!.nameKey),
+                    color: 'var(--series-1)',
+                    pts: pts.map(s => ({
+                      x: new Date(s.date).getTime(), y: s.value,
+                      label: s.competition, emphasis: s.level === 'world' || s.level === 'continental',
+                    })),
+                  }]}
+                  corridor={data.corridorT10 ? { ...data.corridorT10, label: t('bench.group.top10') } : null}
+                  fmtY={v => f(v)} fmtX={v => fmtDate(new Date(v).toISOString())}
+                />
+              ) : <p className="ink-3 text-sm py-8 text-center">{t('athlete.rangeEmpty')}</p>;
+            })()}
           </Gate>
         </Card>
 
@@ -163,8 +203,9 @@ export default function Athlete() {
         </Card>
       </div>
 
-      {/* What does it take? */}
-      <Card>
+      {/* What does it take? (Designvorlage: Category Benchmark mit Meter-Balken) */}
+      <Card className="scroll-mt-20" >
+        <div id="sec-benchmarks" />
         <SectionTitle>{t('athlete.whatittakes')}</SectionTitle>
         <Gate feature="athlete.whatItTakes">
           <div className="flex gap-1.5 flex-wrap mb-4">
@@ -182,15 +223,27 @@ export default function Athlete() {
               <Kpi label={t('athlete.gap')} value={data.gap.gap <= 0 ? '✓' : fmtMag(data.gap.gap, data.sportId)} tone={data.gap.gap <= 0 ? 'good' : undefined} />
               {data.gap.breakdown && data.gap.gap > 0 && (
                 <div className="sm:col-span-3 card p-4">
-                  <div className="text-xs uppercase tracking-wider ink-3 mb-2">{t('athlete.breakdown')}</div>
-                  {data.gap.breakdown.map(b2 => (
-                    <div key={b2.metricKey} className="flex justify-between text-sm py-1">
-                      <span className="ink-2">{t(`metric.${b2.metricKey === 'timeMs' ? 'timeMs' : b2.metricKey}`)}</span>
-                      <span className="tnum font-semibold">{b2.gap > 0 ? fmtMag(b2.gap, data.sportId) : '✓'}</span>
-                    </div>
-                  ))}
+                  <div className="seclabel mb-3">{t('athlete.breakdown')}</div>
+                  {/* Gesamt-Gap als Gradient-Meter (Score vs. Benchmark) */}
+                  <div className="flex items-center justify-between text-sm mb-1">
+                    <span className="ink-2">{t('athlete.current')} <b className="tnum ink-1">{f(data.gap.current)}</b></span>
+                    <span className="ink-2">{t('athlete.benchmark')} <b className="tnum ink-1">{f(data.gap.target)}</b></span>
+                  </div>
+                  <div className="meter mb-4"><i style={{ width: `${Math.max(4, Math.min(100, (data.gap.current / data.gap.target) * 100))}%` }} /></div>
+                  {data.gap.breakdown.map(b2 => {
+                    const share = Math.max(0, Math.min(100, 100 - (b2.gap / Math.max(data.gap!.gap, 1e-9)) * 100));
+                    return (
+                      <div key={b2.metricKey} className="py-1.5">
+                        <div className="flex justify-between text-sm mb-1">
+                          <span className="ink-2">{t(`metric.${b2.metricKey === 'timeMs' ? 'timeMs' : b2.metricKey}`)}</span>
+                          <span className="tnum font-semibold">{b2.gap > 0 ? fmtMag(b2.gap, data.sportId) : '✓'}</span>
+                        </div>
+                        <div className="meter"><i style={{ width: `${b2.gap > 0 ? share : 100}%` }} /></div>
+                      </div>
+                    );
+                  })}
                   {data.gap.largestOpportunityKey && (
-                    <div className="text-sm mt-2 font-semibold" style={{ color: 'var(--accent)' }}>
+                    <div className="text-sm mt-2.5 font-semibold" style={{ color: 'var(--seq-600)' }}>
                       {t('athlete.largestOpportunity')}: {t(`metric.${data.gap.largestOpportunityKey}`)}
                     </div>
                   )}
@@ -203,6 +256,7 @@ export default function Athlete() {
 
       {/* Results table */}
       <Card>
+        <div id="sec-results" />
         <SectionTitle>{t('athlete.results')}</SectionTitle>
         <div className="overflow-x-auto">
           <table className="tbl w-full">

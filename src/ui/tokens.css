@@ -15,8 +15,9 @@
   --accent-2: #38cfff;       /* cyan (gradient partner) */
   --accent-3: #8b5cf6;       /* violet (sparingly) */
   --accent-ink: #ffffff;
-  --series-1: #4f8ef7; --series-2: #e06a3a; --series-3: #27b584; --series-4: #d9a022;
-  --series-5: #e07ba8; --series-6: #41a341; --series-7: #9d8ff0; --series-8: #e86f6f;
+  /* chart series = validated reference palette (dark steps re-validated on navy surface) */
+  --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+  --series-5: #d55181; --series-6: #008300; --series-7: #9085e9; --series-8: #e66767;
   --seq-200: #16335e; --seq-400: #3987e5; --seq-600: #8ec0ff;
   --good: #2fc55f; --warning: #f4b63f; --serious: #ec835a; --critical: #ef5350;
   --grid: rgba(148, 170, 205, 0.10);
@@ -78,6 +79,7 @@ body {
 :root[data-theme="light"] .btn-primary { background: var(--accent); box-shadow: none; }
 
 .chip {
+  display: inline-block;
   border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px;
   font-size: 12px; color: var(--ink-2);
   background: color-mix(in srgb, var(--surface-2) 60%, transparent);
@@ -96,3 +98,59 @@ a { color: inherit; }
   box-shadow: var(--glow); flex: none;
 }
 .scrollbar-none { scrollbar-width: none; } .scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* ---- Designvorlage 10/2026: App-Layout-Primitive ---- */
+/* Sidebar (Desktop-App-Gefühl wie in der Vorlage) */
+.sidelink {
+  display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 10px;
+  font-weight: 600; font-size: 13.5px; color: var(--ink-2); width: 100%;
+}
+.sidelink:hover { color: var(--ink-1); background: var(--surface-2); }
+.sidelink.on { color: #bcd7ff; background: rgba(59, 130, 246, 0.18); }
+:root[data-theme="light"] .sidelink.on { color: var(--accent); background: rgba(42, 120, 214, 0.10); }
+.sidelink svg { flex: none; opacity: 0.85; }
+
+/* Mikro-Label in Großbuchstaben ("GLOBAL SPOTLIGHT", "LATEST RESULTS") */
+.seclabel {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Delta-Badge in KPI-Kacheln (+2 ↑ grün / −3 ↓ rot) */
+.delta { font-size: 12px; font-weight: 700; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+.delta.up   { color: var(--good);     background: color-mix(in srgb, var(--good) 14%, transparent); }
+.delta.down { color: var(--critical); background: color-mix(in srgb, var(--critical) 14%, transparent); }
+.delta.flat { color: var(--ink-3);    background: var(--surface-2); }
+
+/* Sport-/Disziplin-Kacheln mit eigenem Akzentverlauf */
+.tile { position: relative; overflow: hidden; border-radius: 16px; border: 1px solid var(--border); padding: 14px 16px; background: var(--surface-1); }
+.tile::before { content: ''; position: absolute; inset: 0; opacity: 0.16; background: var(--tile-grad, linear-gradient(135deg, var(--accent), transparent 70%)); pointer-events: none; }
+.tile:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+
+/* Hero-Banner-Karte (Spotlight / Talent Radar) mit Gradient-Artwork */
+.hero-band {
+  position: relative; overflow: hidden; border-radius: 16px; border: 1px solid var(--border);
+  background:
+    radial-gradient(640px 220px at 85% 15%, rgba(56, 207, 255, 0.22), transparent 60%),
+    radial-gradient(520px 260px at 95% 95%, rgba(139, 92, 246, 0.22), transparent 55%),
+    linear-gradient(115deg, #0c1e3e 0%, #0d1526 55%, #121a30 100%);
+}
+:root[data-theme="light"] .hero-band { background: linear-gradient(115deg, #e8f0fd, #f6f8fc); }
+
+/* Tab-Leiste (Athletenprofil) */
+.tabbar { display: flex; gap: 4px; overflow-x: auto; }
+.tab { padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
+.tab:hover { color: var(--ink-1); background: var(--surface-2); }
+.tab.on { color: #fff; background: linear-gradient(135deg, #2f6ff0, #3f9bff); }
+:root[data-theme="light"] .tab.on { background: var(--accent); }
+
+/* Meter-Balken (Category Benchmark: Gap-Visualisierung) */
+.meter { height: 7px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.meter > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent-2), var(--accent), var(--accent-3)); }
+
+/* Preiskarten */
+.price-card { display: flex; flex-direction: column; border-radius: 16px; border: 1px solid var(--border); padding: 20px; background: var(--surface-1); }
+.price-card.featured { border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); box-shadow: var(--glow); }
+.price-num { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; }
+.plist { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 7px; font-size: 13px; color: var(--ink-2); }
+.plist li::before { content: '✓  '; color: var(--good); font-weight: 700; }

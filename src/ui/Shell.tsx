@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { t } from '../core/i18n';
 import type { PlanKey } from '../core/types';
@@ -7,7 +7,26 @@ import { DemoBadge } from './components';
 
 const PLANS: PlanKey[] = ['FREE', 'ATHLETE_PRO', 'COACH_PRO', 'CLUB_PRO', 'FED_STARTER', 'FED_PRO', 'FED_ENTERPRISE', 'ADMIN'];
 
-function GlobalSearch() {
+/* minimalistische Line-Icons (Designvorlage: Sidebar mit Icon+Label) */
+const IC: Record<string, ReactNode> = {
+  home: <path d="M3 10.5 12 3l9 7.5M5 9.5V21h14V9.5" />,
+  board: <path d="M4 20V10m5.5 10V4m5.5 16v-7M20.5 20V7" />,
+  compare: <path d="M8 3v18M16 3v18M3 8h5m8 0h5M3 16h5m8 0h5" />,
+  talent: <path d="M12 3l2.5 6 6.5.5-5 4.3 1.6 6.2-5.6-3.6-5.6 3.6L8 13.8 3 9.5l6.5-.5z" />,
+  fed: <path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6" />,
+  globe: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3.5 3 14 0 18-3-4-3-14.5 0-18z" /></>,
+  comp: <path d="M8 21h8m-4-4v4M6 3h12v5a6 6 0 0 1-12 0zM6 5H3v2a4 4 0 0 0 3 3.9M18 5h3v2a4 4 0 0 1-3 3.9" />,
+  price: <path d="M12 2v20M17 6.5C17 4.6 14.8 4 12 4s-5 .9-5 2.8 1.8 2.6 5 3.2 5 1.3 5 3.2-2.2 2.8-5 2.8-5-.6-5-2.5" />,
+  data: <><ellipse cx="12" cy="5" rx="8" ry="2.6" /><path d="M4 5v14c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6V5M4 12c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6" /></>,
+};
+function Icon({ k }: { k: string }) {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>{IC[k]}</svg>
+  );
+}
+
+function GlobalSearch({ compact = false }: { compact?: boolean }) {
   const { store } = useApp();
   const nav = useNavigate();
   const [q, setQ] = useState('');
@@ -26,7 +45,7 @@ function GlobalSearch() {
   }, [q, store]);
   const go = (path: string): void => { setOpen(false); setQ(''); nav(path); };
   return (
-    <div className="relative flex-1 max-w-md" ref={box}>
+    <div className={`relative ${compact ? 'flex-1' : 'flex-1 max-w-md'}`} ref={box}>
       <input
         value={q}
         onChange={e => { setQ(e.target.value); setOpen(true); }}
@@ -64,51 +83,83 @@ function GlobalSearch() {
   );
 }
 
+function Brand() {
+  return (
+    <Link to="/" className="flex items-center gap-2 font-black tracking-tight text-lg whitespace-nowrap">
+      <span className="logo-mark" aria-hidden>S</span>
+      <span>SKATE <span className="text-grad">IQ</span></span>
+    </Link>
+  );
+}
+
+const LINKS: [string, string, string][] = [
+  ['/home', 'nav.home', 'home'], ['/leaderboard', 'nav.leaderboard', 'board'],
+  ['/compare', 'nav.compare', 'compare'], ['/talent', 'nav.talent', 'talent'],
+  ['/federation/GER', 'nav.federation', 'fed'], ['/countries', 'nav.countries', 'globe'],
+  ['/competitions', 'nav.competitions', 'comp'], ['/pricing', 'nav.pricing', 'price'],
+  ['/admin', 'nav.admin', 'data'],
+];
+
 export function Shell({ children }: { children: React.ReactNode }) {
   const { locale, switchLocale, plan, setPlan, theme, setTheme } = useApp();
-  const links: [string, string][] = [
-    ['/home', t('nav.home')], ['/leaderboard', t('nav.leaderboard')], ['/compare', t('nav.compare')],
-    ['/talent', t('nav.talent')], ['/federation/GER', t('nav.federation')], ['/countries', t('nav.countries')],
-    ['/competitions', t('nav.competitions')], ['/pricing', t('nav.pricing')], ['/admin', t('nav.admin')],
-  ];
+  const controls = (
+    <>
+      <select value={plan} onChange={e => setPlan(e.target.value as PlanKey)}
+        className="text-xs rounded-lg border px-1.5 py-1 hidden sm:block" style={{ borderColor: 'var(--border)', background: 'var(--surface-1)' }}
+        aria-label={t('pricing.currentPlan')} title={t('pricing.currentPlan')}>
+        {PLANS.map(p => <option key={p} value={p}>{p.replace('_', ' ')}</option>)}
+      </select>
+      <button className="text-xs navlink" onClick={() => switchLocale(locale === 'en' ? 'de' : 'en')} aria-label={t('common.lang')}>
+        {locale.toUpperCase()}
+      </button>
+      <button className="text-xs navlink" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label="Theme">
+        {theme === 'dark' ? '☀️' : '🌙'}
+      </button>
+    </>
+  );
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="sticky top-0 z-40 border-b" style={{ background: 'color-mix(in srgb, var(--surface-0) 88%, transparent)', backdropFilter: 'blur(10px)', borderColor: 'var(--border)' }}>
-        <div className="max-w-7xl mx-auto px-3 sm:px-5">
-          <div className="flex items-center gap-3 py-2.5">
-            <Link to="/" className="flex items-center gap-2 font-black tracking-tight text-lg whitespace-nowrap">
-              <span className="logo-mark" aria-hidden>S</span>
-              <span>SKATE <span className="text-grad">IQ</span></span>
-            </Link>
-            <GlobalSearch />
-            <select value={plan} onChange={e => setPlan(e.target.value as PlanKey)}
-              className="text-xs rounded-lg border px-1.5 py-1 hidden sm:block" style={{ borderColor: 'var(--border)', background: 'var(--surface-1)' }}
-              aria-label={t('pricing.currentPlan')} title={t('pricing.currentPlan')}>
-              {PLANS.map(p => <option key={p} value={p}>{p.replace('_', ' ')}</option>)}
-            </select>
-            <button className="text-xs navlink" onClick={() => switchLocale(locale === 'en' ? 'de' : 'en')} aria-label={t('common.lang')}>
-              {locale.toUpperCase()}
-            </button>
-            <button className="text-xs navlink" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label="Theme">
-              {theme === 'dark' ? '☀️' : '🌙'}
-            </button>
+    <div className="min-h-screen lg:flex">
+      {/* Sidebar – Desktop (Designvorlage: App-Navigation links) */}
+      <aside className="hidden lg:flex flex-col w-56 flex-none sticky top-0 h-screen border-r px-3 py-4 gap-1"
+        style={{ borderColor: 'var(--border)', background: 'color-mix(in srgb, var(--surface-1) 72%, transparent)' }}>
+        <div className="px-2 pb-4"><Brand /></div>
+        {LINKS.map(([to, key, icon]) => (
+          <NavLink key={to} to={to} className={({ isActive }) => `sidelink ${isActive ? 'on' : ''}`}>
+            <Icon k={icon} />{t(key)}
+          </NavLink>
+        ))}
+        <div className="mt-auto px-2 pt-4 text-[11px] ink-3">
+          <div className="mb-2"><DemoBadge /></div>
+          {t('brand.name')} · {t('brand.tagline')}
+        </div>
+      </aside>
+
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Topbar */}
+        <header className="sticky top-0 z-40 border-b" style={{ background: 'color-mix(in srgb, var(--surface-0) 88%, transparent)', backdropFilter: 'blur(10px)', borderColor: 'var(--border)' }}>
+          <div className="max-w-7xl mx-auto px-3 sm:px-5">
+            <div className="flex items-center gap-3 py-2.5">
+              <span className="lg:hidden"><Brand /></span>
+              <GlobalSearch compact />
+              {controls}
+            </div>
+            {/* mobile: einzeilige wischbare Navigation */}
+            <nav className="lg:hidden flex gap-1 overflow-x-auto scrollbar-none -mx-1 pb-1">
+              {LINKS.map(([to, key]) => (
+                <NavLink key={to} to={to} className={({ isActive }) => `navlink ${isActive ? 'on' : ''}`}>{t(key)}</NavLink>
+              ))}
+            </nav>
           </div>
-          {/* single-row swipeable nav (mobile-first – lesson from the DRIV audit) */}
-          <nav className="flex gap-1 overflow-x-auto scrollbar-none -mx-1 pb-1">
-            {links.map(([to, label]) => (
-              <NavLink key={to} to={to} className={({ isActive }) => `navlink ${isActive ? 'on' : ''}`}>{label}</NavLink>
-            ))}
-          </nav>
-        </div>
-      </header>
-      <main className="flex-1 max-w-7xl mx-auto w-full px-3 sm:px-5 py-5">{children}</main>
-      <footer className="border-t py-5 mt-8" style={{ borderColor: 'var(--border)' }}>
-        <div className="max-w-7xl mx-auto px-3 sm:px-5 flex flex-wrap items-center gap-3 text-xs ink-3">
-          <DemoBadge />
-          <span>{t('brand.independent')}</span>
-          <span className="ml-auto">{t('brand.name')} · {t('brand.tagline')}</span>
-        </div>
-      </footer>
+        </header>
+        <main className="flex-1 max-w-7xl mx-auto w-full px-3 sm:px-5 py-5">{children}</main>
+        <footer className="border-t py-5 mt-8" style={{ borderColor: 'var(--border)' }}>
+          <div className="max-w-7xl mx-auto px-3 sm:px-5 flex flex-wrap items-center gap-3 text-xs ink-3">
+            <span className="lg:hidden"><DemoBadge /></span>
+            <span>{t('brand.independent')}</span>
+            <span className="ml-auto">{t('brand.name')} · {t('brand.tagline')}</span>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }
