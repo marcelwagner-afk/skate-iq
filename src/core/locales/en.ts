@@ -24,6 +24,16 @@ export const en: Record<string, string> = {
   'landing.demoNote': 'Preview uses synthetic demo data. Real federation data is imported only under an access agreement.',
 
   // Home
+  // RollArt calculator (add-on)
+  'nav.calc': 'RollArt Calculator', 'calc.title': 'RollArt Calculator', 'calc.addon': 'Add-on',
+  'calc.price': '€4.99/month', 'calc.activate': 'Activate add-on (demo)',
+  'calc.pitch': 'Calculate content sheets with the official World Skate 2026 values – elements, per-judge QOE, bonuses, components and PDF export.',
+  'calc.f1': 'All official 2026 element values (verified against the World Skate tables)',
+  'calc.f2': 'Free skating, pairs, solo dance – short program and free per class',
+  'calc.f3': 'Bonuses, under-rotations, deductions and components with correct factors',
+  'calc.f4': 'Export content sheets as PDF',
+  'calc.included': 'Included in FED PRO and FED ENTERPRISE',
+  'calc.verified': 'Value tables verified against World Skate 2026 (July-2025 update) · downgrade rule and component caps corrected',
   // Methodology & terms (glossary)
   'gloss.title': 'Methodology & terms', 'gloss.sub': 'Every number in SKATE IQ is a documented formula over official results. This page explains the terms in plain language.',
   'gloss.principle.t': 'Core principle: "analytical standing"',
@@ -56,8 +66,8 @@ export const en: Record<string, string> = {
   'gloss.fed.d': 'The category status shows per category how many athletes a country has and where the best one stands – strengths and gaps at a glance. The talent pipeline lists athletes close to top 10/25 and the fastest improvers; "athletes needing attention" flags performance declines.',
   'gloss.minors.t': 'Minor protection',
   'gloss.minors.d': 'SKATE IQ stores no birth dates. Age is only roughly implied by the competition class. Real athlete data appears exclusively behind the login; the public demo shows fictional athletes only.',
-  'gloss.demo.t': 'DEMO DATA vs. REAL FEDERATION DATA',
-  'gloss.demo.d': 'The yellow "DEMO DATA" badge means: everything fictional, safe to show. The red "REAL FEDERATION DATA" badge means: real results of real athletes – use only behind access protection, never publish openly.',
+  'gloss.demo.t': 'DEMO DATA vs. real-data edition',
+  'gloss.demo.d': 'The yellow "DEMO DATA" badge means: everything fictional, safe to show. The real-data edition instead shows its data date discreetly; it is based entirely on publicly available official result lists and is reached via the login page.',
   // Feature labels (pricing page)
   'feat.athlete.basic': 'Basic profiles & results', 'feat.athlete.history': 'Full history & development curves',
   'feat.athlete.benchmarks': 'International benchmarks', 'feat.athlete.spi': 'SPI with explanation',
@@ -205,7 +215,7 @@ export const en: Record<string, string> = {
   'common.competition': 'Competition', 'common.placement': 'Placement', 'common.level': 'Level',
   'common.loading': 'Loading…', 'common.notFound': 'Not found', 'common.back': 'Back',
   'common.computedNote': 'All values are computed classifications from official results — descriptive, no predictions, no recommendations.',
-  'common.demoBadge': 'DEMO DATA — fictional athletes',
+  'common.demoBadge': 'DEMO DATA — fictional athletes', 'common.dataAsOf': 'Data as of {date}',
   'common.lang': 'Language',
   'metric.unit.points': 'pts', 'metric.unit.seconds': 's',
 
@@ -216,7 +226,6 @@ export const en: Record<string, string> = {
   'klasse.senioren': 'Seniors', 'klasse.junioren': 'Juniors', 'klasse.youth': 'Youth',
   'klasse.cadets': 'Cadets', 'klasse.espoir': 'Espoir', 'klasse.minis': 'Minis', 'klasse.tots': 'Tots',
   'gender.damen': 'Women', 'gender.herren': 'Men',
-  'common.realBadge': 'REAL FEDERATION DATA — access-controlled use only, do not publish without login protection',
   'dis.speed.track': 'Track', 'dis.speed.road': 'Road',
   'cat.senior.w': 'Senior Women', 'cat.senior.m': 'Senior Men',
   'cat.junior.w': 'Junior Women', 'cat.junior.m': 'Junior Men',

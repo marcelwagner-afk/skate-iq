@@ -17,6 +17,7 @@ const IC: Record<string, ReactNode> = {
   globe: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3.5 3 14 0 18-3-4-3-14.5 0-18z" /></>,
   comp: <path d="M8 21h8m-4-4v4M6 3h12v5a6 6 0 0 1-12 0zM6 5H3v2a4 4 0 0 0 3 3.9M18 5h3v2a4 4 0 0 1-3 3.9" />,
   price: <path d="M12 2v20M17 6.5C17 4.6 14.8 4 12 4s-5 .9-5 2.8 1.8 2.6 5 3.2 5 1.3 5 3.2-2.2 2.8-5 2.8-5-.6-5-2.5" />,
+  calc: <><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 7h8M8 12h2m3 0h2M8 16h2m3 0h2" /></>,
   book: <path d="M4 19.5V5a2 2 0 0 1 2-2h14v16H6.5A2.5 2.5 0 0 0 4 21.5v-2zm0 0A2.5 2.5 0 0 1 6.5 17H20" />,
   data: <><ellipse cx="12" cy="5" rx="8" ry="2.6" /><path d="M4 5v14c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6V5M4 12c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6" /></>,
 };
@@ -97,7 +98,7 @@ const LINKS: [string, string, string][] = [
   ['/home', 'nav.home', 'home'], ['/leaderboard', 'nav.leaderboard', 'board'],
   ['/compare', 'nav.compare', 'compare'], ['/talent', 'nav.talent', 'talent'],
   ['/federation/GER', 'nav.federation', 'fed'], ['/countries', 'nav.countries', 'globe'],
-  ['/competitions', 'nav.competitions', 'comp'], ['/methodik', 'nav.method', 'book'], ['/pricing', 'nav.pricing', 'price'],
+  ['/competitions', 'nav.competitions', 'comp'], ['/rechner', 'nav.calc', 'calc'], ['/methodik', 'nav.method', 'book'], ['/pricing', 'nav.pricing', 'price'],
   ['/admin', 'nav.admin', 'data'],
 ];
 

@@ -9,6 +9,7 @@ interface AppCtx {
   store: Store;
   locale: Locale; switchLocale: (l: Locale) => void;
   plan: PlanKey; setPlan: (p: PlanKey) => void;
+  addonCalc: boolean; setAddonCalc: (v: boolean) => void;   // Demo: RollArt-Rechner-Add-on
   theme: 'light' | 'dark' | 'auto'; setTheme: (t: 'light' | 'dark' | 'auto') => void;
 }
 const Ctx = createContext<AppCtx | null>(null);
@@ -18,6 +19,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [locale, setLoc] = useState<Locale>(getLocale());
   const [plan, setPlan] = useState<PlanKey>('FED_PRO');          // demo default: show the product
+  const [addonCalc, setAddonCalc] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>('dark');   // Produktentscheidung 10/2026: Dark-first (Designvorlage)
   useEffect(() => { loadBundle().then(setBundle, (e: unknown) => setLoadError(String(e))); }, []);
   useEffect(() => onLocaleChange(() => setLoc(getLocale())), []);
@@ -34,8 +36,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const value = useMemo<AppCtx | null>(() => (store ? {
     store, locale,
     switchLocale: (l) => setLocale(l),
-    plan, setPlan, theme, setTheme,
-  } : null), [store, locale, plan, theme]);
+    plan, setPlan, addonCalc, setAddonCalc, theme, setTheme,
+  } : null), [store, locale, plan, addonCalc, theme]);
   if (loadError) {
     return <div className="p-8 text-sm" style={{ color: 'var(--critical)' }}>{loadError}</div>;
   }
