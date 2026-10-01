@@ -13,7 +13,13 @@ export function onLocaleChange(f: () => void): () => void { listeners.add(f); re
 
 export function t(key: string, params?: Record<string, string | number>): string {
   let s = DICTS[current][key] ?? DICTS.en[key] ?? key;
-  if (params) for (const [k, v] of Object.entries(params)) s = s.replaceAll(`{${k}}`, String(v));
+  if (params) for (const [k, v] of Object.entries(params)) {
+    // numeric params render locale-aware (de: comma decimals), never grouped (years, counts)
+    const str = typeof v === 'number'
+      ? v.toLocaleString(current === 'de' ? 'de-DE' : 'en-US', { useGrouping: false, maximumFractionDigits: 3 })
+      : v;
+    s = s.replaceAll(`{${k}}`, str);
+  }
   return s;
 }
 export function fmtNum(v: number, decimals = 2): string {
