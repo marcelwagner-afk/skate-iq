@@ -1,6 +1,7 @@
 # GitHub Pages Deployment – baut IMMER die Demo-Variante (synthetische Daten).
 # Echte Verbandsdaten sind gitignored und können hier nie landen; ein Wächter-
 # Schritt bricht das Deployment ab, falls doch je echte Daten im Build auftauchen.
+# Veröffentlicht auf den gh-pages-Branch (aktiviert GitHub Pages automatisch).
 # Die geschützte Echtdaten-Version (login/index.html, AES-verschlüsselt durch
 # deploy/protect.py) wird – falls vorhanden – mit ausgeliefert.
 name: Deploy GitHub Pages
@@ -11,9 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
@@ -22,9 +21,6 @@ concurrency:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -44,11 +40,8 @@ jobs:
           echo "OK: Build ist rein synthetisch."
       - name: Geschützte Echtdaten-Login-Seite mit ausliefern (falls vorhanden)
         run: if [ -d login ]; then cp -r login dist/login; fi
-      - uses: actions/configure-pages@v5
+      - name: Auf gh-pages veröffentlichen
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          enablement: true
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
