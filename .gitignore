@@ -6,3 +6,6 @@ dist/
 src/data-real/*.local.json
 dist-demo/
 dist-real/
+# Deployment-Geheimnisse / Echtdaten (siehe ANLEITUNG_DEPLOYMENT.md)
+zugang/
+SKATE_IQ_Rollkunstlauf_ECHTE_DATEN.html

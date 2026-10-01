@@ -18,7 +18,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [locale, setLoc] = useState<Locale>(getLocale());
   const [plan, setPlan] = useState<PlanKey>('FED_PRO');          // demo default: show the product
-  const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>('auto');
+  const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>('dark');   // Produktentscheidung 10/2026: Dark-first (Designvorlage)
   useEffect(() => { loadBundle().then(setBundle, (e: unknown) => setLoadError(String(e))); }, []);
   useEffect(() => onLocaleChange(() => setLoc(getLocale())), []);
   useEffect(() => {

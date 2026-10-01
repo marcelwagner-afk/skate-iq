@@ -76,8 +76,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-40 border-b" style={{ background: 'color-mix(in srgb, var(--surface-0) 88%, transparent)', backdropFilter: 'blur(10px)', borderColor: 'var(--border)' }}>
         <div className="max-w-7xl mx-auto px-3 sm:px-5">
           <div className="flex items-center gap-3 py-2.5">
-            <Link to="/" className="font-black tracking-tight text-lg whitespace-nowrap">
-              <span style={{ color: 'var(--accent)' }}>SKATE</span> IQ
+            <Link to="/" className="flex items-center gap-2 font-black tracking-tight text-lg whitespace-nowrap">
+              <span className="logo-mark" aria-hidden>S</span>
+              <span>SKATE <span className="text-grad">IQ</span></span>
             </Link>
             <GlobalSearch />
             <select value={plan} onChange={e => setPlan(e.target.value as PlanKey)}

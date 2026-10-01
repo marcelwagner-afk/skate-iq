@@ -12,7 +12,7 @@ export const de: Record<string, string> = {
   'landing.h1a': 'WISSE, WO DU STEHST.', 'landing.h1b': 'WISSE, WAS ALS NÄCHSTES KOMMT.',
   'landing.sub': 'SKATE IQ macht aus offiziellen Wettkampfergebnissen klare Leistungs-Intelligenz – für Athleten, Trainer und Verbände im Rollsport.',
   'landing.ctaExplore': 'Athleten entdecken', 'landing.ctaFree': 'Kostenlos starten', 'landing.ctaFed': 'Für Verbände',
-  'landing.q1': 'Wo stehe ich?', 'landing.q2': 'Was brauche ich für das nächste Level?',
+  'landing.results': 'Ergebnisse', 'landing.q1': 'Wo stehe ich?', 'landing.q2': 'Was brauche ich für das nächste Level?',
   'landing.feat.bench.h': 'Internationales Benchmarking', 'landing.feat.bench.p': 'Perzentile gegen Welt, Kontinent, Land und Top-N-Gruppen – nur wo statistisch belastbar, immer mit Gruppengröße.',
   'landing.feat.athlete.h': 'Athlete Intelligence', 'landing.feat.athlete.p': 'SPI, Bestleistungen, Entwicklung und Konstanz in einem Profil, das sich in fünf Sekunden erschließt.',
   'landing.feat.fed.h': 'Federation Intelligence', 'landing.feat.fed.p': 'Spitzen-Tiefe, Talent-Pipeline und Länder-Lücken als Entscheidungsunterstützung für Sportdirektoren.',

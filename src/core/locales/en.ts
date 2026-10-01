@@ -14,7 +14,7 @@ export const en: Record<string, string> = {
   'landing.h1a': 'KNOW WHERE YOU STAND.', 'landing.h1b': 'KNOW WHAT COMES NEXT.',
   'landing.sub': 'SKATE IQ turns official competition results into clear performance intelligence — for athletes, coaches and federations across roller sports.',
   'landing.ctaExplore': 'Explore athletes', 'landing.ctaFree': 'Start free', 'landing.ctaFed': 'For federations',
-  'landing.q1': 'Where do I stand?', 'landing.q2': 'What do I need to reach the next level?',
+  'landing.results': 'Results', 'landing.q1': 'Where do I stand?', 'landing.q2': 'What do I need to reach the next level?',
   'landing.feat.bench.h': 'International benchmarking', 'landing.feat.bench.p': 'Percentiles against world, continent, country and Top-N groups — only where statistically meaningful, always with the group size shown.',
   'landing.feat.athlete.h': 'Athlete intelligence', 'landing.feat.athlete.p': 'SPI, personal bests, development and consistency in one profile that reads in five seconds.',
   'landing.feat.fed.h': 'Federation intelligence', 'landing.feat.fed.p': 'Elite depth, talent pipeline and country gaps as decision support for performance directors.',
