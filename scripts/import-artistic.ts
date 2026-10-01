@@ -42,7 +42,7 @@ const slug = (s: string): string => s.toLowerCase().normalize('NFD').replace(/[�
 
 // ---------- countries: every code occurring in the dataset ----------
 const CINFO: Record<string, [flag: string, continent: Continent]> = {
-  AIN: ['🏳️', 'EU'], AND: ['🇦🇩', 'EU'], ARG: ['🇦🇷', 'SA'], AUS: ['🇦🇺', 'OC'],
+  AIN: ['🏳️', 'EU'], RUS: ['🇷🇺', 'EU'], AND: ['🇦🇩', 'EU'], ARG: ['🇦🇷', 'SA'], AUS: ['🇦🇺', 'OC'],
   BEL: ['🇧🇪', 'EU'], BOL: ['🇧🇴', 'SA'], BRA: ['🇧🇷', 'SA'], CAN: ['🇨🇦', 'NA'],
   CHI: ['🇨🇱', 'SA'], CHN: ['🇨🇳', 'AS'], CIV: ['🇨🇮', 'AF'], COL: ['🇨🇴', 'SA'],
   CRO: ['🇭🇷', 'EU'], CZE: ['🇨🇿', 'EU'], DEN: ['🇩🇰', 'EU'], ECU: ['🇪🇨', 'SA'],
@@ -129,13 +129,23 @@ for (const ev of seed) {
     if (!catId) { unmappedCats.add(`${k.disziplin}|${k.klasse}|${k.gender ?? ''}`); continue; }
     catIds.add(catId);
     const evId = `ev_${cmpId}_${catId}`;
-    events.push({ id: evId, competitionId: cmpId, categoryId: catId, fieldSize: k.rows.length });
+    // age-group splits (e.g. Espoir Damen Gruppe A/B) arrive as duplicate categories →
+    // merge into ONE event per (competition, category); fieldSize = combined starters
+    const existing = events.find(e => e.id === evId);
+    if (existing) existing.fieldSize = (existing.fieldSize ?? 0) + k.rows.length;
+    else events.push({ id: evId, competitionId: cmpId, categoryId: catId, fieldSize: k.rows.length });
     for (const row of k.rows) {
       const country = countryOf(ev.herkunft === 'international' ? row.nat : 'GER');
       const athleteId = athleteIdFor(row.name, country, row.club);
       if (row.total == null) { rejected++; continue; }
+      // tesOk=false → partial segment data (e.g. withdrawal after short program):
+      // keep the official total, drop the partial TES/PCS (old-tool semantics)
+      const partial = row.tesOk === false;
       const metrics = artisticAdapter.normalizeRaw({
-        total: row.total, tes: row.tes ?? NaN, pcs: row.pcs ?? NaN, deductions: row.abzuege ?? NaN,
+        total: row.total,
+        tes: partial ? NaN : row.tes ?? NaN,
+        pcs: partial ? NaN : row.pcs ?? NaN,
+        deductions: partial ? NaN : row.abzuege ?? NaN,
       });
       if (!metrics) { rejected++; continue; }
       const ok = row.tesOk !== false;
