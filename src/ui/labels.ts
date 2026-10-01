@@ -28,15 +28,15 @@ export function levelKey(level: string): string {
 export function fmtDate(iso: string): string {
   return new Date(iso).toLocaleDateString(getLocale() === 'de' ? 'de-DE' : 'en-US', { month: 'short', year: 'numeric' });
 }
-export function allCategories(): { id: ID; label: () => string }[] {
-  const out: { id: ID; label: () => string }[] = [];
+export function allCategories(): { id: ID; disciplineId: ID; label: () => string }[] {
+  const out: { id: ID; disciplineId: ID; label: () => string }[] = [];
   const multi = registry.enabled().length > 1;
   for (const a of registry.enabled()) {
     for (const c of a.categories) {
       const dis = a.disciplines.find(d => d.id === c.disciplineId);
       const g = c.genderId ? ' ' + t(`gender.${c.genderId}`) : '';
       out.push({
-        id: c.id,
+        id: c.id, disciplineId: c.disciplineId,
         label: () => `${multi ? t(a.sport.nameKey) + ' · ' : ''}${dis ? t(dis.nameKey) + ' · ' : ''}${t(c.nameKey)}${g}`,
       });
     }
