@@ -7,7 +7,7 @@ export const en: Record<string, string> = {
   'nav.home': 'Dashboard', 'nav.athletes': 'Athletes', 'nav.compare': 'Compare',
   'nav.leaderboard': 'Leaderboards', 'nav.federation': 'Federation', 'nav.countries': 'Countries',
   'nav.talent': 'Talent Radar', 'nav.competitions': 'Competitions', 'nav.pricing': 'Pricing',
-  'nav.admin': 'Data Quality', 'nav.demo': 'Demo mode', 'nav.landing': 'Start',
+  'nav.admin': 'Data Quality', 'nav.demo': 'Demo mode', 'nav.landing': 'Start', 'nav.method': 'Methodology',
   'nav.search.placeholder': 'Search athletes, clubs, countries, competitions…',
 
   // Landing
@@ -24,6 +24,40 @@ export const en: Record<string, string> = {
   'landing.demoNote': 'Preview uses synthetic demo data. Real federation data is imported only under an access agreement.',
 
   // Home
+  // Methodology & terms (glossary)
+  'gloss.title': 'Methodology & terms', 'gloss.sub': 'Every number in SKATE IQ is a documented formula over official results. This page explains the terms in plain language.',
+  'gloss.principle.t': 'Core principle: "analytical standing"',
+  'gloss.principle.d': 'SKATE IQ never produces official rankings – those always come from federations. Everything here is an analytical standing: it describes how official results relate to each other. It predicts nothing and recommends no nominations.',
+  'gloss.value.t': 'Total · Technical score (TES) · Components score (PCS) · Deductions',
+  'gloss.value.d': 'Straight from the official RollArt protocols: the total is the competition score. TES measures the technical elements (jumps, spins, steps), PCS the skating quality (composition, performance). TES + PCS = total always holds; deductions (e.g. falls) are already included in TES and shown separately.',
+  'gloss.pb.t': 'Personal best vs. season best',
+  'gloss.pb.d': 'Personal best (PB) = highest total of the whole career in the dataset. Season best (SB) = highest total of the current season. Rankings and benchmarks use the season best so old peaks do not distort the current picture.',
+  'gloss.position.t': 'World / continental / national position',
+  'gloss.position.d': 'All athletes of a category ordered by season best – worldwide, within the continent, or within the country. Exactly one value counts per athlete (their best), so nobody gains from many starts. Internationally achieved values take precedence over purely national ones ("comparable context").',
+  'gloss.percentile.t': 'Global percentile',
+  'gloss.percentile.d': 'Says what share of the comparison group you outperform: percentile 97 means better than 97% of the category worldwide. Important: with fewer than 12 athletes we deliberately show NO percentile, because it would not be statistically robust – the group size (n) is shown instead.',
+  'gloss.spi.t': 'SPI – Skate Performance Index (0–100)',
+  'gloss.spi.d': 'One number bundling six views: international competitiveness (world percentile, 30%), performance level (distance to the world best, 20%), consistency (15%), recent form (last 90 days, 10%), development rate (vs. previous season, 15%) and competition strength (level of competitions entered, 10%). Each dimension is broken down under "Why this SPI?" – the SPI is never a black box. A dimension lacking data is set to a neutral 50 and the data-basis rating drops.',
+  'gloss.confidence.t': 'Data basis (low / medium / high)',
+  'gloss.confidence.d': 'Shows how many results an evaluation rests on. "Low data basis" means few starts – read values with caution. More competitions in the dataset → higher rating.',
+  'gloss.consistency.t': 'Consistency score (0–100)',
+  'gloss.consistency.d': 'Measures how closely the season values sit together. 100 = every result almost equally strong; low values = big swings between starts. Computed from the spread of season values relative to their average.',
+  'gloss.trend.t': '12-month development',
+  'gloss.trend.d': 'Difference between the best value of the last 12 months and the best of the 12 months before – in points. Green (+) means improved, red (−) means fallen back.',
+  'gloss.benchmark.t': 'Benchmark, target benchmark & top-10 gap',
+  'gloss.benchmark.d': 'A benchmark is a reference mark from the world elite: "Top 10" = the season best of the currently tenth-best athlete, "podium benchmark" = average of the best three. The top-10 gap is the difference between your own best and that mark; a ✓ means the mark is reached. "What does it take?" additionally splits the gap into technical and components share and names the "largest opportunity".',
+  'gloss.corridor.t': 'Benchmark corridor (p25–p75)',
+  'gloss.corridor.d': 'The blue band in the development chart: the range holding the middle half of top-10 values (25th to 75th percentile). If your curve sits inside the band, you are moving at top-10 level.',
+  'gloss.strength.t': 'Field strength (competition strength index)',
+  'gloss.strength.d': 'Rates how strongly a competition was cast (0–100): how many internationally ranked athletes, how many top-10/top-25 entrants? A win at field strength 90 weighs differently than one at 40 – which is why it also feeds the SPI.',
+  'gloss.talent.t': 'Talent radar tiers',
+  'gloss.talent.d': 'Five tiers, derived purely from data and explained per athlete: Elite (world top), International level (established in the top groups), Breakthrough (just broke into the international top), Rising (clear improvement over 12 months), High potential (close to international thresholds). No tier is a judgement about a person – it describes the current result situation.',
+  'gloss.fed.t': 'Federation page: category status & talent pipeline',
+  'gloss.fed.d': 'The category status shows per category how many athletes a country has and where the best one stands – strengths and gaps at a glance. The talent pipeline lists athletes close to top 10/25 and the fastest improvers; "athletes needing attention" flags performance declines.',
+  'gloss.minors.t': 'Minor protection',
+  'gloss.minors.d': 'SKATE IQ stores no birth dates. Age is only roughly implied by the competition class. Real athlete data appears exclusively behind the login; the public demo shows fictional athletes only.',
+  'gloss.demo.t': 'DEMO DATA vs. REAL FEDERATION DATA',
+  'gloss.demo.d': 'The yellow "DEMO DATA" badge means: everything fictional, safe to show. The red "REAL FEDERATION DATA" badge means: real results of real athletes – use only behind access protection, never publish openly.',
   // Feature labels (pricing page)
   'feat.athlete.basic': 'Basic profiles & results', 'feat.athlete.history': 'Full history & development curves',
   'feat.athlete.benchmarks': 'International benchmarks', 'feat.athlete.spi': 'SPI with explanation',
@@ -60,7 +94,7 @@ export const en: Record<string, string> = {
   'pricing.yearlyNote': 'billed yearly', 'pricing.popular': 'Popular',
   'pricing.tryPlan': 'Try plan (demo)', 'pricing.demoDisclaimer': 'Demo pricing page – no payment is wired up.',
   'home.greeting': 'Good morning, {name}', 'home.sub': 'Your world of skating',
-  'home.followed': 'Athletes followed', 'home.latest': 'Latest results', 'home.movers': 'Biggest movers',
+  'home.followed': 'Athletes followed', 'home.latest': 'Latest results', 'home.movers': 'Biggest improvements',
   'home.pbs': 'New personal bests', 'home.week': 'Competitions this season', 'home.insights': 'Recommended insights',
 
   // KPI labels
@@ -116,7 +150,7 @@ export const en: Record<string, string> = {
 
   // Federation
   'fed.title': '{country} — Performance Intelligence',
-  'fed.categoryHealth': 'Category health', 'fed.pipeline': 'Talent pipeline',
+  'fed.categoryHealth': 'Category status', 'fed.pipeline': 'Talent pipeline',
   'fed.attention': 'Athletes requiring attention', 'fed.breakthrough': 'Breakthrough athletes',
   'fed.improvers': 'Fastest improvers', 'fed.topPerformers': 'Top international performers',
   'fed.nearTop10': 'Approaching Top 10', 'fed.nearTop25': 'Approaching Top 25', 'fed.decline': 'Performance decline',
@@ -149,7 +183,7 @@ export const en: Record<string, string> = {
   'pricing.sell.FED_STARTER': 'Turn international results into performance strategy.',
   'pricing.sell.FED_PRO': 'Full talent and cockpit intelligence.',
   'pricing.sell.FED_ENTERPRISE': 'API, white label, custom KPIs, SSO.',
-  'pricing.upgrade': 'Requires {plan}', 'pricing.currentPlan': 'Demo as plan:',
+  'pricing.upgrade': 'Requires {plan}', 'pricing.currentPlan': 'Choose demo plan', 'pricing.activePlan': 'Active plan',
 
   // Admin
   'admin.title': 'Data quality', 'admin.sources': 'Data sources', 'admin.checks': 'Automated checks',
@@ -187,7 +221,7 @@ export const en: Record<string, string> = {
   'cat.senior.w': 'Senior Women', 'cat.senior.m': 'Senior Men',
   'cat.junior.w': 'Junior Women', 'cat.junior.m': 'Junior Men',
   'age.senior': 'Senior', 'age.junior': 'Junior', 'gender.w': 'Women', 'gender.m': 'Men',
-  'metric.total': 'Total score', 'metric.tes': 'Technical score', 'metric.pcs': 'Components',
+  'metric.total': 'Total score', 'metric.tes': 'Technical score (TES)', 'metric.pcs': 'Components score (PCS)',
   'metric.deductions': 'Deductions', 'metric.timeMs': 'Time', 'metric.speed': 'Avg. speed',
   'metric.points': 'Points', 'metric.consistency': 'Consistency', 'metric.bestLap': 'Best lap',
 

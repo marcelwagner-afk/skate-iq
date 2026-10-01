@@ -44,7 +44,7 @@ export default function Pricing() {
               </ul>
               <button className={`mt-auto pt-4 w-full ${active ? 'btn' : 'btn btn-primary'}`}
                 onClick={() => setPlan(p)}>
-                {active ? '✓ ' + t('pricing.currentPlan') : t('pricing.tryPlan')}
+                {active ? '✓ ' + t('pricing.activePlan') : t('pricing.tryPlan')}
               </button>
             </div>
           );
