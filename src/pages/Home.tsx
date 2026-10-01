@@ -54,13 +54,13 @@ export default function Home() {
         <Kpi label={`🇩🇪 ${t('kpi.top25')}`} value={ger.top25} />
         <Kpi label={`🇩🇪 ${t('kpi.avgSpi')}`} value={ger.avgSpi != null ? fmtNum(ger.avgSpi, 1) : t('common.na')} />
       </div>
-      <div className="grid lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <Card>
           <SectionTitle>{t('home.latest')}</SectionTitle>
           <div className="space-y-2 text-sm">
             {latest.map(({ c, strength }) => (
               <div key={c.id} className="flex justify-between items-center gap-2">
-                <a href={`#/competition/${c.id}`} className="font-semibold hover:underline truncate">{c.name}</a>
+                <a href={`#/competition/${c.id}`} className="font-semibold hover:underline truncate min-w-0">{c.name}</a>
                 <span className="chip whitespace-nowrap">{t('comp.strength')} {fmtNum(strength, 0)}</span>
               </div>
             ))}

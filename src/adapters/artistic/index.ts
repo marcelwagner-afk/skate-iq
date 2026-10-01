@@ -9,6 +9,8 @@
 import type { MetricValue, Performance } from '../../core/types';
 import { round2 } from '../../core/benchmark';
 import type { GapResult, MetricSpec, SportPerformanceAdapter } from '../types';
+import { CATEGORIES, DISCIPLINES } from './taxonomy';
+export { ELIGIBILITY, KLASSEN, mapDrivCategory } from './taxonomy';
 
 const m = (p: Performance, key: string): number | null =>
   p.metrics.find(x => x.key === key)?.value ?? null;
@@ -22,18 +24,8 @@ export const METRICS: MetricSpec[] = [
 
 export const artisticAdapter: SportPerformanceAdapter = {
   sport: { id: 'artistic', nameKey: 'sport.artistic', enabled: true },
-  disciplines: [
-    { id: 'artistic.free', sportId: 'artistic', nameKey: 'dis.artistic.free' },
-    { id: 'artistic.solodance', sportId: 'artistic', nameKey: 'dis.artistic.solodance' },
-  ],
-  categories: [
-    { id: 'artistic.free.sw', disciplineId: 'artistic.free', nameKey: 'cat.senior.w', ageGroupId: 'senior', genderId: 'w', order: 1 },
-    { id: 'artistic.free.sm', disciplineId: 'artistic.free', nameKey: 'cat.senior.m', ageGroupId: 'senior', genderId: 'm', order: 2 },
-    { id: 'artistic.free.jw', disciplineId: 'artistic.free', nameKey: 'cat.junior.w', ageGroupId: 'junior', genderId: 'w', order: 3 },
-    { id: 'artistic.free.jm', disciplineId: 'artistic.free', nameKey: 'cat.junior.m', ageGroupId: 'junior', genderId: 'm', order: 4 },
-    { id: 'artistic.solodance.sw', disciplineId: 'artistic.solodance', nameKey: 'cat.senior.w', ageGroupId: 'senior', genderId: 'w', order: 5 },
-    { id: 'artistic.solodance.jw', disciplineId: 'artistic.solodance', nameKey: 'cat.junior.w', ageGroupId: 'junior', genderId: 'w', order: 6 },
-  ],
+  disciplines: DISCIPLINES,
+  categories: CATEGORIES,
   metrics: METRICS,
 
   rankingValue: p => (p.status === 'ok' ? m(p, 'total') : null),

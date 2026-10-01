@@ -96,7 +96,7 @@ export default function Federation() {
           <Kpi label={t('kpi.avgSpi')} value={s.avgSpi != null ? fmtNum(s.avgSpi, 1) : t('common.na')} />
           <Kpi label={t('kpi.emerging')} value={s.emerging} />
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
           <Section title={`🏅 ${t('fed.topPerformers')}`} items={cockpit.top} />
           <Section title={`🚀 ${t('fed.improvers')}`} items={cockpit.improvers.map(x => ({ ...x, why: '+' + fmtMag(x.v, x.sport) }))} />
           <Section title={`🎯 ${t('fed.nearTop10')}`} items={cockpit.near10} />
@@ -104,7 +104,7 @@ export default function Federation() {
           <Section title={`⚠️ ${t('fed.attention')}`} items={cockpit.attention} />
           <Section title={`📉 ${t('fed.decline')}`} items={cockpit.decline.map(x => ({ ...x, why: '−' + fmtMag(x.v, x.sport) }))} />
         </div>
-        <div className="grid lg:grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
           <Card>
             <SectionTitle>{t('fed.categoryHealth')}</SectionTitle>
             <div className="overflow-x-auto">

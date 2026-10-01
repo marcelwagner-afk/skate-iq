@@ -7,10 +7,11 @@ export function catParts(store: Store, catId: ID): { sport: string; discipline: 
   const info = store.categoryOf(catId);
   if (!info) return { sport: '', discipline: '', category: catId };
   const dis = info.adapter.disciplines.find(d => d.id === info.cat.disciplineId);
+  const gender = info.cat.genderId ? ' ' + t(`gender.${info.cat.genderId}`) : '';
   return {
     sport: t(info.adapter.sport.nameKey),
     discipline: dis ? t(dis.nameKey) : '',
-    category: t(info.cat.nameKey),
+    category: t(info.cat.nameKey) + gender,
   };
 }
 export function catLabel(store: Store, catId: ID): string {
@@ -29,9 +30,15 @@ export function fmtDate(iso: string): string {
 }
 export function allCategories(): { id: ID; label: () => string }[] {
   const out: { id: ID; label: () => string }[] = [];
+  const multi = registry.enabled().length > 1;
   for (const a of registry.enabled()) {
     for (const c of a.categories) {
-      out.push({ id: c.id, label: () => `${t(a.sport.nameKey)} · ${t(c.nameKey)}` });
+      const dis = a.disciplines.find(d => d.id === c.disciplineId);
+      const g = c.genderId ? ' ' + t(`gender.${c.genderId}`) : '';
+      out.push({
+        id: c.id,
+        label: () => `${multi ? t(a.sport.nameKey) + ' · ' : ''}${dis ? t(dis.nameKey) + ' · ' : ''}${t(c.nameKey)}${g}`,
+      });
     }
   }
   return out;

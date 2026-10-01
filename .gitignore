@@ -1,3 +1,8 @@
 .tmp/
 node_modules/
 dist/
+
+# Echte Verbandsdaten nie einchecken (Datenschutz, docs/SECURITY.md)
+src/data-real/*.local.json
+dist-demo/
+dist-real/

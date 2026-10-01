@@ -142,7 +142,12 @@ export const en: Record<string, string> = {
 
   // Sports / disciplines / categories (synthetic taxonomy)
   'sport.artistic': 'Artistic Skating', 'sport.speed': 'Speed Skating',
-  'dis.artistic.free': 'Free Skating', 'dis.artistic.solodance': 'Solo Dance',
+  'dis.artistic.kuer': 'Free Skating', 'dis.artistic.solotanz': 'Solo Dance',
+  'dis.artistic.rolltanz': 'Couple Dance', 'dis.artistic.paarlauf': 'Pairs',
+  'klasse.senioren': 'Seniors', 'klasse.junioren': 'Juniors', 'klasse.youth': 'Youth',
+  'klasse.cadets': 'Cadets', 'klasse.espoir': 'Espoir', 'klasse.minis': 'Minis', 'klasse.tots': 'Tots',
+  'gender.damen': 'Women', 'gender.herren': 'Men',
+  'common.realBadge': 'REAL FEDERATION DATA — access-controlled use only, do not publish without login protection',
   'dis.speed.track': 'Track', 'dis.speed.road': 'Road',
   'cat.senior.w': 'Senior Women', 'cat.senior.m': 'Senior Men',
   'cat.junior.w': 'Junior Women', 'cat.junior.m': 'Junior Men',
@@ -155,4 +160,18 @@ export const en: Record<string, string> = {
   'country.GER': 'Germany', 'country.ITA': 'Italy', 'country.ESP': 'Spain', 'country.POR': 'Portugal',
   'country.FRA': 'France', 'country.USA': 'United States', 'country.BRA': 'Brazil',
   'country.ARG': 'Argentina', 'country.AUS': 'Australia',
+  // additional nations from the real import data
+  'country.AIN': 'Neutral Athletes', 'country.AND': 'Andorra', 'country.BEL': 'Belgium',
+  'country.BOL': 'Bolivia', 'country.CAN': 'Canada', 'country.CHI': 'Chile', 'country.CHN': 'China',
+  'country.CIV': 'Ivory Coast', 'country.COL': 'Colombia', 'country.CRO': 'Croatia',
+  'country.CZE': 'Czechia', 'country.DEN': 'Denmark', 'country.ECU': 'Ecuador',
+  'country.EGY': 'Egypt', 'country.ESA': 'El Salvador', 'country.EST': 'Estonia',
+  'country.GBR': 'Great Britain', 'country.HAI': 'Haiti', 'country.ISR': 'Israel',
+  'country.JPN': 'Japan', 'country.KOR': 'South Korea', 'country.MAR': 'Morocco',
+  'country.MEX': 'Mexico', 'country.NED': 'Netherlands', 'country.NZL': 'New Zealand',
+  'country.PAN': 'Panama', 'country.PAR': 'Paraguay', 'country.ROM': 'Romania',
+  'country.ROU': 'Romania', 'country.SLO': 'Slovenia', 'country.SLV': 'El Salvador',
+  'country.SMR': 'San Marino', 'country.SUI': 'Switzerland', 'country.THA': 'Thailand',
+  'country.TPE': 'Chinese Taipei', 'country.UKR': 'Ukraine', 'country.URU': 'Uruguay',
+  'country.VEN': 'Venezuela',
 };

@@ -30,7 +30,7 @@ export default function Landing() {
           <span><b className="ink-2 tnum">{nCmp}</b> {t('nav.competitions')}</span>
         </div>
       </section>
-      <section className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {feats.map(([k, icon]) => (
           <Card key={k}>
             <div className="text-2xl mb-2">{icon}</div>

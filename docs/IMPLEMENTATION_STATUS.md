@@ -13,12 +13,14 @@ Updated: 2026-10-01 · build: typecheck ✓ · vite build ✓ (dist 165 KB gzip)
 - Deterministic insight engine (§36)
 - Identity resolution (exact/subset/fuzzy, 0.95 auto-merge threshold, review queue)
 - Entitlements (8 plans → feature sets) + feature flags
-- i18n EN (default) + DE complete, key-based
+- i18n DE (default – Artistic-first product decision) + EN complete, key-based
 - Design system (validated dataviz palette, light/dark, mobile-first) + SVG chart components (corridor, crosshair tooltip, legend rules)
 - Screens: Landing · Home · Athlete Intelligence (KPI row §65, dev chart+corridor, SPI-why, what-does-it-take with tes/pcs breakdown, results, insights, share card PNG) · Compare ≤5 + head-to-head · Leaderboards (analytical labelling §42) · Federation Intelligence + cockpit (§15/§66) · Country matrix + A/B gap analysis · Talent Radar (5 explainable tiers) · Competitions list/detail (strength, PB flags, preview/review) · Pricing (§67 sell lines, demo switcher, no payment) · Admin data quality · global grouped search · demo route
-- Synthetic seed: 9 countries, 2 sports, 10 categories, 3 seasons, 389 fictional athletes, 2,448 performances, deterministic PRNG, gender-correct name pools
-- Real-data migration importer validated: 8,392/8,392 rows accounted, 2,631 identities, 305 review-queue (not auto-merged)
-- 36 unit/integration tests + scripted browser smoke with screenshots
+- Synthetic seed: 9 countries, 2 sports, real Artistic category IDs, 3 seasons, 389 fictional athletes, 2,448 performances, deterministic PRNG, gender-correct name pools
+- **Artistic full build (Oct 2026):** real DRIV/WSE taxonomy in `src/adapters/artistic/taxonomy.ts` (Kür/Solotanz/Rolltanz/Paarlauf × Senioren…Tots × Damen/Herren incl. Solotanz mixed classes, ELIGIBILITY metadata, `mapDrivCategory`); composed category labels; Speed adapter kept as architecture proof behind `SPEED_ENABLED=false`
+- **Real-data build:** importer v2 writes `src/data-real/bundle.artistic.local.json` (GITIGNORED – privacy) with 47 countries (flags/continents), 60 clubs, seasons from data; 8,392/8,392 rows accounted, 43 real categories mapped, 2,631 identities, 305 review-queue (not auto-merged); `npm run dev:real` / `build:real` (VITE_REAL=1), async bundle loading, dynamic DEMO/ECHTDATEN badge; anchor verified in-app (Noah Hirsch, DM Stade 2026: 165,36 / TES 102,08 / PCS 63,28)
+- Standalone single-file builds via `scripts/make-standalone.mjs` (file://-safe, demo + real variants)
+- 36 unit/integration tests + scripted browser smoke with screenshots (both variants: 0 console errors, 0 px mobile overflow)
 
 ## IN PROGRESS
 - (nothing – clean checkpoint)

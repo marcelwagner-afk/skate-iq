@@ -6,7 +6,7 @@ export type FlagKey =
 
 const DEFAULTS: Record<FlagKey, boolean> = {
   ARTISTIC_ENABLED: true,
-  SPEED_ENABLED: true,                 // second reference adapter (synthetic data)
+  SPEED_ENABLED: false,                // adapter stays as the multi-sport proof (tests); UI focuses on Artistic first
   SKATEBOARDING_ENABLED: false,
   HOCKEY_ENABLED: false,
   SKATE_AI_ENABLED: false,             // architecture only in Phase 1 (see ROADMAP)

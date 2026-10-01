@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { t } from '../core/i18n';
+import { fmtNum, t } from '../core/i18n';
 import { can, requiredPlan } from '../core/entitlements';
 import type { FeatureKey, PlanKey } from '../core/types';
 import type { TalentTier } from '../data/store';
@@ -35,9 +35,14 @@ export function Badge({ children, color }: { children: ReactNode; color?: string
   );
 }
 export function DemoBadge() {
+  const { store } = useApp();
+  const real = !store.b.synthetic;
   return (
-    <span className="chip" style={{ borderColor: 'var(--warning)', color: 'var(--ink-2)', background: 'color-mix(in srgb, var(--warning) 12%, var(--surface-1))' }}>
-      ⚠ {t('common.demoBadge')}
+    <span className="chip" style={{
+      borderColor: real ? 'var(--critical)' : 'var(--warning)', color: 'var(--ink-2)',
+      background: `color-mix(in srgb, ${real ? 'var(--critical)' : 'var(--warning)'} 12%, var(--surface-1))`,
+    }}>
+      ⚠ {t(real ? 'common.realBadge' : 'common.demoBadge')}
     </span>
   );
 }
@@ -77,16 +82,16 @@ export function ComputedNote() {
 export function fmtMag(v: number | null | undefined, sportId: string): string {
   if (v == null) return t('common.na');
   const m = Math.abs(v);
-  if (sportId === 'speed') return (m / 1000).toFixed(3) + ' s';
-  return m.toFixed(2);
+  if (sportId === 'speed') return fmtNum(m / 1000, 3) + ' s';
+  return fmtNum(m, 2);
 }
 export function fmtOriented(v: number | null | undefined, sportId: string, decimals = 2): string {
   if (v == null) return t('common.na');
   if (sportId === 'speed') {
     const ms = -v; const s = ms / 1000;
-    if (s < 60) return s.toFixed(3) + ' s';
+    if (s < 60) return fmtNum(s, 3) + ' s';
     const min = Math.floor(s / 60);
     return `${min}:${(s - min * 60).toFixed(3).padStart(6, '0')}`;
   }
-  return v.toFixed(decimals);
+  return fmtNum(v, decimals);
 }

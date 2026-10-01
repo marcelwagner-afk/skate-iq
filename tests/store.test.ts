@@ -11,7 +11,7 @@ describe('store over seed bundle', () => {
     expect((bundleJson as { synthetic: boolean }).synthetic).toBe(true);
   });
   it('world ranking exists for every artistic+speed category and positions are contiguous', () => {
-    for (const catId of ['artistic.free.sw', 'artistic.free.jm', 'speed.track.sm', 'speed.track.jw']) {
+    for (const catId of ['artistic.kuer.senioren.damen', 'artistic.kuer.junioren.herren', 'speed.track.sm', 'speed.track.jw']) {
       const r = store.ranking(catId, 's2026');
       expect(r.length).toBeGreaterThan(10);
       expect(r[0].position).toBe(1);
@@ -20,7 +20,7 @@ describe('store over seed bundle', () => {
     }
   });
   it('percentile of the world #1 is > 95', () => {
-    const r = store.ranking('artistic.free.sw', 's2026');
+    const r = store.ranking('artistic.kuer.senioren.damen', 's2026');
     expect(r[0].percentile!).toBeGreaterThan(95);
   });
   it('top-10 target equals the 10th best value', () => {
@@ -29,8 +29,8 @@ describe('store over seed bundle', () => {
     expect(t).toBeCloseTo(r[9].value, 6);
   });
   it('SPI computes for a ranked athlete and is explainable', () => {
-    const r = store.ranking('artistic.free.sw', 's2026');
-    const spi = store.spi(r[2].athlete.id, 'artistic.free.sw')!;
+    const r = store.ranking('artistic.kuer.senioren.damen', 's2026');
+    const spi = store.spi(r[2].athlete.id, 'artistic.kuer.senioren.damen')!;
     expect(spi.value).toBeGreaterThan(0);
     expect(spi.contributions).toHaveLength(6);
   });
@@ -54,7 +54,7 @@ describe('store over seed bundle', () => {
   });
   it('comparable-context rule: ranking basis excludes national-only inflation', () => {
     // an athlete competing only nationally must not outrank via national values
-    const r = store.ranking('artistic.free.sw', 's2026');
+    const r = store.ranking('artistic.kuer.senioren.damen', 's2026');
     expect(r.every(x => Number.isFinite(x.value))).toBe(true);
   });
 });

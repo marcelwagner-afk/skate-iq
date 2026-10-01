@@ -10,6 +10,7 @@
 import type { MetricValue, Performance } from '../../core/types';
 import { round2 } from '../../core/benchmark';
 import type { GapResult, MetricSpec, SportPerformanceAdapter } from '../types';
+import { flag } from '../../core/flags';
 
 const m = (p: Performance, key: string): number | null =>
   p.metrics.find(x => x.key === key)?.value ?? null;
@@ -27,7 +28,7 @@ export const speedMetrics: MetricSpec[] = [
 ];
 
 export const speedAdapter: SportPerformanceAdapter = {
-  sport: { id: 'speed', nameKey: 'sport.speed', enabled: true },
+  sport: { id: 'speed', nameKey: 'sport.speed', enabled: flag('SPEED_ENABLED') },
   disciplines: [
     { id: 'speed.track', sportId: 'speed', nameKey: 'dis.speed.track' },
   ],
