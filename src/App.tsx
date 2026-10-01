@@ -2,6 +2,7 @@ import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AppProvider } from './ui/AppContext';
 import { Shell } from './ui/Shell';
 import Admin from './pages/Admin';
+import Methodik from './pages/Methodik';
 import Athlete from './pages/Athlete';
 import Compare from './pages/Compare';
 import { CompetitionDetail, CompetitionList } from './pages/Competitions';
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/federation/:code" element={<Federation />} />
             <Route path="/countries" element={<Countries />} />
             <Route path="/talent" element={<Talent />} />
+            <Route path="/methodik" element={<Methodik />} />
             <Route path="/competitions" element={<CompetitionList />} />
             <Route path="/competition/:id" element={<CompetitionDetail />} />
             <Route path="/pricing" element={<Pricing />} />
