@@ -30,7 +30,7 @@ export default function Talent() {
         </select>
       </div>
       <Gate feature="club.talentRadar">
-        <div className="grid lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {TIERS.map(tier => {
             const entries = radar.filter(r => r.tier === tier);
             if (!entries.length) return null;

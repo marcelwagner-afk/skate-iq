@@ -109,7 +109,7 @@ export default function Athlete() {
 
       {/* Insights */}
       {data.insights.length > 0 && (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
           {data.insights.map((ins, i) => (
             <Card key={i} className="!p-3 text-sm flex items-start gap-2">
               <span style={{ color: ins.tone === 'positive' ? 'var(--good)' : ins.tone === 'attention' ? 'var(--serious)' : 'var(--ink-3)' }}>
@@ -121,7 +121,7 @@ export default function Athlete() {
         </div>
       )}
 
-      <div className="grid lg:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Development chart with corridor + major-competition emphasis */}
         <Card>
           <SectionTitle sub={data.corridorT10 ? t('athlete.corridor', { group: t('bench.group.top10'), n: data.corridorT10.n }) : undefined}>
@@ -176,7 +176,7 @@ export default function Athlete() {
             ))}
           </div>
           {data.gap && data.tgt != null ? (
-            <div className="grid sm:grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
               <Kpi label={t('athlete.current')} value={f(data.gap.current)} />
               <Kpi label={`${t('athlete.benchmark')} · ${t(TARGETS[target].key)}`} value={f(data.gap.target)} />
               <Kpi label={t('athlete.gap')} value={data.gap.gap <= 0 ? '✓' : fmtMag(data.gap.gap, data.sportId)} tone={data.gap.gap <= 0 ? 'good' : undefined} />

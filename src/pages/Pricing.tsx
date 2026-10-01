@@ -11,7 +11,7 @@ export default function Pricing() {
   return (
     <div className="space-y-4">
       <SectionTitle sub={t('pricing.note')}>{t('pricing.title')}</SectionTitle>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {ORDER.map(p => {
           const feats = [...PLAN_FEATURES[p]];
           const active = plan === p;

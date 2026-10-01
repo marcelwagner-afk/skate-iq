@@ -6,6 +6,12 @@ export default defineConfig({
   // relative base → deployable on GitHub Pages project subpaths
   base: './',
   plugins: [react(), tailwindcss()],
-  build: { outDir: 'dist', chunkSizeWarningLimit: 1500 },
+  build: {
+    outDir: 'dist', chunkSizeWarningLimit: 1500,
+    // VITE_INLINE=1 → one JS chunk (standalone single-file build, scripts/make-standalone.mjs)
+    ...(process.env.VITE_INLINE === '1'
+      ? { rollupOptions: { output: { inlineDynamicImports: true } } }
+      : {}),
+  },
   test: { environment: 'node' },
 });

@@ -82,7 +82,7 @@ export default function Compare() {
         {ids.length > 2 && <button className="btn text-sm" onClick={() => setIds(ids.slice(0, -1))}>−</button>}
       </div>
       <Gate feature="athlete.compare">
-        <div className="grid lg:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <Card>
             <div className="overflow-x-auto">
               <table className="tbl w-full">

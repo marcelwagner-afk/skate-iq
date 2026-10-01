@@ -54,18 +54,18 @@ const seasons: Season[] = [
   { id: 's2025', label: '2025', start: '2025-01-01', end: '2025-12-31' },
   { id: 's2026', label: '2026', start: '2026-01-01', end: '2026-12-31' },
 ];
-interface CatDef { id: string; sport: 'artistic' | 'speed'; junior: boolean; base: number }
+interface CatDef { id: string; sport: 'artistic' | 'speed'; junior: boolean; base: number; g: 'w' | 'm' }
 const CATS: CatDef[] = [
-  { id: 'artistic.free.sw', sport: 'artistic', junior: false, base: 150 },
-  { id: 'artistic.free.sm', sport: 'artistic', junior: false, base: 165 },
-  { id: 'artistic.free.jw', sport: 'artistic', junior: true, base: 120 },
-  { id: 'artistic.free.jm', sport: 'artistic', junior: true, base: 130 },
-  { id: 'artistic.solodance.sw', sport: 'artistic', junior: false, base: 110 },
-  { id: 'artistic.solodance.jw', sport: 'artistic', junior: true, base: 90 },
-  { id: 'speed.track.sw', sport: 'speed', junior: false, base: 92_000 },   // 1000 m time in ms
-  { id: 'speed.track.sm', sport: 'speed', junior: false, base: 84_000 },
-  { id: 'speed.track.jw', sport: 'speed', junior: true, base: 97_000 },
-  { id: 'speed.track.jm', sport: 'speed', junior: true, base: 89_000 },
+  { id: 'artistic.kuer.senioren.damen', sport: 'artistic', junior: false, base: 150, g: 'w' },
+  { id: 'artistic.kuer.senioren.herren', sport: 'artistic', junior: false, base: 165, g: 'm' },
+  { id: 'artistic.kuer.junioren.damen', sport: 'artistic', junior: true, base: 120, g: 'w' },
+  { id: 'artistic.kuer.junioren.herren', sport: 'artistic', junior: true, base: 130, g: 'm' },
+  { id: 'artistic.solotanz.senioren.damen', sport: 'artistic', junior: false, base: 110, g: 'w' },
+  { id: 'artistic.solotanz.junioren.damen', sport: 'artistic', junior: true, base: 90, g: 'w' },
+  { id: 'speed.track.sw', sport: 'speed', junior: false, base: 92_000, g: 'w' },   // 1000 m time in ms
+  { id: 'speed.track.sm', sport: 'speed', junior: false, base: 84_000, g: 'm' },
+  { id: 'speed.track.jw', sport: 'speed', junior: true, base: 97_000, g: 'w' },
+  { id: 'speed.track.jm', sport: 'speed', junior: true, base: 89_000, g: 'm' },
 ];
 
 // ---------- competitions ----------
@@ -100,7 +100,7 @@ for (const cat of CATS) {
     const n = 2 + Math.floor(strength * 2.6 + rnd() * 1.4);      // 2..5 per country
     for (let i = 0; i < n; i++) {
       athN++;
-      const pool = cat.id.endsWith('w') ? cc.firstW : cc.firstM;
+      const pool = cat.g === 'w' ? cc.firstW : cc.firstM;
       let name = `${pick(pool)} ${pick(cc.last)}`;
       let guard = 0;
       while (usedNames.has(name) && guard++ < 40) name = `${pick(pool)} ${pick(cc.last)}`;

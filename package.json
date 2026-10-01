@@ -8,7 +8,9 @@
     "seed": "esbuild scripts/generate-seed.ts --bundle --platform=node --format=esm --outfile=.tmp/gen-seed.mjs && node .tmp/gen-seed.mjs",
     "import:artistic": "esbuild scripts/import-artistic.ts --bundle --platform=node --format=esm --outfile=.tmp/import-artistic.mjs && node .tmp/import-artistic.mjs",
     "dev": "vite",
+    "dev:real": "VITE_REAL=1 vite",
     "build": "tsc --noEmit && vite build",
+    "build:real": "tsc --noEmit && VITE_REAL=1 vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"

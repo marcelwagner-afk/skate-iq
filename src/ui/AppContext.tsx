@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import bundleJson from '../data/seed/bundle.json';
+import { loadBundle } from '../data/bundleLoader';
 import { Store } from '../data/store';
 import type { DataBundle } from '../data/provider';
-import { getLocale, onLocaleChange, setLocale, type Locale } from '../core/i18n';
+import { getLocale, onLocaleChange, setLocale, t, type Locale } from '../core/i18n';
 import type { PlanKey } from '../core/types';
 
 interface AppCtx {
@@ -14,21 +14,34 @@ interface AppCtx {
 const Ctx = createContext<AppCtx | null>(null);
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const store = useMemo(() => new Store(bundleJson as unknown as DataBundle, '2026-10-01'), []);
+  const [bundle, setBundle] = useState<DataBundle | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [locale, setLoc] = useState<Locale>(getLocale());
   const [plan, setPlan] = useState<PlanKey>('FED_PRO');          // demo default: show the product
   const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>('auto');
+  useEffect(() => { loadBundle().then(setBundle, (e: unknown) => setLoadError(String(e))); }, []);
   useEffect(() => onLocaleChange(() => setLoc(getLocale())), []);
   useEffect(() => {
     const el = document.documentElement;
     if (theme === 'auto') el.removeAttribute('data-theme');
     else el.setAttribute('data-theme', theme);
   }, [theme]);
-  const value = useMemo<AppCtx>(() => ({
+  // "today" for analytics: real bundles use their generation date, the demo seed is pinned
+  const store = useMemo(
+    () => (bundle ? new Store(bundle, bundle.synthetic ? '2026-10-01' : bundle.generatedAt) : null),
+    [bundle],
+  );
+  const value = useMemo<AppCtx | null>(() => (store ? {
     store, locale,
     switchLocale: (l) => setLocale(l),
     plan, setPlan, theme, setTheme,
-  }), [store, locale, plan, theme]);
+  } : null), [store, locale, plan, theme]);
+  if (loadError) {
+    return <div className="p-8 text-sm" style={{ color: 'var(--critical)' }}>{loadError}</div>;
+  }
+  if (!value) {
+    return <div className="p-8 text-sm ink-3">{t('common.loading')}</div>;
+  }
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 export function useApp(): AppCtx {

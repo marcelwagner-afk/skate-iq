@@ -4,7 +4,7 @@ import { en } from './locales/en';
 
 export type Locale = 'en' | 'de';
 const DICTS: Record<Locale, Record<string, string>> = { en, de };
-let current: Locale = 'en';
+let current: Locale = 'de';   // product decision Oct 2026: Artistic-first for the German federation → DE default, EN complete
 const listeners = new Set<() => void>();
 
 export function setLocale(l: Locale): void { current = l; listeners.forEach(f => f()); }
