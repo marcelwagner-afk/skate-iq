@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { t } from '../core/i18n';
 import { PLAN_FEATURES, PLAN_PRICING } from '../core/entitlements';
 import type { PlanKey } from '../core/types';
@@ -49,6 +50,18 @@ export default function Pricing() {
             </div>
           );
         })}
+      </div>
+      {/* Add-on (Designvorlage: separates Produkt mit eigenem Preis) */}
+      <div className="price-card sm:flex-row sm:items-center gap-4">
+        <div className="flex-1">
+          <h3 className="font-extrabold text-sm">🧮 {t('calc.title')} <span className="chip ml-1">{t('calc.addon')}</span></h3>
+          <p className="text-sm ink-2 mt-1">{t('calc.pitch')}</p>
+          <p className="text-[11px] ink-3 mt-1">{t('calc.included')}</p>
+        </div>
+        <div className="text-right">
+          <div className="price-num text-grad">{t('calc.price')}</div>
+          <Link to="/rechner" className="btn btn-primary inline-block mt-2 text-sm">{t('calc.title')} →</Link>
+        </div>
       </div>
       <p className="text-xs ink-3">{t('pricing.demoDisclaimer')} {t('brand.independent')}</p>
     </div>

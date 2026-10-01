@@ -188,7 +188,7 @@ export interface Subscription {
 export type FeatureKey =
   | 'athlete.basic' | 'athlete.history' | 'athlete.benchmarks' | 'athlete.spi'
   | 'athlete.whatItTakes' | 'athlete.compare' | 'athlete.reports' | 'athlete.cards'
-  | 'coach.portfolio' | 'coach.alerts'
+  | 'coach.portfolio' | 'coach.alerts' | 'tools.calculator'
   | 'club.dashboard' | 'club.talentRadar' | 'club.exports'
   | 'federation.intelligence' | 'federation.countryCompare' | 'federation.talent'
   | 'federation.cockpit' | 'federation.reports' | 'federation.api' | 'federation.whiteLabel'

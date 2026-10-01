@@ -21,6 +21,16 @@ export const de: Record<string, string> = {
   'landing.feat.multi.h': 'Gebaut für alle Rollsport-Arten', 'landing.feat.multi.p': 'Sport-Adapter-Architektur: Artistic zuerst, Speed als Nächstes, das World-Skate-Ökosystem als Ziel.',
   'landing.demoNote': 'Vorschau mit synthetischen Demo-Daten. Echte Verbandsdaten werden nur im Rahmen einer Zugangs-Vereinbarung importiert.',
 
+  // RollArt-Rechner (Add-on)
+  'nav.calc': 'RollArt-Rechner', 'calc.title': 'RollArt-Rechner', 'calc.addon': 'Add-on',
+  'calc.price': '4,99 €/Monat', 'calc.activate': 'Add-on aktivieren (Demo)',
+  'calc.pitch': 'Content Sheets nach den offiziellen World-Skate-Werten 2026 kalkulieren – Elemente, QOE je Kampfrichter, Boni, Komponenten und PDF-Export.',
+  'calc.f1': 'Alle offiziellen Elementwerte 2026 (gegen die World-Skate-Tabellen verifiziert)',
+  'calc.f2': 'Kür, Paarlauf, Solotanz – Kurzprogramm und Kür je Klasse',
+  'calc.f3': 'Boni, Unterrotationen, Abzüge und Komponenten mit korrekten Faktoren',
+  'calc.f4': 'Content Sheets als PDF exportieren',
+  'calc.included': 'In FED PRO und FED ENTERPRISE enthalten',
+  'calc.verified': 'Wertetabellen verifiziert gegen World Skate 2026 (Stand Juli-2025-Update) · Downgrade-Regel und Komponenten-Obergrenzen korrigiert',
   // Methodik & Begriffe (Glossar)
   'gloss.title': 'Methodik & Begriffe', 'gloss.sub': 'Jede Zahl in SKATE IQ ist eine dokumentierte Formel über offizielle Ergebnisse. Hier steht, was die Begriffe bedeuten – ohne Statistik-Vorwissen lesbar.',
   'gloss.principle.t': 'Grundprinzip: „rechnerische Einordnung"',
@@ -53,8 +63,8 @@ export const de: Record<string, string> = {
   'gloss.fed.d': 'Der Kategorien-Status zeigt je Kategorie, wie viele Athleten ein Land hat und wo der beste steht – auf einen Blick sichtbar, wo es stark besetzt ist und wo Lücken sind. Die Talent-Pipeline listet Athleten nahe Top 10/Top 25 und die schnellsten Aufsteiger; „Athleten mit Handlungsbedarf" markiert Leistungsrückgänge.',
   'gloss.minors.t': 'Minderjährigen-Schutz',
   'gloss.minors.d': 'SKATE IQ speichert keine Geburtsdaten. Das Alter ergibt sich nur grob aus der Wettkampf-Klasse. Echte Athletendaten erscheinen ausschließlich hinter dem Login; die öffentliche Demo zeigt nur fiktive Athleten.',
-  'gloss.demo.t': 'DEMO-DATEN vs. ECHTE VERBANDSDATEN',
-  'gloss.demo.d': 'Der gelbe Hinweis „DEMO-DATEN" bedeutet: alles fiktiv, frei herzeigbar. Der rote Hinweis „ECHTE VERBANDSDATEN" bedeutet: reale Ergebnisse echter Athleten – nur hinter Zugangsschutz verwenden, niemals offen veröffentlichen.',
+  'gloss.demo.t': 'DEMO-DATEN vs. Echtdaten-Version',
+  'gloss.demo.d': 'Der gelbe Hinweis „DEMO-DATEN" bedeutet: alles fiktiv, frei herzeigbar. Die Echtdaten-Version zeigt stattdessen dezent ihren Datenstand; sie beruht vollständig auf öffentlich zugänglichen offiziellen Ergebnislisten und ist über die Login-Seite erreichbar.',
   // Feature-Labels (Preisseite)
   'feat.athlete.basic': 'Basis-Profile & Ergebnisse', 'feat.athlete.history': 'Volle Historie & Entwicklungskurven',
   'feat.athlete.benchmarks': 'Internationale Benchmarks', 'feat.athlete.spi': 'SPI mit Erklärung',
@@ -188,7 +198,7 @@ export const de: Record<string, string> = {
   'common.competition': 'Wettbewerb', 'common.placement': 'Platz', 'common.level': 'Level',
   'common.loading': 'Lädt…', 'common.notFound': 'Nicht gefunden', 'common.back': 'Zurück',
   'common.computedNote': 'Alle Werte sind rechnerische Einordnungen aus offiziellen Ergebnissen – deskriptiv, keine Vorhersagen, keine Empfehlungen.',
-  'common.demoBadge': 'DEMO-DATEN – fiktive Athleten',
+  'common.demoBadge': 'DEMO-DATEN – fiktive Athleten', 'common.dataAsOf': 'Datenstand {date}',
   'common.lang': 'Sprache',
   'metric.unit.points': 'Pkt.', 'metric.unit.seconds': 's',
 
@@ -198,7 +208,6 @@ export const de: Record<string, string> = {
   'klasse.senioren': 'Senioren', 'klasse.junioren': 'Junioren', 'klasse.youth': 'Jugend',
   'klasse.cadets': 'Cadets', 'klasse.espoir': 'Espoir', 'klasse.minis': 'Minis', 'klasse.tots': 'Tots',
   'gender.damen': 'Damen', 'gender.herren': 'Herren',
-  'common.realBadge': 'ECHTE VERBANDSDATEN – nur zugangsgeschützt verwenden, nicht ohne Login-Schutz veröffentlichen',
   'dis.speed.track': 'Bahn', 'dis.speed.road': 'Straße',
   'cat.senior.w': 'Seniorinnen', 'cat.senior.m': 'Senioren',
   'cat.junior.w': 'Juniorinnen', 'cat.junior.m': 'Junioren',

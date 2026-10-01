@@ -8,7 +8,7 @@ const ATHLETE_PRO: FeatureKey[] = [...BASE,
 const COACH_PRO: FeatureKey[] = [...ATHLETE_PRO, 'coach.portfolio', 'coach.alerts'];
 const CLUB_PRO: FeatureKey[] = [...COACH_PRO, 'club.dashboard', 'club.talentRadar', 'club.exports'];
 const FED_STARTER: FeatureKey[] = [...CLUB_PRO, 'federation.intelligence', 'federation.countryCompare'];
-const FED_PRO: FeatureKey[] = [...FED_STARTER, 'federation.talent', 'federation.cockpit', 'federation.reports'];
+const FED_PRO: FeatureKey[] = [...FED_STARTER, 'federation.talent', 'federation.cockpit', 'federation.reports', 'tools.calculator'];
 const FED_ENTERPRISE: FeatureKey[] = [...FED_PRO, 'federation.api', 'federation.whiteLabel'];
 const ADMIN: FeatureKey[] = [...FED_ENTERPRISE, 'admin.dataQuality', 'admin.console'];
 

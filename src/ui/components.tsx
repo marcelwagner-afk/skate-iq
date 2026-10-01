@@ -46,13 +46,17 @@ export function Badge({ children, color }: { children: ReactNode; color?: string
 }
 export function DemoBadge() {
   const { store } = useApp();
-  const real = !store.b.synthetic;
+  if (!store.b.synthetic) {
+    // Echtdaten: öffentliche Wettkampfergebnisse – nur dezenter Datenstand, keine Warnung
+    const d = new Date(store.b.generatedAt).toLocaleDateString('de-DE');
+    return <span className="chip">{t('common.dataAsOf', { date: d })}</span>;
+  }
   return (
     <span className="chip" style={{
-      borderColor: real ? 'var(--critical)' : 'var(--warning)', color: 'var(--ink-2)',
-      background: `color-mix(in srgb, ${real ? 'var(--critical)' : 'var(--warning)'} 12%, var(--surface-1))`,
+      borderColor: 'var(--warning)', color: 'var(--ink-2)',
+      background: `color-mix(in srgb, var(--warning) 12%, var(--surface-1))`,
     }}>
-      ⚠ {t(real ? 'common.realBadge' : 'common.demoBadge')}
+      ⚠ {t('common.demoBadge')}
     </span>
   );
 }

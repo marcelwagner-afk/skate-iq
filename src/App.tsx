@@ -3,6 +3,7 @@ import { AppProvider } from './ui/AppContext';
 import { Shell } from './ui/Shell';
 import Admin from './pages/Admin';
 import Methodik from './pages/Methodik';
+import Rechner from './pages/Rechner';
 import Athlete from './pages/Athlete';
 import Compare from './pages/Compare';
 import { CompetitionDetail, CompetitionList } from './pages/Competitions';
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/countries" element={<Countries />} />
             <Route path="/talent" element={<Talent />} />
             <Route path="/methodik" element={<Methodik />} />
+            <Route path="/rechner" element={<Rechner />} />
             <Route path="/competitions" element={<CompetitionList />} />
             <Route path="/competition/:id" element={<CompetitionDetail />} />
             <Route path="/pricing" element={<Pricing />} />
