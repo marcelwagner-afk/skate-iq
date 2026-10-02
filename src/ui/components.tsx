@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { fmtNum, t } from '../core/i18n';
+import { fmtNum, localeTag, t } from '../core/i18n';
 import { can, requiredPlan } from '../core/entitlements';
 import type { FeatureKey, PlanKey } from '../core/types';
 import type { TalentTier } from '../data/store';
@@ -48,7 +48,7 @@ export function DemoBadge() {
   const { store } = useApp();
   if (!store.b.synthetic) {
     // Echtdaten: öffentliche Wettkampfergebnisse – nur dezenter Datenstand, keine Warnung
-    const d = new Date(store.b.generatedAt).toLocaleDateString('de-DE');
+    const d = new Date(store.b.generatedAt).toLocaleDateString(localeTag());
     return <span className="chip">{t('common.dataAsOf', { date: d })}</span>;
   }
   return (

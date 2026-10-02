@@ -1,5 +1,5 @@
 import { registry } from '../adapters/types';
-import { t, getLocale } from '../core/i18n';
+import { t, localeTag } from '../core/i18n';
 import type { ID } from '../core/types';
 import type { Store } from '../data/store';
 
@@ -26,7 +26,7 @@ export function levelKey(level: string): string {
   return ({ world: 'bench.group.world', continental: 'bench.group.continent' } as Record<string, string>)[level] ?? 'common.level';
 }
 export function fmtDate(iso: string): string {
-  return new Date(iso).toLocaleDateString(getLocale() === 'de' ? 'de-DE' : 'en-US', { month: 'short', year: 'numeric' });
+  return new Date(iso).toLocaleDateString(localeTag(), { month: 'short', year: 'numeric' });
 }
 export function allCategories(): { id: ID; disciplineId: ID; label: () => string }[] {
   const out: { id: ID; disciplineId: ID; label: () => string }[] = [];

@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { t } from '../core/i18n';
+import { LOCALES, t, type Locale } from '../core/i18n';
 import type { PlanKey } from '../core/types';
 import { useApp } from './AppContext';
 import { DemoBadge } from './components';
@@ -111,9 +111,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
         aria-label={t('pricing.currentPlan')} title={t('pricing.currentPlan')}>
         {PLANS.map(p => <option key={p} value={p}>{p.replace('_', ' ')}</option>)}
       </select>
-      <button className="text-xs navlink" onClick={() => switchLocale(locale === 'en' ? 'de' : 'en')} aria-label={t('common.lang')}>
-        {locale.toUpperCase()}
-      </button>
+      <select value={locale} onChange={e => switchLocale(e.target.value as Locale)}
+        className="text-xs rounded-lg border px-1.5 py-1" style={{ borderColor: 'var(--border)', background: 'var(--surface-1)' }}
+        aria-label={t('common.lang')} title={t('common.lang')}>
+        {LOCALES.map(l => <option key={l} value={l}>{l.toUpperCase()}</option>)}
+      </select>
       <button className="text-xs navlink" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label="Theme">
         {theme === 'dark' ? '☀️' : '🌙'}
       </button>
