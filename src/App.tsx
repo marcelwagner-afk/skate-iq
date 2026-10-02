@@ -4,6 +4,7 @@ import { Shell } from './ui/Shell';
 import Admin from './pages/Admin';
 import Methodik from './pages/Methodik';
 import Rechner from './pages/Rechner';
+import Driv from './pages/Driv';
 import Athlete from './pages/Athlete';
 import Compare from './pages/Compare';
 import { CompetitionDetail, CompetitionList } from './pages/Competitions';
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/athlete/:id" element={<Athlete />} />
             <Route path="/compare" element={<Compare />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/driv" element={<Driv />} />
             <Route path="/federation/:code" element={<Federation />} />
             <Route path="/countries" element={<Countries />} />
             <Route path="/talent" element={<Talent />} />

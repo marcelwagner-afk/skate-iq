@@ -22,6 +22,14 @@ export const fr: Record<string, string> = {
   'landing.demoNote': 'Aperçu avec des données démo synthétiques. Les données fédérales réelles ne sont importées que dans le cadre d’un accord d’accès.',
 
   // Calculateur RollArt (add-on)
+  // Cockpit DRIV (comparaison internationale)
+  'nav.driv': 'Cockpit DRIV',
+  'driv.title': 'DRIV – Comparaison internationale',
+  'driv.sub': "L'équipe allemande dans le contexte mondial – chaque nombre est un classement computationnel issu de résultats officiels.",
+  'driv.squad': 'Équipe en comparaison mondiale',
+  'driv.squadSub': 'Tous les athlètes allemands avec position mondiale/européenne, percentile et retard sur le top 10 – par catégorie.',
+  'driv.europe': 'Position européenne',
+  'driv.compare': 'Comparaison de pays : le DRIV face au monde',
   'nav.calc': 'Calculateur RollArt', 'calc.title': 'Calculateur RollArt', 'calc.addon': 'Add-on',
   'calc.price': '4,99 €/mois', 'calc.activate': 'Activer l’add-on (démo)',
   'calc.pitch': 'Calcule les content sheets selon les valeurs officielles World Skate – éléments, QOE par juge, bonus, composantes et export PDF.',

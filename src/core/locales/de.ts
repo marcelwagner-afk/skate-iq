@@ -22,6 +22,14 @@ export const de: Record<string, string> = {
   'landing.demoNote': 'Vorschau mit synthetischen Demo-Daten. Echte Verbandsdaten werden nur im Rahmen einer Zugangs-Vereinbarung importiert.',
 
   // RollArt-Rechner (Add-on)
+  // DRIV-Cockpit (internationaler Vergleich)
+  'nav.driv': 'DRIV-Cockpit',
+  'driv.title': 'DRIV – Internationaler Vergleich',
+  'driv.sub': 'Der deutsche Kader im Weltkontext – jede Zahl ist eine rechnerische Einordnung aus offiziellen Ergebnissen.',
+  'driv.squad': 'Kader im Weltvergleich',
+  'driv.squadSub': 'Alle deutschen Athleten mit Welt-/Europa-Position, Perzentil und Rückstand auf die Top 10 – je Kategorie.',
+  'driv.europe': 'Europa-Position',
+  'driv.compare': 'Ländervergleich: DRIV gegen die Welt',
   'nav.calc': 'RollArt-Rechner', 'calc.title': 'RollArt-Rechner', 'calc.addon': 'Add-on',
   'calc.price': '4,99 €/Monat', 'calc.activate': 'Add-on aktivieren (Demo)',
   'calc.pitch': 'Content Sheets nach den offiziellen World-Skate-Werten 2026 kalkulieren – Elemente, QOE je Kampfrichter, Boni, Komponenten und PDF-Export.',
