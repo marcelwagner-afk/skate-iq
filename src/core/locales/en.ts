@@ -25,6 +25,14 @@ export const en: Record<string, string> = {
 
   // Home
   // RollArt calculator (add-on)
+  // DRIV cockpit (international comparison)
+  'nav.driv': 'DRIV Cockpit',
+  'driv.title': 'DRIV – International Comparison',
+  'driv.sub': 'The German squad in its world context – every number is a computational classification from official results.',
+  'driv.squad': 'Squad in world comparison',
+  'driv.squadSub': 'All German athletes with world/Europe position, percentile and gap to the top 10 – per category.',
+  'driv.europe': 'Europe position',
+  'driv.compare': 'Country comparison: DRIV vs the world',
   'nav.calc': 'RollArt Calculator', 'calc.title': 'RollArt Calculator', 'calc.addon': 'Add-on',
   'calc.price': '€4.99/month', 'calc.activate': 'Activate add-on (demo)',
   'calc.pitch': 'Calculate content sheets with the official World Skate 2026 values – elements, per-judge QOE, bonuses, components and PDF export.',

@@ -20,6 +20,7 @@ const IC: Record<string, ReactNode> = {
   calc: <><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 7h8M8 12h2m3 0h2M8 16h2m3 0h2" /></>,
   book: <path d="M4 19.5V5a2 2 0 0 1 2-2h14v16H6.5A2.5 2.5 0 0 0 4 21.5v-2zm0 0A2.5 2.5 0 0 1 6.5 17H20" />,
   data: <><ellipse cx="12" cy="5" rx="8" ry="2.6" /><path d="M4 5v14c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6V5M4 12c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6" /></>,
+  driv: <path d="M12 3l7 3v5c0 4.6-3 8.6-7 10-4-1.4-7-5.4-7-10V6zM8.5 12l2.3 2.3L15.5 9.5" />,
 };
 function Icon({ k }: { k: string }) {
   return (
@@ -95,7 +96,7 @@ function Brand() {
 }
 
 const LINKS: [string, string, string][] = [
-  ['/home', 'nav.home', 'home'], ['/leaderboard', 'nav.leaderboard', 'board'],
+  ['/home', 'nav.home', 'home'], ['/driv', 'nav.driv', 'driv'], ['/leaderboard', 'nav.leaderboard', 'board'],
   ['/compare', 'nav.compare', 'compare'], ['/talent', 'nav.talent', 'talent'],
   ['/federation/GER', 'nav.federation', 'fed'], ['/countries', 'nav.countries', 'globe'],
   ['/competitions', 'nav.competitions', 'comp'], ['/rechner', 'nav.calc', 'calc'], ['/methodik', 'nav.method', 'book'], ['/pricing', 'nav.pricing', 'price'],
