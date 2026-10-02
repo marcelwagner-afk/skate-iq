@@ -4,6 +4,8 @@ import { t, fmtNum, getLocale } from '../core/i18n';
 import { useApp } from '../ui/AppContext';
 import { AthleteLink, Card, Kpi, SecLabel, SectionTitle, fmtMag, fmtOriented } from '../ui/components';
 import { allCategories, fmtDate, sportOf } from '../ui/labels';
+import spotlightImg from '../assets/spotlight.jpg';
+import talentImg from '../assets/talent.jpg';
 
 /** Akzentverläufe der Disziplin-Kacheln (Designvorlage: Sports Overview) */
 const TILE_GRADS = [
@@ -99,6 +101,7 @@ export default function Home() {
         <div className="lg:col-span-2 space-y-5 min-w-0">
           {spot && (
             <div className="hero-band p-5 sm:p-6">
+              <div className="hero-photo" style={{ backgroundImage: `url(${spotlightImg})`, width: 'min(34%, 240px)' }} aria-hidden="true" />
               <SecLabel>{t('home.spotlight')}</SecLabel>
               <h2 className="text-xl sm:text-2xl font-extrabold max-w-lg">{t('home.spotlightH', { name: spot.name })}</h2>
               <p className="text-sm ink-2 mt-1 max-w-md">
@@ -124,13 +127,14 @@ export default function Home() {
             </div>
           </div>
           {/* Talent-Radar-Banner (Vorlage) */}
-          <div className="hero-band p-5 sm:p-6 flex flex-wrap items-center justify-between gap-3">
-            <div>
+          <div className="hero-band p-5 sm:p-6">
+            <div className="hero-photo" style={{ backgroundImage: `url(${talentImg})`, width: 'min(42%, 300px)', backgroundPosition: 'center 35%' }} aria-hidden="true" />
+            <div className="max-w-md">
               <SecLabel>{t('nav.talent')}</SecLabel>
               <h2 className="text-lg sm:text-xl font-extrabold">{t('home.talentH')}</h2>
               <p className="text-sm ink-2 mt-0.5">{t('home.talentP')}</p>
+              <Link to="/talent" className="btn btn-primary inline-block text-sm mt-3">{t('home.viewTalent')} →</Link>
             </div>
-            <Link to="/talent" className="btn btn-primary text-sm">{t('home.viewTalent')} →</Link>
           </div>
         </div>
 

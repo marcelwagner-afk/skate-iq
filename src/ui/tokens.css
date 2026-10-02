@@ -137,6 +137,21 @@ a { color: inherit; }
 }
 :root[data-theme="light"] .hero-band { background: linear-gradient(115deg, #e8f0fd, #f6f8fc); }
 
+/* Foto-Layer für hero-band (Designvorlage): Bild seitlich, weich in den Verlauf geblendet */
+.hero-band > .hero-photo {
+  position: absolute; top: 0; bottom: 0; right: 0; width: min(48%, 440px); pointer-events: none;
+  background-size: cover; background-position: center 18%; opacity: 0.92;
+  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.96) 52%, transparent);
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.96) 52%, transparent);
+}
+.hero-band > .hero-photo.left {
+  right: auto; left: 0;
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.96) 52%, transparent);
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.96) 52%, transparent);
+}
+.hero-band > :not(.hero-photo) { position: relative; z-index: 1; }
+:root[data-theme="light"] .hero-band > .hero-photo { opacity: 0.4; }
+
 /* Tab-Leiste (Athletenprofil) */
 .tabbar { display: flex; gap: 4px; overflow-x: auto; }
 .tab { padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
