@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { t, fmtNum, getLocale } from '../core/i18n';
+import { t, fmtNum, localeTag } from '../core/i18n';
 import { useApp } from '../ui/AppContext';
 import { AthleteLink, Card, Kpi, SecLabel, SectionTitle, fmtMag, fmtOriented } from '../ui/components';
 import { allCategories, fmtDate, sportOf } from '../ui/labels';
@@ -74,7 +74,7 @@ export default function Home() {
 
   const hour = new Date().getHours();
   const greet = t(hour < 11 ? 'home.greet.morning' : hour < 18 ? 'home.greet.day' : 'home.greet.evening');
-  const today = new Date().toLocaleDateString(getLocale() === 'de' ? 'de-DE' : 'en-US',
+  const today = new Date().toLocaleDateString(localeTag(),
     { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
   const ger = store.federationStats('GER');
