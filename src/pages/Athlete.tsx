@@ -8,6 +8,7 @@ import { LineChart, SpiBars } from '../ui/charts';
 import { AthleteLink, Card, ComputedNote, Gate, Kpi, SectionTitle, fmtMag, fmtOriented } from '../ui/components';
 import { catLabel, catParts, fmtDate, sportOf } from '../ui/labels';
 import { downloadShareCard } from '../ui/shareCard';
+import athleteHeroImg from '../assets/athlete-hero.jpg';
 
 const TARGETS: { key: string; group: BenchmarkGroup }[] = [
   { key: 'bench.group.top50', group: { kind: 'topN', n: 50 } },
@@ -79,6 +80,7 @@ export default function Athlete() {
     <div className="space-y-5">
       {/* Hero-Header (Designvorlage: großer Name, Meta-Zeile, Tabs) */}
       <div className="hero-band p-5 sm:p-7" id="sec-overview">
+        <div className="hero-photo hidden sm:block" style={{ backgroundImage: `url(${athleteHeroImg})`, width: 'min(44%, 400px)', backgroundPosition: 'center 25%' }} aria-hidden="true" />
         <div className="flex flex-wrap items-start gap-4">
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-4xl flex-none"
             style={{ background: 'color-mix(in srgb, var(--surface-2) 70%, transparent)', border: '1px solid var(--border)' }}>{c?.flag}</div>

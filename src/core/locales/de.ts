@@ -94,6 +94,8 @@ export const de: Record<string, string> = {
   'landing.sport.derby': 'Roller Derby', 'landing.sport.scootering': 'Scootering',
   'landing.sport.live': 'live', 'landing.sport.soon': 'bald',
   'landing.moreLabel': 'Mehr als Ergebnisse', 'landing.moreH': 'Mehr als Ergebnisse. Echter Fortschritt.',
+  'landing.mobileLabel': 'Überall dabei', 'landing.mobileH': 'Dein Weg. Mit Daten belegt.',
+  'landing.mobileP': 'SKATE IQ läuft auf jedem Gerät – Rankings, Entwicklung und Vergleiche auch unterwegs, direkt im Browser.',
   'landing.moreP': 'SKATE IQ verwandelt Wettkampfdaten in verständliche Leistungs-Intelligenz – damit du siehst, wo du stehst, dein Potenzial verstehst und bessere Entscheidungen triffst.',
   'landing.featH': 'Starke Funktionen für jedes Level',
   'pricing.h1a': 'Klare Pläne.', 'pricing.h1b': 'Echter Mehrwert.',

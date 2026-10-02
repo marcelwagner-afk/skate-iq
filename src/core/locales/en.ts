@@ -97,6 +97,8 @@ export const en: Record<string, string> = {
   'landing.sport.derby': 'Roller Derby', 'landing.sport.scootering': 'Scootering',
   'landing.sport.live': 'live', 'landing.sport.soon': 'soon',
   'landing.moreLabel': 'More than results', 'landing.moreH': 'More than results. Real progress.',
+  'landing.mobileLabel': 'Take it anywhere', 'landing.mobileH': 'Your journey. Backed by data.',
+  'landing.mobileP': 'SKATE IQ runs on any device – rankings, development and comparisons on the go, right in your browser.',
   'landing.moreP': 'SKATE IQ transforms competition data into meaningful performance intelligence – so you can see where you stand, understand your potential and make better decisions.',
   'landing.featH': 'Powerful features for every level',
   'pricing.h1a': 'Simple plans.', 'pricing.h1b': 'Real impact.',
