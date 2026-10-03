@@ -161,7 +161,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <div className="max-w-7xl mx-auto px-3 sm:px-5 flex flex-wrap items-center gap-3 text-xs ink-3">
             <span className="lg:hidden"><DemoBadge /></span>
             <span>{t('brand.independent')}</span>
-            <span className="ml-auto">{t('brand.name')} · {t('brand.tagline')}</span>
+            <span className="ml-auto flex gap-3 items-center">
+              <Link to="/impressum" className="hover:underline">{t('nav.imprint')}</Link>
+              <Link to="/datenschutz" className="hover:underline">{t('nav.privacy')}</Link>
+              <span>{t('brand.name')} · {t('brand.tagline')}</span>
+            </span>
           </div>
         </footer>
       </div>

@@ -5,6 +5,8 @@ import Admin from './pages/Admin';
 import Methodik from './pages/Methodik';
 import Rechner from './pages/Rechner';
 import Driv from './pages/Driv';
+import Impressum from './pages/Impressum';
+import Datenschutz from './pages/Datenschutz';
 import Athlete from './pages/Athlete';
 import Compare from './pages/Compare';
 import { CompetitionDetail, CompetitionList } from './pages/Competitions';
@@ -28,6 +30,8 @@ export default function App() {
             <Route path="/compare" element={<Compare />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/driv" element={<Driv />} />
+            <Route path="/impressum" element={<Impressum />} />
+            <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="/federation/:code" element={<Federation />} />
             <Route path="/countries" element={<Countries />} />
             <Route path="/talent" element={<Talent />} />

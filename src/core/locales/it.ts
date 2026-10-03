@@ -84,6 +84,7 @@ export const it: Record<string, string> = {
   'intl.none': 'Per questa stagione non sono ancora disponibili campi di gara internazionali.',
   'intl.note': 'Collocazione computazionale del miglior punteggio stagionale nel campo reale e giudicato (risultato proprio escluso). Non sostituisce qualificazioni né forma del giorno – i piazzamenti reali sono mostrati accanto.',
   'el.benchCol': 'Media top 10', 'el.benchHint': 'Punti medi del panel della top 10 mondiale della categoria per lo stesso elemento (stagione)',
+  'nav.imprint': 'Note legali', 'nav.privacy': 'Privacy',
   'nav.calc': 'Calcolatore RollArt', 'calc.title': 'Calcolatore RollArt', 'calc.addon': 'Add-on',
   'calc.price': '4,99 €/mese', 'calc.activate': 'Attiva l’add-on (demo)',
   'calc.pitch': 'Calcola i content sheet secondo i valori ufficiali World Skate – elementi, QOE per giudice, bonus, componenti ed export PDF.',
