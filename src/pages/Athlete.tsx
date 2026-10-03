@@ -12,6 +12,8 @@ import { diagnose } from '../data/diagnosis';
 import { DiagnosisPanel } from '../ui/DiagnosisPanel';
 import { analyzeElements } from '../core/elements';
 import { ElementsPanel } from '../ui/ElementsPanel';
+import { top10ElementBench } from '../data/elementBench';
+import { intlPlacements } from '../data/intlPlacement';
 import athleteHeroImg from '../assets/athlete-hero.jpg';
 
 const TARGETS: { key: string; group: BenchmarkGroup }[] = [
@@ -37,6 +39,7 @@ export default function Athlete() {
   const [range, setRange] = useState(4);             // default Karriere
   const catId = catSel ?? cats[0];
   const season = store.currentSeason();
+  const [intlSeason, setIntlSeason] = useState(season);   // Saisonwahl für „Internationale Einordnung" (2026 → 2027 …)
 
   const data = useMemo(() => {
     if (!a || !catId) return null;
@@ -74,7 +77,8 @@ export default function Athlete() {
     const elRowsSeason = elRowsAll.filter(x => x.cmp.seasonId === season);
     const elems = analyzeElements((elRowsSeason.length >= 2 ? elRowsSeason : elRowsAll)
       .map(x => ({ date: x.cmp.startDate, comp: x.cmp.name, p: x.p })));
-    return { sportId, world, contPos, natPos, pct, spi, series, pb, sb, trend, corridorT10, tgt, gap, gapT10, results, consistency, insights, info, diag, elems };
+    const elBench = elems ? top10ElementBench(store, catId, season) : undefined;
+    return { sportId, world, contPos, natPos, pct, spi, series, pb, sb, trend, corridorT10, tgt, gap, gapT10, results, consistency, insights, info, diag, elems, elBench };
   }, [a, catId, season, store, target]);
 
   if (!a || !data) return <Card>{t('common.notFound')}</Card>;
@@ -170,10 +174,73 @@ export default function Athlete() {
         <Card>
           <SectionTitle sub={t('el.sub')}>{t('el.title')}</SectionTitle>
           <Gate feature="athlete.whatItTakes">
-            <ElementsPanel a={data.elems} names={store.b.elementNames} kinds={store.b.elementKinds} />
+            <ElementsPanel a={data.elems} names={store.b.elementNames} kinds={store.b.elementKinds} bench={data.elBench} />
           </Gate>
         </Card>
       )}
+
+      {/* Internationale Einordnung (Marcel 03.10.: virtuelle Platzierung bei EM/WM/Weltcup/CoE/Interland je Saison) */}
+      {(() => {
+        const champs = intlPlacements(store, a.id, catId, intlSeason);
+        const seasons = [...store.b.seasons].sort((s1, s2) => s2.id.localeCompare(s1.id));
+        if (!champs.length && intlSeason === season) return null;
+        return (
+          <Card>
+            <div className="flex flex-wrap items-end justify-between gap-2">
+              <SectionTitle sub={t('intl.sub')}>{t('intl.title')}</SectionTitle>
+              <div className="tabbar">
+                {seasons.map(s2 => (
+                  <button key={s2.id} className={`tab !px-2.5 !py-1 !text-xs ${s2.id === intlSeason ? 'on' : ''}`}
+                    onClick={() => setIntlSeason(s2.id)}>{s2.label}</button>
+                ))}
+              </div>
+            </div>
+            <Gate feature="athlete.benchmarks">
+              {champs.length === 0 ? (
+                <p className="text-sm ink-3 py-4">{t('intl.none')}</p>
+              ) : (
+                <div className="overflow-x-auto mt-2">
+                  <table className="tbl w-full">
+                    <thead>
+                      <tr>
+                        <th>{t('common.competition')}</th><th>{t('common.date')}</th><th>{t('comp.participants')}</th>
+                        <th>{t('intl.winner')}</th><th>{t('intl.third')}</th><th>{t('intl.myValue')}</th>
+                        <th>{t('intl.virtualPos')}</th><th>{t('intl.actual')}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {champs.map(ch => (
+                        <tr key={ch.evId}>
+                          <td className="font-semibold whitespace-nowrap">
+                            <a href={`#/competition/${ch.cmp.id}`} className="hover:underline">{ch.cmp.name}</a>
+                            {(ch.cmp.level === 'world' || ch.cmp.level === 'continental') &&
+                              <span className="chip ml-1.5 text-[10px]">{ch.cmp.level === 'world' ? 'WM' : 'EM'}</span>}
+                          </td>
+                          <td className="ink-3 whitespace-nowrap">{fmtDate(ch.cmp.startDate)}</td>
+                          <td className="tnum">{ch.n}</td>
+                          <td className="tnum">{fmtNum(ch.winner, 2)}</td>
+                          <td className="tnum">{ch.third != null ? fmtNum(ch.third, 2) : t('common.na')}</td>
+                          <td className="tnum font-semibold whitespace-nowrap">
+                            {ch.my != null ? fmtNum(ch.my, 2) : t('common.na')}
+                            {ch.mySeason != null && ch.mySeason !== intlSeason &&
+                              <span className="chip ml-1.5 text-[10px]">{store.b.seasons.find(s2 => s2.id === ch.mySeason)?.label}</span>}
+                          </td>
+                          <td className="tnum font-black whitespace-nowrap"
+                            style={{ color: ch.pos != null && ch.pos <= 3 ? 'var(--good)' : ch.pos != null && ch.pos <= 10 ? 'var(--accent-2)' : undefined }}>
+                            {ch.pos != null ? <>#{ch.pos} <span className="ink-3 font-normal">/ {ch.n}</span>{ch.pos <= 3 ? ' 🏅' : ''}</> : t('common.na')}
+                          </td>
+                          <td className="tnum">{ch.actual != null ? `#${ch.actual}` : <span className="ink-3">{t('intl.notEntered')}</span>}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p className="text-[11px] ink-3 mt-2">{t('intl.note')}</p>
+                </div>
+              )}
+            </Gate>
+          </Card>
+        );
+      })()}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5" id="sec-development">
         {/* Development chart with corridor + major-competition emphasis + range pills */}
