@@ -4,6 +4,7 @@ import { useApp } from '../ui/AppContext';
 import { HBars } from '../ui/charts';
 import { AthleteLink, Card, ComputedNote, Gate, Kpi, SectionTitle, fmtMag } from '../ui/components';
 import { allCategories, catLabel, sportOf } from '../ui/labels';
+import { diagnose } from '../data/diagnosis';
 
 const DRIV = 'GER';
 
@@ -26,6 +27,7 @@ export default function Driv() {
       id: string; name: string; catId: string; cat: string; sport: string;
       world: number; of: number; eu: number | null; euOf: number | null;
       pct: number | null; sb: number; gap10: number | null; trend: number | null;
+      deficit: string | null;                 // Top-Arbeitsfeld aus der Diagnose
     }[] = [];
     for (const cat of allCategories()) {
       if (catSel && cat.id !== catSel) continue;
@@ -43,6 +45,7 @@ export default function Driv() {
           pct: r.percentile, sb: r.value,
           gap10: bench10 != null ? r.value - bench10 : null,
           trend: store.trend12(r.athlete.id, cat.id),
+          deficit: diagnose(store, r.athlete.id, cat.id, season)?.work[0]?.key ?? null,
         });
       }
     }
@@ -100,6 +103,7 @@ export default function Driv() {
                   <th>{t('kpi.world')}</th><th>{t('driv.europe')}</th>
                   <th>{t('kpi.percentile')}</th><th>{t('kpi.sb')}</th>
                   <th>{t('kpi.gapTop10')}</th><th>{t('athlete.range.12m')}</th>
+                  <th>{t('diag.topDeficit')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -116,6 +120,11 @@ export default function Driv() {
                     </td>
                     <td className="tnum whitespace-nowrap" style={{ color: (r.trend ?? 0) >= 0 ? 'var(--good)' : 'var(--critical)' }}>
                       {r.trend == null ? t('common.na') : (r.trend >= 0 ? '+' : '−') + fmtMag(r.trend, r.sport)}
+                    </td>
+                    <td className="whitespace-nowrap">
+                      {r.deficit
+                        ? <span className="chip text-[11px]" style={{ borderColor: 'color-mix(in srgb, var(--critical) 45%, var(--border))', color: 'var(--critical)' }}>{t(`diag.${r.deficit}.label`)}</span>
+                        : <span style={{ color: 'var(--good)' }}>✓</span>}
                     </td>
                   </tr>
                 ))}
