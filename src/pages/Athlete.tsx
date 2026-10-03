@@ -10,6 +10,8 @@ import { catLabel, catParts, fmtDate, sportOf } from '../ui/labels';
 import { downloadShareCard } from '../ui/shareCard';
 import { diagnose } from '../data/diagnosis';
 import { DiagnosisPanel } from '../ui/DiagnosisPanel';
+import { analyzeElements } from '../core/elements';
+import { ElementsPanel } from '../ui/ElementsPanel';
 import athleteHeroImg from '../assets/athlete-hero.jpg';
 
 const TARGETS: { key: string; group: BenchmarkGroup }[] = [
@@ -67,7 +69,12 @@ export default function Athlete() {
     });
     const gapT10 = gapT10v != null && (sb ?? pb) != null ? +(gapT10v - (sb ?? pb)!).toFixed(2) : null;
     const diag = diagnose(store, a.id, catId, season);
-    return { sportId, world, contPos, natPos, pct, spi, series, pb, sb, trend, corridorT10, tgt, gap, gapT10, results, consistency, insights, info, diag };
+    // Element-Analyse: Saison-Starts (Fallback: Karriere), chronologisch
+    const elRowsAll = store.athletePerfs(a.id).filter(x => x.ev.categoryId === catId && x.p.det?.length);
+    const elRowsSeason = elRowsAll.filter(x => x.cmp.seasonId === season);
+    const elems = analyzeElements((elRowsSeason.length >= 2 ? elRowsSeason : elRowsAll)
+      .map(x => ({ date: x.cmp.startDate, comp: x.cmp.name, p: x.p })));
+    return { sportId, world, contPos, natPos, pct, spi, series, pb, sb, trend, corridorT10, tgt, gap, gapT10, results, consistency, insights, info, diag, elems };
   }, [a, catId, season, store, target]);
 
   if (!a || !data) return <Card>{t('common.notFound')}</Card>;
@@ -154,6 +161,16 @@ export default function Athlete() {
           <SectionTitle sub={t('diag.sub')}>{t('diag.title')}</SectionTitle>
           <Gate feature="athlete.whatItTakes">
             <DiagnosisPanel diag={data.diag} />
+          </Gate>
+        </Card>
+      )}
+
+      {/* Elemente im Detail (Marcel 03.10.: Entwicklung je Element, konkrete Arbeitsfelder) */}
+      {data.elems && (
+        <Card>
+          <SectionTitle sub={t('el.sub')}>{t('el.title')}</SectionTitle>
+          <Gate feature="athlete.whatItTakes">
+            <ElementsPanel a={data.elems} names={store.b.elementNames} kinds={store.b.elementKinds} />
           </Gate>
         </Card>
       )}

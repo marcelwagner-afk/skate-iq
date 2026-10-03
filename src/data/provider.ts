@@ -19,6 +19,9 @@ export interface DataBundle {
   performances: Performance[];
   sources: DataSource[];
   quality: DataQualityRecord[];
+  /** Element-Detail-Beiwerk (nur Echtdaten): Kind-Tabelle + Code→Name. */
+  elementKinds?: string[];
+  elementNames?: Record<string, string>;
 }
 
 export interface DataProvider { load(): Promise<DataBundle>; }

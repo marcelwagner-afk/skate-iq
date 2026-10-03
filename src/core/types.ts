@@ -83,6 +83,10 @@ export interface Performance {               // one athlete's outing at one Even
   metrics: MetricValue[];                    // e.g. artistic: total/tes/pcs/deductions; speed: timeMs
   placement?: number;                        // official placement (null = not classified)
   segments?: { key: string; metrics: MetricValue[] }[];
+  /** Element-Details aus den "Judges details per skater"-Blättern (kompakt):
+   *  je Segment die Elemente als [kindIdx → DataBundle.elementKinds, code, flags(<,<<,<<<,*…), base, qoe, panel]
+   *  plus die 4 Komponenten-Panelwerte (Skating Skills, Transitions, Performance, Choreography). */
+  det?: { s: string; els: [number, string, string, number, number, number][]; c?: (number | null)[] | null }[];
   status: 'ok' | 'incomplete' | 'dns' | 'dnf' | 'dsq' | 'withdrawn';
   sourceId: ID;                              // provenance (DataSource)
 }
