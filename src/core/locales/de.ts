@@ -85,6 +85,7 @@ export const de: Record<string, string> = {
   'intl.note': 'Rechnerische Einordnung des Saison-Bestwerts in das reale, gewertete Feld (eigenes Ergebnis herausgerechnet). Ersetzt keine Qualifikation und keine Tagesform – reale Platzierungen stehen daneben.',
   'el.benchCol': 'Ø Top 10', 'el.benchHint': 'Ø Panel-Punkte der Welt-Top-10 der Kategorie für dasselbe Element (Saison)',
   'nav.imprint': 'Impressum', 'nav.privacy': 'Datenschutz',
+  'contact.cta': 'Demo anfragen', 'contact.pitch': 'Fragen oder Interesse an SKATE IQ für deinen Verband oder Verein? Wir zeigen dir das Tool live.',
   'nav.calc': 'RollArt-Rechner', 'calc.title': 'RollArt-Rechner', 'calc.addon': 'Add-on',
   'calc.price': '4,99 €/Monat', 'calc.activate': 'Add-on aktivieren (Demo)',
   'calc.pitch': 'Content Sheets nach den offiziellen World-Skate-Werten 2026 kalkulieren – Elemente, QOE je Kampfrichter, Boni, Komponenten und PDF-Export.',

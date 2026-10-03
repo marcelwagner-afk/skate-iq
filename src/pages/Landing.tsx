@@ -34,7 +34,7 @@ export default function Landing() {
           <div className="flex flex-wrap gap-3 mt-7">
             <Link to="/leaderboard" className="btn btn-primary">{t('landing.ctaExplore')} →</Link>
             <Link to="/home" className="btn">{t('landing.ctaFree')}</Link>
-            <Link to="/federation/GER" className="btn">{t('landing.ctaFed')}</Link>
+            <a href={`mailto:marcel.wagner@w-dfs.de?subject=${encodeURIComponent('SKATE IQ – Demo-Anfrage')}`} className="btn">{t('contact.cta')}</a>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3 max-w-xl mt-10">
@@ -97,6 +97,12 @@ export default function Landing() {
       <section className="text-center">
         <div className="inline-flex flex-wrap justify-center gap-6 text-xl font-extrabold ink-2">
           <span>{t('landing.q1')}</span><span className="text-grad">→</span><span>{t('landing.q2')}</span>
+        </div>
+        <div className="mt-6">
+          <p className="text-sm ink-2 mb-3">{t('contact.pitch')}</p>
+          <a href={`mailto:marcel.wagner@w-dfs.de?subject=${encodeURIComponent('SKATE IQ – Demo-Anfrage')}`} className="btn btn-primary">
+            {t('contact.cta')} →
+          </a>
         </div>
         <p className="text-xs ink-3 mt-6 max-w-xl mx-auto">{t('landing.demoNote')} {t('brand.independent')}</p>
       </section>

@@ -63,6 +63,11 @@ export default function Pricing() {
           <Link to="/rechner" className="btn btn-primary inline-block mt-2 text-sm">{t('calc.title')} →</Link>
         </div>
       </div>
+      <div className="hero-band p-5 sm:p-6 text-center">
+        <h2 className="text-lg sm:text-xl font-extrabold">{t('contact.pitch')}</h2>
+        <a href={`mailto:marcel.wagner@w-dfs.de?subject=${encodeURIComponent('SKATE IQ – Demo-Anfrage')}`}
+          className="btn btn-primary inline-block mt-3 text-sm">{t('contact.cta')} →</a>
+      </div>
       <p className="text-xs ink-3">{t('pricing.demoDisclaimer')} {t('brand.independent')}</p>
     </div>
   );

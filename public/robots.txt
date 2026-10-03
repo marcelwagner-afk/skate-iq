@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /login/
+
+Sitemap: https://marcelwagner-afk.github.io/skate-iq/sitemap.xml
