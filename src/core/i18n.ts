@@ -29,9 +29,16 @@ function initialLocale(): Locale {
 let current: Locale = initialLocale();
 const listeners = new Set<() => void>();
 
+/** html lang="…" an die aktive Sprache koppeln (SEO/Screenreader). */
+function applyLang(): void {
+  try { document.documentElement.lang = current; } catch { /* kein DOM (Tests) */ }
+}
+applyLang();
+
 export function setLocale(l: Locale): void {
   current = l;
   try { localStorage.setItem(STORE_KEY, l); } catch { /* Wahl gilt dann nur für diese Sitzung */ }
+  applyLang();
   listeners.forEach(f => f());
 }
 export function getLocale(): Locale { return current; }

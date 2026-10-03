@@ -85,6 +85,7 @@ export const es: Record<string, string> = {
   'intl.note': 'Ubicación computacional de la mejor marca de la temporada dentro del campo real puntuado (resultado propio excluido). No sustituye clasificaciones ni la forma del día – los puestos reales se muestran al lado.',
   'el.benchCol': 'Media top 10', 'el.benchHint': 'Puntos medios del panel del top 10 mundial de la categoría para el mismo elemento (temporada)',
   'nav.imprint': 'Aviso legal', 'nav.privacy': 'Privacidad',
+  'contact.cta': 'Solicitar una demo', 'contact.pitch': '¿Preguntas o interés en SKATE IQ para tu federación o club? Te mostramos la herramienta en vivo.',
   'nav.calc': 'Calculadora RollArt', 'calc.title': 'Calculadora RollArt', 'calc.addon': 'Add-on',
   'calc.price': '4,99 €/mes', 'calc.activate': 'Activar add-on (demo)',
   'calc.pitch': 'Calcula content sheets según los valores oficiales de World Skate – elementos, QOE por juez, bonus, componentes y exportación a PDF.',

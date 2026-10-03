@@ -88,6 +88,7 @@ export const en: Record<string, string> = {
   'intl.note': 'Computational placement of the season best within the real, scored field (own result removed). No substitute for qualification or day-of form – actual placements are shown alongside.',
   'el.benchCol': 'Top-10 avg', 'el.benchHint': 'Avg panel points of the category’s world top 10 for the same element (season)',
   'nav.imprint': 'Legal Notice', 'nav.privacy': 'Privacy',
+  'contact.cta': 'Request a demo', 'contact.pitch': 'Questions, or interested in SKATE IQ for your federation or club? We will show you the tool live.',
   'nav.calc': 'RollArt Calculator', 'calc.title': 'RollArt Calculator', 'calc.addon': 'Add-on',
   'calc.price': '€4.99/month', 'calc.activate': 'Activate add-on (demo)',
   'calc.pitch': 'Calculate content sheets with the official World Skate 2026 values – elements, per-judge QOE, bonuses, components and PDF export.',
