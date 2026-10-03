@@ -32,6 +32,23 @@ interface DrivEvent { typ: string; jahr: number; name: string; datum: string; he
 
 const seed: DrivEvent[] = JSON.parse(readFileSync(seedPath, 'utf-8'));
 
+// ---------- Element-Details (Judges details per skater), optional ----------
+interface DetSheet { e: string; d: string; k: string; g: string; n: string; s: string;
+  els: [number, string, string, number, number, number][]; c?: (number | null)[] | null }
+interface DetFile { kinds: string[]; names: Record<string, string>; sheets: DetSheet[] }
+const detPath = join(ROOT, 'data', 'details_for_import.json');
+const detFile: DetFile | null = existsSync(detPath) ? JSON.parse(readFileSync(detPath, 'utf-8')) : null;
+const SEG_ORDER: Record<string, number> = { C1: 0, C2: 1, SP: 2, SD: 2, FP: 3, FD: 3 };
+const detIndex = new Map<string, DetSheet[]>();
+if (detFile) {
+  for (const sh of detFile.sheets) {
+    const key = `${sh.e}|${sh.d}|${sh.k}|${sh.g}|${sh.n}`;
+    const arr = detIndex.get(key) ?? [];
+    arr.push(sh); detIndex.set(key, arr);
+  }
+}
+let detAttached = 0, detSheets = 0;
+
 const LEVEL: Record<string, CompetitionLevel> = {
   WM: 'world', EM: 'continental', 'WC-EU': 'international', 'WC-SA': 'international',
   'WC-F': 'international', CoE: 'international', IGC: 'international', IL: 'international',
@@ -149,9 +166,18 @@ for (const ev of seed) {
       });
       if (!metrics) { rejected++; continue; }
       const ok = row.tesOk !== false;
+      // Element-Details anhängen (Blätter je Segment, SP vor FP)
+      const sheets = detIndex.get(`${ev.name}|${k.disziplin}|${k.klasse}|${k.gender ?? ''}|${row.name}`);
+      let det: Performance['det'];
+      if (sheets?.length) {
+        det = [...sheets]
+          .sort((a, b) => (SEG_ORDER[a.s] ?? 9) - (SEG_ORDER[b.s] ?? 9))
+          .map(sh => ({ s: sh.s, els: sh.els, c: sh.c ?? undefined }));
+        detAttached++; detSheets += sheets.length;
+      }
       performances.push({
         id: `perf_real_${performances.length + 1}`, eventId: evId, athleteId,
-        metrics, placement: row.platz ?? undefined,
+        metrics, placement: row.platz ?? undefined, det,
         status: ok ? 'ok' : 'incomplete', sourceId: 'src_driv',
       });
       ok ? accepted++ : incomplete++;
@@ -168,6 +194,7 @@ const bundle: DataBundle = {
   countries, clubs, athletes,
   seasons: [...years].sort().map(y => ({ id: `s${y}`, label: String(y), start: `${y}-01-01`, end: `${y}-12-31` })),
   competitions, events, performances,
+  elementKinds: detFile?.kinds, elementNames: detFile?.names,
   sources: [{
     id: 'src_driv', organization: 'DRIV (official RollArt protocols)', type: 'pdf',
     url: 'https://github.com/marcelwagner-afk/DRIV-Rollkunstlauf_Leistungsdaten_Analyse',
@@ -189,6 +216,7 @@ console.log(`performances imported:  ${performances.length} (ok=${accepted}, inc
 console.log(`competitions:           ${competitions.length} | categories: ${catIds.size} | events: ${events.length}`);
 console.log(`athlete identities:     ${athletes.length} (created=${created}, variant-merges=${merged}, exact-hits=${exact}, review-queue=${reviewQueue})`);
 console.log(`countries:              ${countries.length} | clubs: ${clubs.length} | seasons: ${[...years].sort().join(',')}`);
+if (detFile) console.log(`element details:        ${detAttached} performances with ${detSheets} sheets (of ${detFile.sheets.length} available)`);
 if (unknownNats.size) console.log(`WARN unknown nat codes → GER fallback: ${[...unknownNats].join(', ')}`);
 if (unmappedCats.size) { console.log(`ERROR unmapped categories: ${[...unmappedCats].join(' · ')}`); process.exit(1); }
 const lost = totalRows - performances.length - rejected;
