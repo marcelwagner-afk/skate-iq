@@ -8,6 +8,8 @@ import { LineChart, SpiBars } from '../ui/charts';
 import { AthleteLink, Card, ComputedNote, Gate, Kpi, SectionTitle, fmtMag, fmtOriented } from '../ui/components';
 import { catLabel, catParts, fmtDate, sportOf } from '../ui/labels';
 import { downloadShareCard } from '../ui/shareCard';
+import { diagnose } from '../data/diagnosis';
+import { DiagnosisPanel } from '../ui/DiagnosisPanel';
 import athleteHeroImg from '../assets/athlete-hero.jpg';
 
 const TARGETS: { key: string; group: BenchmarkGroup }[] = [
@@ -64,7 +66,8 @@ export default function Athlete() {
       lastValues: series.map(s => s.value), spi,
     });
     const gapT10 = gapT10v != null && (sb ?? pb) != null ? +(gapT10v - (sb ?? pb)!).toFixed(2) : null;
-    return { sportId, world, contPos, natPos, pct, spi, series, pb, sb, trend, corridorT10, tgt, gap, gapT10, results, consistency, insights, info };
+    const diag = diagnose(store, a.id, catId, season);
+    return { sportId, world, contPos, natPos, pct, spi, series, pb, sb, trend, corridorT10, tgt, gap, gapT10, results, consistency, insights, info, diag };
   }, [a, catId, season, store, target]);
 
   if (!a || !data) return <Card>{t('common.notFound')}</Card>;
@@ -143,6 +146,16 @@ export default function Athlete() {
             </Card>
           ))}
         </div>
+      )}
+
+      {/* Stärken & Defizite (Marcel 03.10.: pro Athlet erkennbar, was gut/schlecht ist und woran gearbeitet werden muss) */}
+      {data.diag && (
+        <Card>
+          <SectionTitle sub={t('diag.sub')}>{t('diag.title')}</SectionTitle>
+          <Gate feature="athlete.whatItTakes">
+            <DiagnosisPanel diag={data.diag} />
+          </Gate>
+        </Card>
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5" id="sec-development">
