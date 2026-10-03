@@ -5,6 +5,7 @@ import { HBars } from '../ui/charts';
 import { AthleteLink, Card, ComputedNote, Gate, Kpi, SectionTitle, fmtMag } from '../ui/components';
 import { allCategories, catLabel, sportOf } from '../ui/labels';
 import { diagnose } from '../data/diagnosis';
+import { squadVirtual } from '../data/intlPlacement';
 
 const DRIV = 'GER';
 
@@ -20,6 +21,16 @@ export default function Driv() {
   const [rival, setRival] = useState('ITA');
   const s = store.federationStats(DRIV);
   const sR = store.federationStats(rival);
+
+  /* Virtuelle Meisterschafts-Platzierungen: Saison- und Wettbewerbswahl */
+  const [vSeason, setVSeason] = useState(season);
+  const vComps = useMemo(() => store.b.competitions
+    .filter(c => c.seasonId === vSeason && (c.level === 'world' || c.level === 'continental' || c.level === 'international'))
+    .sort((a, b) => b.startDate.localeCompare(a.startDate)), [store, vSeason]);
+  const [vCmpSel, setVCmpSel] = useState('');
+  const vCmp = vComps.find(c => c.id === vCmpSel)
+    ?? vComps.find(c => c.level === 'continental') ?? vComps.find(c => c.level === 'world') ?? vComps[0];
+  const vRows = useMemo(() => (vCmp ? squadVirtual(store, vCmp.id, DRIV, vSeason) : []), [store, vCmp, vSeason]);
 
   /* Kader international: alle deutschen Athleten je Kategorie im Weltkontext */
   const rows = useMemo(() => {
@@ -132,6 +143,55 @@ export default function Driv() {
             </table>
           </div>
           <ComputedNote />
+        </Card>
+
+        {/* Virtuelle Platzierung: Wo würde der Kader bei EM/WM/Weltcup/CoE/Interland landen? */}
+        <Card>
+          <div className="flex flex-wrap items-end justify-between gap-2">
+            <SectionTitle sub={t('intl.squadSub')}>{t('intl.squadTitle')}</SectionTitle>
+            <div className="flex gap-2 items-center flex-wrap">
+              <select className={sel} style={st} value={vSeason}
+                onChange={e => { setVSeason(e.target.value); setVCmpSel(''); }}>
+                {[...store.b.seasons].sort((a, b) => b.id.localeCompare(a.id)).map(s2 =>
+                  <option key={s2.id} value={s2.id}>{t('common.season')} {s2.label}</option>)}
+              </select>
+              <select className={sel} style={st} value={vCmp?.id ?? ''} onChange={e => setVCmpSel(e.target.value)}>
+                {vComps.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+              </select>
+            </div>
+          </div>
+          {vRows.length === 0 ? (
+            <p className="text-sm ink-3 py-4">{t('intl.none')}</p>
+          ) : (
+            <div className="overflow-x-auto mt-2">
+              <table className="tbl w-full">
+                <thead>
+                  <tr>
+                    <th>{t('board.athlete')}</th><th>{t('common.category')}</th><th>{t('kpi.sb')}</th>
+                    <th>{t('intl.virtualPos')}</th><th>{t('intl.podiumGap')}</th><th>{t('intl.actual')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {vRows.map(r => (
+                    <tr key={r.athleteId + r.catId}>
+                      <td className="font-semibold whitespace-nowrap"><AthleteLink id={r.athleteId} name={r.name} /></td>
+                      <td className="text-xs ink-2 whitespace-nowrap">{catLabel(store, r.catId)}</td>
+                      <td className="tnum font-semibold">{fmtNum(r.my, 2)}</td>
+                      <td className="tnum font-black whitespace-nowrap"
+                        style={{ color: r.pos <= 3 ? 'var(--good)' : r.pos <= 10 ? 'var(--accent-2)' : undefined }}>
+                        #{r.pos} <span className="ink-3 font-normal">/ {r.n}</span>{r.pos <= 3 ? ' 🏅' : ''}
+                      </td>
+                      <td className="tnum whitespace-nowrap" style={{ color: (r.podiumGap ?? -1) >= 0 ? 'var(--good)' : 'var(--critical)' }}>
+                        {r.podiumGap == null ? t('common.na') : r.podiumGap >= 0 ? '✓' : '−' + fmtNum(Math.abs(r.podiumGap), 2)}
+                      </td>
+                      <td className="tnum">{r.actual != null ? `#${r.actual}` : <span className="ink-3">{t('intl.notEntered')}</span>}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="text-[11px] ink-3 mt-2">{t('intl.note')}</p>
+            </div>
+          )}
         </Card>
 
         <Card>

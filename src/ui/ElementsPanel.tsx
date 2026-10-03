@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { fmtNum, t } from '../core/i18n';
 import type { ElementsAnalysis } from '../core/elements';
+import type { ElementBench } from '../data/elementBench';
 import { LineChart } from './charts';
 import { fmtDate } from './labels';
 
@@ -10,8 +11,8 @@ const qoeColor = (q: number): string => (q < -0.05 ? 'var(--critical)' : q > 0.0
 const COMP_KEYS = ['el.comp.skills', 'el.comp.transitions', 'el.comp.performance', 'el.comp.choreo'];
 
 /** Element-Detailanalyse: Entwicklung je Element, Komponenten, Arbeitsliste. */
-export function ElementsPanel({ a, names, kinds }: {
-  a: ElementsAnalysis; names?: Record<string, string>; kinds?: string[];
+export function ElementsPanel({ a, names, kinds, bench }: {
+  a: ElementsAnalysis; names?: Record<string, string>; kinds?: string[]; bench?: Map<string, ElementBench>;
 }) {
   const [sel, setSel] = useState<string>(a.work[0]?.code ?? a.elements[0].code);
   const e = a.elements.find(x => x.code === sel) ?? a.elements[0];
@@ -80,7 +81,9 @@ export function ElementsPanel({ a, names, kinds }: {
             <thead>
               <tr>
                 <th>{t('el.element')}</th><th>{t('el.attempts')}</th><th>Ø {t('el.base')}</th>
-                <th>Ø QOE</th><th>Ø {t('metric.points')}</th><th>{t('el.best')}</th><th>&lt;/&lt;&lt;</th><th>{t('el.trend')}</th>
+                <th>Ø QOE</th><th>Ø {t('metric.points')}</th>
+                {bench && <th title={t('el.benchHint')}>{t('el.benchCol')}</th>}
+                <th>{t('el.best')}</th><th>&lt;/&lt;&lt;</th><th>{t('el.trend')}</th>
               </tr>
             </thead>
             <tbody>
@@ -94,6 +97,14 @@ export function ElementsPanel({ a, names, kinds }: {
                   <td className="tnum">{fmtNum(x.avgBase, 2)}</td>
                   <td className="tnum font-semibold" style={{ color: qoeColor(x.avgQoe) }}>{signed(x.avgQoe, 2)}</td>
                   <td className="tnum font-semibold">{fmtNum(x.avgPanel, 2)}</td>
+                  {bench && (() => {
+                    const b = bench.get(x.code);
+                    return (
+                      <td className="tnum whitespace-nowrap" style={b ? { color: x.avgPanel >= b.avg ? 'var(--good)' : 'var(--critical)' } : undefined}>
+                        {b ? fmtNum(b.avg, 2) : '–'}
+                      </td>
+                    );
+                  })()}
                   <td className="tnum">{fmtNum(x.bestPanel, 2)}</td>
                   <td className="tnum" style={{ color: x.ur + x.dg > 0 ? 'var(--critical)' : 'var(--ink-3)' }}>
                     {x.ur + x.dg > 0 ? `${x.ur}/${x.dg}` : '–'}
