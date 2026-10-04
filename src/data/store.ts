@@ -98,11 +98,34 @@ export class Store {
     });
   }
 
+  /** Bestwerte je Athlet OHNE Kontextfilter – Basis der nationalen Rangliste
+   *  (innerhalb eines Landes ist das Wettkampfformat konsistent; die
+   *  International-vor-national-Regel würde hier Athleten mit internationalen
+   *  Starts benachteiligen, weil z. B. Espoir international nur EIN Segment
+   *  läuft, national aber zwei – Fall Mandaus, 03.10.2026). */
+  private allValuesByAthlete(catId: ID, seasonId: ID): Map<ID, number[]> {
+    return this.memo(`vbaAll_${catId}_${seasonId}`, () => {
+      const info = this.categoryOf(catId); const map = new Map<ID, number[]>();
+      if (!info) return map;
+      for (const { p } of this.perfsIn(catId, seasonId)) {
+        const v = info.adapter.primaryValue(p);
+        if (v == null) continue;
+        if (!map.has(p.athleteId)) map.set(p.athleteId, []);
+        map.get(p.athleteId)!.push(v);
+      }
+      return map;
+    });
+  }
+
   // ---------- analytical ranking / leaderboard ----------
   ranking(catId: ID, seasonId: ID, scope?: { kind: 'country' | 'continent'; key: string }): RankedRow[] {
     return this.memo(`rank_${catId}_${seasonId}_${scope?.kind ?? 'w'}_${scope?.key ?? ''}`, () => {
-      const vba = this.valuesByAthlete(catId, seasonId);
-      const world = bestPerAthlete(vba);
+      // Landes-Rangliste: ALLE Ergebnisse des Landes zählen (konsistentes Format);
+      // Welt/Kontinent: vergleichbarer Kontext (international bevorzugt) wie gehabt.
+      const vba = scope?.kind === 'country'
+        ? this.allValuesByAthlete(catId, seasonId)
+        : this.valuesByAthlete(catId, seasonId);
+      const world = bestPerAthlete(this.valuesByAthlete(catId, seasonId));
       const rows: { athlete: Athlete; value: number }[] = [];
       for (const [athId, vals] of vba) {
         const a = this.athlete(athId); if (!a) continue;

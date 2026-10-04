@@ -107,7 +107,7 @@ export const en: Record<string, string> = {
   'gloss.pb.t': 'Personal best vs. season best',
   'gloss.pb.d': 'Personal best (PB) = highest total of the whole career in the dataset. Season best (SB) = highest total of the current season. Rankings and benchmarks use the season best so old peaks do not distort the current picture.',
   'gloss.position.t': 'World / continental / national position',
-  'gloss.position.d': 'All athletes of a category ordered by season best – worldwide, within the continent, or within the country. Exactly one value counts per athlete (their best), so nobody gains from many starts. Internationally achieved values take precedence over purely national ones ("comparable context").',
+  'gloss.position.d': 'All athletes of a category ordered by season best – worldwide, within the continent, or within the country. Exactly one value counts per athlete (their best), so nobody gains from many starts. Internationally achieved values take precedence over purely national ones ("comparable context"). For the NATIONAL position, all of the country’s results count (consistent competition format) – international formats with a different number of segments do not distort it.',
   'gloss.percentile.t': 'Global percentile',
   'gloss.percentile.d': 'Says what share of the comparison group you outperform: percentile 97 means better than 97% of the category worldwide. Important: with fewer than 12 athletes we deliberately show NO percentile, because it would not be statistically robust – the group size (n) is shown instead.',
   'gloss.spi.t': 'SPI – Skate Performance Index (0–100)',
