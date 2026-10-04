@@ -104,7 +104,7 @@ export const de: Record<string, string> = {
   'gloss.pb.t': 'Bestleistung vs. Saison-Bestwert',
   'gloss.pb.d': 'Bestleistung (PB) = höchste Gesamtwertung der gesamten Karriere im Datenbestand. Saison-Bestwert (SB) = höchste Gesamtwertung der laufenden Saison. Ranglisten und Benchmarks nutzen den Saison-Bestwert, damit alte Topwerte das aktuelle Bild nicht verzerren.',
   'gloss.position.t': 'Welt- / Kontinent- / Nationale Position',
-  'gloss.position.d': 'Reihung aller Athleten einer Kategorie nach ihrem Saison-Bestwert – weltweit, innerhalb des Kontinents oder innerhalb des Landes. Je Athlet zählt genau ein Wert (der beste), damit niemand durch viele Starts bevorzugt wird. International erzielte Werte haben Vorrang vor rein nationalen („vergleichbarer Kontext").',
+  'gloss.position.d': 'Reihung aller Athleten einer Kategorie nach ihrem Saison-Bestwert – weltweit, innerhalb des Kontinents oder innerhalb des Landes. Je Athlet zählt genau ein Wert (der beste), damit niemand durch viele Starts bevorzugt wird. International erzielte Werte haben Vorrang vor rein nationalen („vergleichbarer Kontext"). Bei der NATIONALEN Position zählen alle Ergebnisse des Landes (einheitliches Wettkampfformat) – internationale Formate mit anderer Segmentzahl verzerren sie nicht.',
   'gloss.percentile.t': 'Globales Perzentil',
   'gloss.percentile.d': 'Sagt in Prozent, wie viele der Vergleichsgruppe man hinter sich lässt: Perzentil 97 heißt besser als 97 % der Kategorie weltweit. Wichtig: Bei weniger als 12 Athleten in der Gruppe zeigen wir bewusst KEIN Perzentil, weil es statistisch nicht belastbar wäre – stattdessen steht dort die Gruppengröße (n).',
   'gloss.spi.t': 'SPI – Skate Performance Index (0–100)',

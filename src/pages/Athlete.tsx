@@ -37,7 +37,9 @@ export default function Athlete() {
   const [catSel, setCatSel] = useState<string | null>(null);
   const [target, setTarget] = useState(2);           // default Top 10
   const [range, setRange] = useState(4);             // default Karriere
-  const catId = catSel ?? cats[0];
+  // Standard: Kategorie des JÜNGSTEN Starts (Athleten wachsen in neue Klassen – Minis → Espoir …)
+  const latestCat = a ? store.athletePerfs(a.id).at(-1)?.ev.categoryId : undefined;
+  const catId = catSel ?? latestCat ?? cats[0];
   const season = store.currentSeason();
   const [intlSeason, setIntlSeason] = useState(season);   // Saisonwahl für „Internationale Einordnung" (2026 → 2027 …)
 
