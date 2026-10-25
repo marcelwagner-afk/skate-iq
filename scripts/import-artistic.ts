@@ -67,7 +67,7 @@ const CINFO: Record<string, [flag: string, continent: Continent]> = {
   FRA: ['🇫🇷', 'EU'], GBR: ['🇬🇧', 'EU'], GER: ['🇩🇪', 'EU'], HAI: ['🇭🇹', 'NA'],
   ISR: ['🇮🇱', 'AS'], ITA: ['🇮🇹', 'EU'], JPN: ['🇯🇵', 'AS'], KOR: ['🇰🇷', 'AS'],
   MAR: ['🇲🇦', 'AF'], MEX: ['🇲🇽', 'NA'], NED: ['🇳🇱', 'EU'], NZL: ['🇳🇿', 'OC'],
-  PAN: ['🇵🇦', 'NA'], PAR: ['🇵🇾', 'SA'], POR: ['🇵🇹', 'EU'], ROM: ['🇷🇴', 'EU'],
+  PAN: ['🇵🇦', 'NA'], PAR: ['🇵🇾', 'SA'], POL: ['🇵🇱', 'EU'], POR: ['🇵🇹', 'EU'], ROM: ['🇷🇴', 'EU'],
   ROU: ['🇷🇴', 'EU'], SLO: ['🇸🇮', 'EU'], SLV: ['🇸🇻', 'NA'], SMR: ['🇸🇲', 'EU'],
   SUI: ['🇨🇭', 'EU'], THA: ['🇹🇭', 'AS'], TPE: ['🇹🇼', 'AS'], UKR: ['🇺🇦', 'EU'],
   URU: ['🇺🇾', 'SA'], USA: ['🇺🇸', 'NA'], VEN: ['🇻🇪', 'SA'],

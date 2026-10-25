@@ -287,7 +287,7 @@ export const pt: Record<string, string> = {
   'metric.points': 'Pontos', 'metric.consistency': 'Consistência', 'metric.bestLap': 'Melhor volta',
 
   // Países
-  'country.GER': 'Alemanha', 'country.ITA': 'Itália', 'country.ESP': 'Espanha', 'country.POR': 'Portugal',
+  'country.GER': 'Alemanha', 'country.ITA': 'Itália', 'country.ESP': 'Espanha', 'country.POR': 'Portugal', 'country.POL': 'Polónia',
   'country.FRA': 'França', 'country.USA': 'EUA', 'country.BRA': 'Brasil',
   'country.ARG': 'Argentina', 'country.AUS': 'Austrália',
   'country.AIN': 'Atletas neutros', 'country.AND': 'Andorra', 'country.BEL': 'Bélgica',

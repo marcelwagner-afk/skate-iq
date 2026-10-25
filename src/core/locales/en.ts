@@ -305,7 +305,7 @@ export const en: Record<string, string> = {
   'metric.points': 'Points', 'metric.consistency': 'Consistency', 'metric.bestLap': 'Best lap',
 
   // Countries
-  'country.GER': 'Germany', 'country.ITA': 'Italy', 'country.ESP': 'Spain', 'country.POR': 'Portugal',
+  'country.GER': 'Germany', 'country.ITA': 'Italy', 'country.ESP': 'Spain', 'country.POR': 'Portugal', 'country.POL': 'Poland',
   'country.FRA': 'France', 'country.USA': 'United States', 'country.BRA': 'Brazil',
   'country.ARG': 'Argentina', 'country.AUS': 'Australia',
   // additional nations from the real import data
