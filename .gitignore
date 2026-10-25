@@ -9,3 +9,6 @@ dist-real/
 # Deployment-Geheimnisse / Echtdaten (siehe ANLEITUNG_DEPLOYMENT.md)
 zugang/
 SKATE_IQ_Rollkunstlauf_ECHTE_DATEN.html
+
+# DRIV-only Saisonplanung mit echter Kaderliste – nie ins öffentliche Repo
+src/planner/saisonplanung.local.html

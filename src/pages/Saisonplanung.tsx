@@ -1,4 +1,4 @@
-import planHtml from '../planner/saisonplanung.html?raw';
+import planHtml from '@planner-html?raw';
 import { t } from '../core/i18n';
 import { useApp } from '../ui/AppContext';
 import { Card, SecLabel } from '../ui/components';
@@ -6,7 +6,10 @@ import { Card, SecLabel } from '../ui/components';
 /**
  * Saisonplanung RKL – Eingabemaske (Marcels Prototyp v1.1, 13.10.2026).
  * Ausdrücklich NUR für den DRIV: erscheint ausschließlich im Echtdaten-Build
- * (öffentliche Demo: synthetic=true → Hinweis statt Maske). Vollständig
+ * (öffentliche Demo: synthetic=true → Hinweis statt Maske). Die echte Maske
+ * (saisonplanung.local.html, enthält die Kaderliste → gitignored) wird über
+ * den Vite-Alias @planner-html nur bei VITE_REAL=1 eingebunden; öffentliche
+ * Builds erhalten den leeren Stub. Vollständig
  * eigenständige Datei ohne externe Abhängigkeiten, eingebettet als iframe
  * srcdoc → funktioniert auch im Standalone-/Login-Build; Zwischenstände
  * speichert die Maske lokal im Browser (localStorage).
