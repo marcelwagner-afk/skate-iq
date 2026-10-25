@@ -22,6 +22,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [addonCalc, setAddonCalc] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>('dark');   // Produktentscheidung 10/2026: Dark-first (Designvorlage)
   useEffect(() => { loadBundle().then(setBundle, (e: unknown) => setLoadError(String(e))); }, []);
+  // DRIV-Vollversion: der Echtdaten-Build ist ausschließlich für den DRIV →
+  // voller Funktionsumfang ohne Plan-Schranken (Demo behält die Tarif-Simulation)
+  useEffect(() => { if (bundle && !bundle.synthetic) setPlan('ADMIN'); }, [bundle]);
   useEffect(() => onLocaleChange(() => setLoc(getLocale())), []);
   useEffect(() => {
     const el = document.documentElement;

@@ -106,15 +106,19 @@ const LINKS: [string, string, string][] = [
 
 export function Shell({ children }: { children: React.ReactNode }) {
   const { store, locale, switchLocale, plan, setPlan, theme, setTheme } = useApp();
-  // Saisonplanung ist ausdrücklich NUR für den DRIV → Link nur im Echtdaten-Build
-  const links = LINKS.filter(([to]) => to !== '/saisonplanung' || !store.b.synthetic);
+  // Saisonplanung ist ausdrücklich NUR für den DRIV → Link nur im Echtdaten-Build;
+  // umgekehrt ist die DRIV-Vollversion kein Verkaufskanal → Preise nur in der Demo
+  const links = LINKS.filter(([to]) =>
+    (to !== '/saisonplanung' || !store.b.synthetic) && (to !== '/pricing' || store.b.synthetic));
   const controls = (
     <>
-      <select value={plan} onChange={e => setPlan(e.target.value as PlanKey)}
-        className="text-xs rounded-lg border px-1.5 py-1 hidden sm:block" style={{ borderColor: 'var(--border)', background: 'var(--surface-1)' }}
-        aria-label={t('pricing.currentPlan')} title={t('pricing.currentPlan')}>
-        {PLANS.map(p => <option key={p} value={p}>{p.replace('_', ' ')}</option>)}
-      </select>
+      {store.b.synthetic && (
+        <select value={plan} onChange={e => setPlan(e.target.value as PlanKey)}
+          className="text-xs rounded-lg border px-1.5 py-1 hidden sm:block" style={{ borderColor: 'var(--border)', background: 'var(--surface-1)' }}
+          aria-label={t('pricing.currentPlan')} title={t('pricing.currentPlan')}>
+          {PLANS.map(p => <option key={p} value={p}>{p.replace('_', ' ')}</option>)}
+        </select>
+      )}
       <select value={locale} onChange={e => switchLocale(e.target.value as Locale)}
         className="text-xs rounded-lg border px-1.5 py-1" style={{ borderColor: 'var(--border)', background: 'var(--surface-1)' }}
         aria-label={t('common.lang')} title={t('common.lang')}>

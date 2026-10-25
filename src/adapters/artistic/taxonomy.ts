@@ -15,7 +15,9 @@ export const DISCIPLINES: Discipline[] = [
 
 /** competitive classes in progression order (Senioren first) */
 export const KLASSEN = ['senioren', 'junioren', 'youth', 'cadets', 'espoir', 'minis', 'tots'] as const;
-export type Klasse = typeof KLASSEN[number];
+/** national Breitensport classes (DM RKB: Senior/Cadet Intermediate) – Kürlaufen only */
+export const NATIONAL_KLASSEN = ['cup', 'nachwuchs'] as const;
+export type Klasse = typeof KLASSEN[number] | typeof NATIONAL_KLASSEN[number];
 
 /** which disciplines split by gender (singles) vs. couples (no split) */
 const GENDERED: Record<string, boolean> = {
@@ -47,6 +49,17 @@ function buildCategories(): Category[] {
         out.push({ id: categoryId(d.id, k), disciplineId: d.id, nameKey: `klasse.${k}`, ageGroupId: k, order: order++ });
       }
     }
+    // national Breitensport classes exist only in Kürlaufen (gendered)
+    if (d.id === 'artistic.kuer') {
+      for (const k of NATIONAL_KLASSEN) {
+        for (const g of ['damen', 'herren'] as const) {
+          out.push({
+            id: categoryId(d.id, k, g), disciplineId: d.id,
+            nameKey: `klasse.${k}`, ageGroupId: k, genderId: g, order: order++,
+          });
+        }
+      }
+    }
   }
   return out;
 }
@@ -73,6 +86,7 @@ const DIS_MAP: Record<string, string> = {
 const KLASSE_MAP: Record<string, Klasse> = {
   Senioren: 'senioren', Junioren: 'junioren', Youth: 'youth', Jugend: 'youth',
   Cadets: 'cadets', Espoir: 'espoir', Minis: 'minis', Tots: 'tots',
+  Nachwuchsklasse: 'nachwuchs', Cup: 'cup',
 };
 const GENDER_MAP: Record<string, string> = { Damen: 'damen', Herren: 'herren' };
 

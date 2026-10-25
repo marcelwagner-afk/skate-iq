@@ -47,9 +47,16 @@ export function Badge({ children, color }: { children: ReactNode; color?: string
 export function DemoBadge() {
   const { store } = useApp();
   if (!store.b.synthetic) {
-    // Echtdaten: öffentliche Wettkampfergebnisse – nur dezenter Datenstand, keine Warnung
+    // Echtdaten = DRIV-Vollversion: voller Umfang, dezenter Datenstand, keine Warnung
     const d = new Date(store.b.generatedAt).toLocaleDateString(localeTag());
-    return <span className="chip">{t('common.dataAsOf', { date: d })}</span>;
+    return (
+      <span className="inline-flex flex-wrap items-center gap-1.5">
+        <span className="chip" style={{ borderColor: 'color-mix(in srgb, var(--accent) 55%, var(--border))' }}>
+          🇩🇪 {t('common.fullVersion')}
+        </span>
+        <span className="chip">{t('common.dataAsOf', { date: d })}</span>
+      </span>
+    );
   }
   return (
     <span className="chip" style={{
