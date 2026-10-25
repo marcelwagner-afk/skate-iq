@@ -37,6 +37,8 @@ jobs:
             echo "::error::Echtdaten-Bundle im Repo gefunden – Abbruch."; exit 1; fi
           if grep -rl "ath_real_" dist/assets/ 2>/dev/null; then
             echo "::error::Echte Athleten-IDs im Demo-Build gefunden – Abbruch."; exit 1; fi
+          if grep -rl '"squadGroups"' dist/assets/ 2>/dev/null; then
+            echo "::error::Kaderlisten-Daten im Demo-Build gefunden – Abbruch."; exit 1; fi
           echo "OK: Build ist rein synthetisch."
       - name: Geschützte Echtdaten-Login-Seite mit ausliefern (falls vorhanden)
         run: if [ -d login ]; then cp -r login dist/login; fi
@@ -45,3 +47,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          # Einzel-Commit-Historie: jeder Deploy ersetzt gh-pages komplett –
+          # alte Build-Staende (und was je darin stand) bleiben nicht oeffentlich.
+          force_orphan: true
