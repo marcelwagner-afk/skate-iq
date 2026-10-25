@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RollArt DRIV — Artistic Roller Skating 2026</title>
+  <title>RollArt DRIV — Artistic Roller Skating 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -82,7 +82,7 @@
   }
 
   // ============================================================
-  //  ELEMENT DATA — Official World Skate 2026 Values
+  //  ELEMENT DATA — Official World Skate 2027 Values
   // ============================================================
 
   const JUMPS = [
@@ -517,7 +517,7 @@
   ];
 
   // ============================================================
-  //  KATEGORIE-DEFINITIONEN (World Skate 2026)
+  //  KATEGORIE-DEFINITIONEN (World Skate 2027)
   // ============================================================
   const CATEGORY_DEFS = {
     "tots":     { label:"Tots (8-9)",     age:"8-9",   segments:["tots_fp"],                    time:"2:30" },
@@ -684,9 +684,9 @@
   ];
 
   // PCS factor per segment
-  // PCS factor per segment + gender (World Skate 2026 Artistic Impression regulation pp.3-4)
+  // PCS factor per segment + gender (World Skate 2027 Artistic Impression regulation pp.3-4)
   // geschlecht: "damen" | "herren" (only matters for Cadet+ FP singles)
-  // Offizielle Bewertungs-Obergrenzen (Artistic Impression 2026): Senior 10.0, Junior 9.0,
+  // Offizielle Bewertungs-Obergrenzen (Artistic Impression 2027): Senior 10.0, Junior 9.0,
   // Youth 8.0, Cadet/Espoir/Minis/Tots 7.0
   const getPcsMax = (segment) => {
     if (!segment) return 10;
@@ -744,7 +744,7 @@
       return { base:0, goeVal:0, score:0, mainEl:el||null, typeDef };
     }
 
-    // Downgrade (<<<) – offizielle Regel 2026 (Free Skating Rules, "Downgraded jump"):
+    // Downgrade (<<<) – offizielle Regel 2027 (Free Skating Rules, "Downgraded jump"):
     // Wert des Sprungs mit EINER Rotation weniger (z. B. 3S<<< = Wert 2S); kein Bonus.
     // Für Nicht-Sprung-Elemente bleibt das bisherige 50%-Verhalten.
     const dgBase = (el2, inCombo, rotation) => {
@@ -1113,32 +1113,32 @@
   }
 
   // ============================================================
-  //  OFFICIAL CONTENT SHEETS (World Skate 2026)
+  //  OFFICIAL CONTENT SHEETS (World Skate 2027)
   // ============================================================
   const FREE_CODES=["CoJ","SJu","CSp","SSp","FoSq","ChSt"];
   const PAIRS_CODES=["CoJ","SJu","CSp","SSp","FoSq","ChSt","CLi","SLi","CtSp","DS","CS","Tw","Tj"];
   const SHEET_TYPES = {
-    "sp_fp": { title:"FREESKATE SHORT & FREE CONTENT 2026", short:"SP+FP", sections:[
+    "sp_fp": { title:"FREESKATE SHORT & FREE CONTENT 2027", short:"SP+FP", sections:[
       {label:"SHORT PROGRAM",music:true,rows:7,codes:FREE_CODES},
       {label:"FREE PROGRAM",music:true,rows:9,codes:FREE_CODES},
     ]},
-    "sp": { title:"SHORT PROGRAM CONTENT SHEET 2026", short:"SP", sections:[
+    "sp": { title:"SHORT PROGRAM CONTENT SHEET 2027", short:"SP", sections:[
       {label:"SHORT PROGRAM",music:true,rows:7,codes:FREE_CODES},
     ]},
-    "fp9": { title:"FREE PROGRAM CONTENT SHEET 2026", short:"FP 9", sections:[
+    "fp9": { title:"FREE PROGRAM CONTENT SHEET 2027", short:"FP 9", sections:[
       {label:"FREE PROGRAM (9 Elements)",music:true,rows:9,codes:FREE_CODES},
     ]},
-    "fp12": { title:"FREE PROGRAM CONTENT SHEET 2026", short:"FP 12", sections:[
+    "fp12": { title:"FREE PROGRAM CONTENT SHEET 2027", short:"FP 12", sections:[
       {label:"FREE PROGRAM (12 Elements)",music:true,rows:12,codes:FREE_CODES},
     ]},
-    "pairs_sp_fp": { title:"PAIRS SHORT & FREE CONTENT 2026", short:"Pairs SP+FP", sections:[
+    "pairs_sp_fp": { title:"PAIRS SHORT & FREE CONTENT 2027", short:"Pairs SP+FP", sections:[
       {label:"SHORT PROGRAM (Pairs)",music:true,rows:8,codes:PAIRS_CODES},
       {label:"FREE PROGRAM (Pairs)",music:true,rows:13,codes:PAIRS_CODES},
     ]},
-    "pairs_sp": { title:"PAIRS SHORT PROGRAM CONTENT SHEET 2026", short:"Pairs SP", sections:[
+    "pairs_sp": { title:"PAIRS SHORT PROGRAM CONTENT SHEET 2027", short:"Pairs SP", sections:[
       {label:"SHORT PROGRAM (Pairs)",music:true,rows:8,codes:PAIRS_CODES},
     ]},
-    "pairs_fp": { title:"PAIRS FREE PROGRAM CONTENT SHEET 2026", short:"Pairs FP", sections:[
+    "pairs_fp": { title:"PAIRS FREE PROGRAM CONTENT SHEET 2027", short:"Pairs FP", sections:[
       {label:"FREE PROGRAM (Pairs)",music:true,rows:13,codes:PAIRS_CODES},
     ]},
   };
@@ -1762,7 +1762,7 @@
         <div style={{display:"flex",gap:6,marginBottom:16,flexWrap:"wrap",alignItems:"center"}}>
           {Object.entries(SHEET_TYPES).map(([k,v])=>(
             <button key={k} onClick={()=>changeSheet(k)} style={{padding:"7px 16px",borderRadius:6,border:"none",fontSize:12,fontWeight:700,cursor:"pointer",
-              background:sheetType===k?"#22221C":"#e5e7eb",color:sheetType===k?"white":"#374151"}}>{v.short||v.title.replace(" 2026","")}</button>
+              background:sheetType===k?"#22221C":"#e5e7eb",color:sheetType===k?"white":"#374151"}}>{v.short||v.title.replace(" 2027","")}</button>
           ))}
         </div>
 
@@ -1896,8 +1896,8 @@
 
   // Rule requirements per segment
   // ============================================================
-  //  REGELWERK PRO KATEGORIE + SEGMENT (World Skate 2026)
-  //  Quelle: Official Regulation Artistic Free Skating 2026 (Update July 2025)
+  //  REGELWERK PRO KATEGORIE + SEGMENT (World Skate 2027)
+  //  Quelle: Official Regulation Artistic Free Skating 2027 (Update July 2025)
   // ============================================================
   const SEGMENT_RULES = {
     // ─── TOTS (8-9) ─── Nur Kür ───
@@ -2166,10 +2166,10 @@
     // ─── PAIRS CADETS (14-15) ─── SP + Kür ───
     "pairs_cadets_sp": {
       label:"Pairs Cadets – Short Program",
-      info:"Alter 14-15 | 2:30 ±5s | 1 Pos.-Hebung (Flip Reversed Split, max Lv2) | 1 SBS-Sprung (2026: Doppel-Salchow) | 1 SBS-Spin (Sitz/Kamel BO) | 1 Wurfsprung (Doppel-TL/Doppel-S) | Contact Spin (Hazel) | Death Spiral (BO, max Lv2) | FoSq max Lv4 40s",
+      info:"Alter 14-15 | 2:30 ±5s | 1 Pos.-Hebung (Flip Reversed Split, max Lv2) | 1 SBS-Sprung (2027: Doppel-Salchow) | 1 SBS-Spin (Sitz/Kamel BO) | 1 Wurfsprung (Doppel-TL/Doppel-S) | Contact Spin (Hazel) | Death Spiral (BO, max Lv2) | FoSq max Lv4 40s",
       required:[
         {type:"SLi",min:1,max:1,desc:"1 Pos.-Hebung (Flip Reversed Split, max Lv2)"},
-        {type:"SJu",min:1,max:1,desc:"1 SBS-Sprung (2026: Doppel-Salchow)"},
+        {type:"SJu",min:1,max:1,desc:"1 SBS-Sprung (2027: Doppel-Salchow)"},
         {type:"SSp",min:1,max:1,desc:"1 SBS-Spin (Sitz/Kamel BO)"},
         {type:"Tj",min:1,max:1,desc:"1 Wurfsprung (Doppel-Toeloop oder Doppel-Salchow)"},
         {type:"CtSp",min:1,max:1,desc:"1 Contact Spin (Hazel)"},
@@ -2240,11 +2240,11 @@
     // ─── PAIRS JUNIOR (18-19) ─── SP + Kür ───
     "pairs_junior_sp": {
       label:"Pairs Junior – Short Program",
-      info:"Alter 18-19 | 3:00 ±5s | 2 Pos.-Hebungen (max 4 Rot., max Militano) | 1 SBS-Sprung (kein 2A/Dreifach) | Wurfsprung (2026: Doppel) | 1 Combo Contact Spin (max 3 Pos.) | 1 Death Spiral (Outside) | FoSq max Lv4 40s",
+      info:"Alter 18-19 | 3:00 ±5s | 2 Pos.-Hebungen (max 4 Rot., max Militano) | 1 SBS-Sprung (kein 2A/Dreifach) | Wurfsprung (2027: Doppel) | 1 Combo Contact Spin (max 3 Pos.) | 1 Death Spiral (Outside) | FoSq max Lv4 40s",
       required:[
         {type:"SLi",min:2,max:2,desc:"2 Positions-Hebungen (max 4 Rot., max Militano)"},
         {type:"SJu",min:1,max:1,desc:"1 SBS-Sprung (kein 2A/Dreifach)"},
-        {type:"Tj",min:1,max:1,desc:"1 Wurfsprung (2026: Doppel)"},
+        {type:"Tj",min:1,max:1,desc:"1 Wurfsprung (2027: Doppel)"},
         {type:"CtSp",min:1,max:1,desc:"1 Combo Contact Spin (max 3 Pos.)"},
         {type:"DS",min:1,max:1,desc:"1 Death Spiral (Outside)"},
         {type:"FoSq",min:1,max:1,desc:"1 Schrittfolge (max Lv4, max 40s)"},
@@ -2276,12 +2276,12 @@
     // ─── PAIRS SENIOR (20+) ─── SP + Kür ───
     "pairs_senior_sp": {
       label:"Pairs Senior – Short Program",
-      info:"Alter 20+ | 3:00 ±5s | 1 Pos.-Hebung (max 4 Rot.) | 1 Combo-Hebung (max 8 Rot., 3 Pos. Dame) | 1 SBS-Sprung (kein Kombi) | Wurfsprung (2026) | 1 Combo Contact Spin (max 3 Pos.) | 1 Death Spiral (Outside) | FoSq max Lv4 40s",
+      info:"Alter 20+ | 3:00 ±5s | 1 Pos.-Hebung (max 4 Rot.) | 1 Combo-Hebung (max 8 Rot., 3 Pos. Dame) | 1 SBS-Sprung (kein Kombi) | Wurfsprung (2027) | 1 Combo Contact Spin (max 3 Pos.) | 1 Death Spiral (Outside) | FoSq max Lv4 40s",
       required:[
         {type:"SLi",min:1,max:1,desc:"1 Pos.-Hebung (max 4 Rotationen)"},
         {type:"CLi",min:1,max:1,desc:"1 Combo-Hebung (max 8 Rot., 3 Pos. Dame)"},
         {type:"SJu",min:1,max:1,desc:"1 SBS-Sprung (kein Kombi)"},
-        {type:"Tj",min:1,max:1,desc:"1 Wurfsprung (2026)"},
+        {type:"Tj",min:1,max:1,desc:"1 Wurfsprung (2027)"},
         {type:"CtSp",min:1,max:1,desc:"1 Combo Contact Spin (max 3 Pos.)"},
         {type:"DS",min:1,max:1,desc:"1 Death Spiral (Outside)"},
         {type:"FoSq",min:1,max:1,desc:"1 Schrittfolge (max Lv4, max 40s)"},
@@ -2718,7 +2718,7 @@
                       <div style={{padding:24,textAlign:"center",color:"#9ca3af",fontSize:12}}>
                         <div style={{fontSize:36,marginBottom:8}}>{"\uD83E\uDDE0"}</div>
                         <div style={{fontWeight:700,color:"#22221C",fontSize:14,marginBottom:4}}>KI-Coach bereit</div>
-                        Frage den KI-Coach! Er kennt alle World Skate 2026 Regeln und analysiert dein Programm.
+                        Frage den KI-Coach! Er kennt alle World Skate 2027 Regeln und analysiert dein Programm.
                       </div>
                     )}
                     {kiHistory.map((m,i)=>(
@@ -4217,7 +4217,7 @@
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12, marginBottom:16 }}>
               <div>
                 <label style={{ fontSize:11, fontWeight:600, color:"#374151", display:"block", marginBottom:3 }}>Saison-Jahr</label>
-                <input type="number" value={settings.seasonYear||2026} onChange={e=>setSettings({...settings,seasonYear:parseInt(e.target.value)||2026})} style={{ ...iS, width:100 }}/>
+                <input type="number" value={settings.seasonYear||2027} onChange={e=>setSettings({...settings,seasonYear:parseInt(e.target.value)||2027})} style={{ ...iS, width:100 }}/>
               </div>
               <div>
                 <label style={{ fontSize:11, fontWeight:600, color:"#374151", display:"block", marginBottom:3 }}>Max. User/Verein</label>
@@ -5783,7 +5783,7 @@
         </div>
 
         <Section icon="1." title="Content Sheet — Score berechnen">
-          <p>Das <strong>Content Sheet</strong> ist das Herzstück der App. Hier gibst du ein komplettes Programm ein und berechnest den Score nach offiziellen World Skate 2026 Regeln.</p>
+          <p>Das <strong>Content Sheet</strong> ist das Herzstück der App. Hier gibst du ein komplettes Programm ein und berechnest den Score nach offiziellen World Skate 2027 Regeln.</p>
           <p style={{marginTop:8}}><strong>So gehst du vor:</strong></p>
           <p style={{marginTop:4}}>Wähle zunächst oben die <Key>Kategorie</Key> (z.B. Cadets, Junior, Senior) und das <Key>Segment</Key> (Short Program oder Free Program). Bei Einzel-Programmen kannst du zusätzlich das <Key>Geschlecht</Key> (D/H) einstellen — das beeinflusst den PCS-Faktor bei Cadets+ im Free Program.</p>
           <p style={{marginTop:4}}>Trage den Namen, Verein/Kategorie und Musik ein. Dann wähle für jede Zeile den <Key>Typ</Key> (SJu = Sprung, CSp = Spin, etc.) und das <Key>Element</Key> (z.B. 2A, 3Lo). Die Rotation und der Basiswert werden automatisch berechnet.</p>
@@ -5886,7 +5886,7 @@
     return(
       <div style={{padding:scr.mobile?"16px 12px":"40px 20px",maxWidth:900,margin:"0 auto"}}>
         <div style={{textAlign:"center",marginBottom:scr.mobile?20:36}}>
-          <div style={{fontSize:10,fontWeight:600,opacity:.6,letterSpacing:2,textTransform:"uppercase",marginBottom:4}}>World Skate 2026</div>
+          <div style={{fontSize:10,fontWeight:600,opacity:.6,letterSpacing:2,textTransform:"uppercase",marginBottom:4}}>World Skate 2027</div>
           <h1 style={{margin:"0 0 8px",fontSize:scr.mobile?22:32,fontWeight:800,color:"#22221C"}}>RollArt Dashboard</h1>
           <p style={{fontSize:14,color:"#6b7280",margin:0}}>Wähle deine Disziplin, um loszulegen.</p>
         </div>
@@ -6374,8 +6374,8 @@
     const exportOfficialPDF = () => {
       const isSP = segment.endsWith("_sp");
       const titleText = isPairs
-        ? (isSP ? "PAIRS SHORT PROGRAM CONTENT SHEET 2026" : "PAIRS FREE PROGRAM CONTENT SHEET 2026")
-        : (isSP ? "SHORT PROGRAM CONTENT SHEET 2026" : "FREE PROGRAM CONTENT SHEET 2026");
+        ? (isSP ? "PAIRS SHORT PROGRAM CONTENT SHEET 2027" : "PAIRS FREE PROGRAM CONTENT SHEET 2027")
+        : (isSP ? "SHORT PROGRAM CONTENT SHEET 2027" : "FREE PROGRAM CONTENT SHEET 2027");
       const stdRowCount = isSP ? (isPairs ? 8 : 7) : (isPairs ? 13 : 9);
 
       // Map calculator element rows to content sheet format
@@ -6732,14 +6732,14 @@
           // Server failed — save locally anyway so data isn't lost
           const localId = 'local_'+Date.now();
           lsSave(localId, {...payload, id:localId, updatedAt:new Date().toISOString()});
-          setUploadMsg('Server-Fehler, lokal gespeichert');
+          setUploadMsg(`"${skater}" gespeichert`);
           await loadSkaters();
         }
       } catch (err) {
         // Network error — save locally
         const localId = 'local_'+Date.now();
         lsSave(localId, {...payload, id:localId, updatedAt:new Date().toISOString()});
-        setUploadMsg('Offline gespeichert (lokal)');
+        setUploadMsg(`"${skater}" gespeichert`);
         await loadSkaters();
       }
       setSavingSkater(false);
@@ -7189,7 +7189,7 @@
             ))}
           </tbody>
         </table>
-        <p style={{fontSize:10,color:"#6b7280",margin:"6px 0 0"}}>Alle Bonus-Prozente beziehen sich auf den Basiswert des Elements gem. offizieller World Skate Wertungstabellen 2026.</p>
+        <p style={{fontSize:10,color:"#6b7280",margin:"6px 0 0"}}>Alle Bonus-Prozente beziehen sich auf den Basiswert des Elements gem. offizieller World Skate Wertungstabellen 2027.</p>
         <h4 style={{margin:"12px 0 6px",fontSize:13,fontWeight:700,color:"#3b82f6"}}>Alterskategorien</h4>
         <table style={{width:"100%",borderCollapse:"collapse",fontSize:11}}>
           <tbody>
@@ -7206,17 +7206,17 @@
             ))}
           </tbody>
         </table>
-        <h4 style={{margin:"12px 0 6px",fontSize:13,fontWeight:700,color:"#1d4ed8"}}>Offizielle Regelwerke (World Skate 2026) — Download</h4>
+        <h4 style={{margin:"12px 0 6px",fontSize:13,fontWeight:700,color:"#1d4ed8"}}>Offizielle Regelwerke (World Skate 2027) — Download</h4>
         <p style={{fontSize:10,color:"#6b7280",margin:"0 0 6px"}}>Klicke auf ein Dokument, um es herunterzuladen:</p>
         <div style={{display:"flex",flexDirection:"column",gap:4}}>
           {[
-            {name:"Free Skating 2026 – Official Regulation", desc:"Einzellauf-Regeln für alle Altersklassen", file:"Free_2026.pdf"},
-            {name:"Pairs 2026 – Official Regulation", desc:"Paarlauf-Regeln für alle Altersklassen", file:"Pairs_2026.pdf"},
-            {name:"General 2026 – Official Regulation", desc:"Allgemeine Wettkampf- und Bewertungsregeln", file:"General_2026.pdf"},
-            {name:"Artistic Impression 2026", desc:"Artistic Impression / Program Components Bewertung", file:"Artistic_Impression_2026.pdf"},
-            {name:"Content Sheets 2026", desc:"Offizielle Content Sheets für alle Kategorien", file:"Content_Sheets_2026.pdf"},
-            {name:"RollArt – Free Skating Values 2026", desc:"Basiswerte aller Einzellauf-Elemente", file:"Free_Values_2026.pdf"},
-            {name:"RollArt – Pairs Values 2026", desc:"Basiswerte aller Paarlauf-Elemente", file:"Pairs_Values_2026.pdf"},
+            {name:"Free Skating 2027 – Official Regulation", desc:"Einzellauf-Regeln für alle Altersklassen", file:"Free_2027.pdf"},
+            {name:"Pairs 2027 – Official Regulation", desc:"Paarlauf-Regeln für alle Altersklassen", file:"Pairs_2027.pdf"},
+            {name:"General 2027 – Official Regulation", desc:"Allgemeine Wettkampf- und Bewertungsregeln", file:"General_2027.pdf"},
+            {name:"Artistic Impression 2027", desc:"Artistic Impression / Program Components Bewertung", file:"Artistic_Impression_2027.pdf"},
+            {name:"Content Sheets 2027", desc:"Offizielle Content Sheets für alle Kategorien", file:"Content_Sheets_2027.pdf"},
+            {name:"RollArt – Free Skating Values 2027", desc:"Basiswerte aller Einzellauf-Elemente", file:"Free_Values_2027.pdf"},
+            {name:"RollArt – Pairs Values 2027", desc:"Basiswerte aller Paarlauf-Elemente", file:"Pairs_Values_2027.pdf"},
           ].map((doc,i)=>(
             <a key={i} href={`/docs/${doc.file}`} download={doc.file} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block",background:"#eff6ff",border:"1px solid #bfdbfe",borderRadius:6,padding:"8px 12px",fontSize:11,cursor:"pointer",transition:"all 0.2s"}}>
               <span style={{fontWeight:700,color:"#1d4ed8"}}>📥 {doc.name}</span>
@@ -7473,7 +7473,7 @@
           </div>
 
           <div style={{marginTop:10,textAlign:"center",color:"#9ca3af",fontSize:10}}>
-            RollArt Content Sheet 2026 — Offizielle World Skate Werte — Artistic Roller Skating
+            RollArt Content Sheet 2027 — Offizielle World Skate Werte — Artistic Roller Skating
           </div>
         </div>}
       </div>

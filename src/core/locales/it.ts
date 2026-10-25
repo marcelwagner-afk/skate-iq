@@ -96,7 +96,7 @@ export const it: Record<string, string> = {
   'calc.f3': 'Bonus, sottorotazioni, deduzioni e componenti con i fattori corretti',
   'calc.f4': 'Esporta i content sheet in PDF',
   'calc.included': 'Incluso in FED PRO e FED ENTERPRISE',
-  'calc.verified': 'Tabelle dei valori verificate con World Skate 2026 (aggiornamento luglio 2025) · regola di downgrade e limiti dei componenti corretti',
+  'calc.verified': 'Tabelle dei valori verificate con World Skate 2027 (aggiornamento luglio 2025) · regola di downgrade e limiti dei componenti corretti',
   // Metodologia e glossario
   'gloss.title': 'Metodologia e termini', 'gloss.sub': 'Ogni numero in SKATE IQ è una formula documentata su risultati ufficiali. Qui trovi cosa significano i termini – leggibile senza conoscenze di statistica.',
   'gloss.principle.t': 'Principio di base: «classificazione computazionale»',
