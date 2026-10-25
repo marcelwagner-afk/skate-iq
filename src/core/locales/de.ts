@@ -276,7 +276,7 @@ export const de: Record<string, string> = {
   'dis.artistic.rolltanz': 'Rolltanz', 'dis.artistic.paarlauf': 'Paarlauf',
   'klasse.senioren': 'Senioren', 'klasse.junioren': 'Junioren', 'klasse.youth': 'Jugend',
   'klasse.cadets': 'Cadets', 'klasse.espoir': 'Espoir', 'klasse.minis': 'Minis', 'klasse.tots': 'Tots',
-  'klasse.nachwuchs': 'Nachwuchsklasse', 'klasse.cup': 'Cup', 'common.fullVersion': 'DRIV-Vollversion',
+  'common.fullVersion': 'DRIV-Vollversion',
   'gender.damen': 'Damen', 'gender.herren': 'Herren',
   'dis.speed.track': 'Bahn', 'dis.speed.road': 'Straße',
   'cat.senior.w': 'Seniorinnen', 'cat.senior.m': 'Senioren',
