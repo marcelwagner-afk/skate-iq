@@ -5,6 +5,7 @@ import Admin from './pages/Admin';
 import Methodik from './pages/Methodik';
 import Rechner from './pages/Rechner';
 import Driv from './pages/Driv';
+import Saisonplanung from './pages/Saisonplanung';
 import Impressum from './pages/Impressum';
 import Datenschutz from './pages/Datenschutz';
 import Athlete from './pages/Athlete';
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="/compare" element={<Compare />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/driv" element={<Driv />} />
+            <Route path="/saisonplanung" element={<Saisonplanung />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="/federation/:code" element={<Federation />} />

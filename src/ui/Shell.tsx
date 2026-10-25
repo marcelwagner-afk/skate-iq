@@ -21,6 +21,7 @@ const IC: Record<string, ReactNode> = {
   book: <path d="M4 19.5V5a2 2 0 0 1 2-2h14v16H6.5A2.5 2.5 0 0 0 4 21.5v-2zm0 0A2.5 2.5 0 0 1 6.5 17H20" />,
   data: <><ellipse cx="12" cy="5" rx="8" ry="2.6" /><path d="M4 5v14c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6V5M4 12c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6" /></>,
   driv: <path d="M12 3l7 3v5c0 4.6-3 8.6-7 10-4-1.4-7-5.4-7-10V6zM8.5 12l2.3 2.3L15.5 9.5" />,
+  plan: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M8 3v4m8-4v4M3 10h18M7.5 14.5h3m3 0h3M7.5 17.5h3" /></>,
 };
 function Icon({ k }: { k: string }) {
   return (
@@ -96,7 +97,7 @@ function Brand() {
 }
 
 const LINKS: [string, string, string][] = [
-  ['/home', 'nav.home', 'home'], ['/driv', 'nav.driv', 'driv'], ['/leaderboard', 'nav.leaderboard', 'board'],
+  ['/home', 'nav.home', 'home'], ['/driv', 'nav.driv', 'driv'], ['/saisonplanung', 'nav.plan', 'plan'], ['/leaderboard', 'nav.leaderboard', 'board'],
   ['/compare', 'nav.compare', 'compare'], ['/talent', 'nav.talent', 'talent'],
   ['/federation/GER', 'nav.federation', 'fed'], ['/countries', 'nav.countries', 'globe'],
   ['/competitions', 'nav.competitions', 'comp'], ['/rechner', 'nav.calc', 'calc'], ['/methodik', 'nav.method', 'book'], ['/pricing', 'nav.pricing', 'price'],
@@ -104,7 +105,9 @@ const LINKS: [string, string, string][] = [
 ];
 
 export function Shell({ children }: { children: React.ReactNode }) {
-  const { locale, switchLocale, plan, setPlan, theme, setTheme } = useApp();
+  const { store, locale, switchLocale, plan, setPlan, theme, setTheme } = useApp();
+  // Saisonplanung ist ausdrücklich NUR für den DRIV → Link nur im Echtdaten-Build
+  const links = LINKS.filter(([to]) => to !== '/saisonplanung' || !store.b.synthetic);
   const controls = (
     <>
       <select value={plan} onChange={e => setPlan(e.target.value as PlanKey)}
@@ -128,7 +131,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <aside className="hidden lg:flex flex-col w-56 flex-none sticky top-0 h-screen border-r px-3 py-4 gap-1"
         style={{ borderColor: 'var(--border)', background: 'color-mix(in srgb, var(--surface-1) 72%, transparent)' }}>
         <div className="px-2 pb-4"><Brand /></div>
-        {LINKS.map(([to, key, icon]) => (
+        {links.map(([to, key, icon]) => (
           <NavLink key={to} to={to} className={({ isActive }) => `sidelink ${isActive ? 'on' : ''}`}>
             <Icon k={icon} />{t(key)}
           </NavLink>
@@ -150,7 +153,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             </div>
             {/* mobile: einzeilige wischbare Navigation */}
             <nav className="lg:hidden flex gap-1 overflow-x-auto scrollbar-none -mx-1 pb-1">
-              {LINKS.map(([to, key]) => (
+              {links.map(([to, key]) => (
                 <NavLink key={to} to={to} className={({ isActive }) => `navlink ${isActive ? 'on' : ''}`}>{t(key)}</NavLink>
               ))}
             </nav>
