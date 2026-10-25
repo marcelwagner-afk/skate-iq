@@ -32,7 +32,6 @@ export default function Saisonplanung() {
       <div className="flex flex-wrap items-center justify-between gap-2 px-3 sm:px-0">
         <div>
           <h1 className="text-xl font-extrabold">{t('plan.title')}</h1>
-          <p className="text-xs ink-3">{t('plan.sub')}</p>
         </div>
         <span className="chip" style={{ borderColor: 'color-mix(in srgb, var(--accent) 55%, var(--border))' }}>🇩🇪 DRIV</span>
       </div>

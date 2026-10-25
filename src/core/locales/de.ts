@@ -87,7 +87,6 @@ export const de: Record<string, string> = {
   'nav.imprint': 'Impressum', 'nav.privacy': 'Datenschutz',
   'contact.cta': 'Demo anfragen', 'contact.pitch': 'Fragen oder Interesse an SKATE IQ für deinen Verband oder Verein? Wir zeigen dir das Tool live.',
   'nav.plan': 'Saisonplanung', 'plan.title': 'Saisonplanung RKL',
-  'plan.sub': 'Eingabemaske für die Trainings- und Wettkampfplanung des DRIV-Kaders (Prototyp v1.1) – Zwischenstände werden lokal im Browser gespeichert.',
   'plan.drivOnly': 'Dieses Modul ist ausschließlich für den DRIV bestimmt und nur in der Verbands-Version mit Echtdaten verfügbar.',
   'nav.calc': 'RollArt-Rechner', 'calc.title': 'RollArt-Rechner', 'calc.addon': 'Add-on',
   'calc.price': '4,99 €/Monat', 'calc.activate': 'Add-on aktivieren (Demo)',

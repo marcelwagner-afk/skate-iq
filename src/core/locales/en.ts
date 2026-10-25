@@ -90,7 +90,6 @@ export const en: Record<string, string> = {
   'nav.imprint': 'Legal Notice', 'nav.privacy': 'Privacy',
   'contact.cta': 'Request a demo', 'contact.pitch': 'Questions, or interested in SKATE IQ for your federation or club? We will show you the tool live.',
   'nav.plan': 'Season planning', 'plan.title': 'Season Planning (RKL)',
-  'plan.sub': 'Input form for the DRIV squad\'s training and competition planning (prototype v1.1) – drafts are stored locally in your browser.',
   'plan.drivOnly': 'This module is reserved for the DRIV and only available in the federation version with real data.',
   'nav.calc': 'RollArt Calculator', 'calc.title': 'RollArt Calculator', 'calc.addon': 'Add-on',
   'calc.price': '€4.99/month', 'calc.activate': 'Activate add-on (demo)',

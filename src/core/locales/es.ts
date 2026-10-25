@@ -87,7 +87,6 @@ export const es: Record<string, string> = {
   'nav.imprint': 'Aviso legal', 'nav.privacy': 'Privacidad',
   'contact.cta': 'Solicitar una demo', 'contact.pitch': '¿Preguntas o interés en SKATE IQ para tu federación o club? Te mostramos la herramienta en vivo.',
   'nav.plan': 'Planificación de temporada', 'plan.title': 'Planificación de temporada (RKL)',
-  'plan.sub': 'Formulario de entrada para la planificación de entrenamientos y competiciones del equipo DRIV (prototipo v1.1) – los borradores se guardan localmente en el navegador.',
   'plan.drivOnly': 'Este módulo está reservado al DRIV y solo está disponible en la versión federativa con datos reales.',
   'nav.calc': 'Calculadora RollArt', 'calc.title': 'Calculadora RollArt', 'calc.addon': 'Add-on',
   'calc.price': '4,99 €/mes', 'calc.activate': 'Activar add-on (demo)',
