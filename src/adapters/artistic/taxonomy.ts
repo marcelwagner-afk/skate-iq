@@ -15,7 +15,9 @@ export const DISCIPLINES: Discipline[] = [
 
 /** competitive classes in progression order (Senioren first) */
 export const KLASSEN = ['senioren', 'junioren', 'youth', 'cadets', 'espoir', 'minis', 'tots'] as const;
-export type Klasse = typeof KLASSEN[number];
+/** Intermediate-Klassen (zweite Leistungsebene, z. B. Cup of Europe) – nur Paarlauf */
+export const INTERMEDIATE_KLASSEN = ['senioren-int', 'junioren-int', 'youth-int', 'cadets-int', 'espoir-int'] as const;
+export type Klasse = typeof KLASSEN[number] | typeof INTERMEDIATE_KLASSEN[number];
 
 /** which disciplines split by gender (singles) vs. couples (no split) */
 const GENDERED: Record<string, boolean> = {
@@ -47,6 +49,15 @@ function buildCategories(): Category[] {
         out.push({ id: categoryId(d.id, k), disciplineId: d.id, nameKey: `klasse.${k}`, ageGroupId: k, order: order++ });
       }
     }
+    // Intermediate-Klassen (Cup of Europe, zweite Leistungsebene) – nur Paarlauf
+    if (d.id === 'artistic.paarlauf') {
+      for (const k of INTERMEDIATE_KLASSEN) {
+        out.push({
+          id: categoryId(d.id, k), disciplineId: d.id, nameKey: `klasse.${k}`,
+          ageGroupId: k.replace('-int', ''), order: order++,
+        });
+      }
+    }
   }
   return out;
 }
@@ -73,6 +84,9 @@ const DIS_MAP: Record<string, string> = {
 const KLASSE_MAP: Record<string, Klasse> = {
   Senioren: 'senioren', Junioren: 'junioren', Youth: 'youth', Jugend: 'youth',
   Cadets: 'cadets', Espoir: 'espoir', Minis: 'minis', Tots: 'tots',
+  'Senioren Intermediate': 'senioren-int', 'Junioren Intermediate': 'junioren-int',
+  'Youth Intermediate': 'youth-int', 'Cadets Intermediate': 'cadets-int',
+  'Espoir Intermediate': 'espoir-int',
 };
 const GENDER_MAP: Record<string, string> = { Damen: 'damen', Herren: 'herren' };
 

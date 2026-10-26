@@ -293,6 +293,7 @@ export const en: Record<string, string> = {
   'dis.artistic.rolltanz': 'Couple Dance', 'dis.artistic.paarlauf': 'Pairs',
   'klasse.senioren': 'Seniors', 'klasse.junioren': 'Juniors', 'klasse.youth': 'Youth',
   'klasse.cadets': 'Cadets', 'klasse.espoir': 'Espoir', 'klasse.minis': 'Minis', 'klasse.tots': 'Tots',
+  'klasse.senioren-int': 'Senior Intermediate', 'klasse.junioren-int': 'Junior Intermediate', 'klasse.youth-int': 'Youth Intermediate', 'klasse.cadets-int': 'Cadet Intermediate', 'klasse.espoir-int': 'Espoir Intermediate',
   'common.fullVersion': 'DRIV full version',
   'gender.damen': 'Women', 'gender.herren': 'Men',
   'dis.speed.track': 'Track', 'dis.speed.road': 'Road',

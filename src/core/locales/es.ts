@@ -275,6 +275,7 @@ export const es: Record<string, string> = {
   'dis.artistic.rolltanz': 'Parejas danza', 'dis.artistic.paarlauf': 'Parejas artístico',
   'klasse.senioren': 'Sénior', 'klasse.junioren': 'Júnior', 'klasse.youth': 'Youth',
   'klasse.cadets': 'Cadetes', 'klasse.espoir': 'Espoir', 'klasse.minis': 'Minis', 'klasse.tots': 'Tots',
+  'klasse.senioren-int': 'Senior Intermediate', 'klasse.junioren-int': 'Junior Intermediate', 'klasse.youth-int': 'Youth Intermediate', 'klasse.cadets-int': 'Cadet Intermediate', 'klasse.espoir-int': 'Espoir Intermediate',
   'common.fullVersion': 'Versión completa DRIV',
   'gender.damen': 'Mujeres', 'gender.herren': 'Hombres',
   'dis.speed.track': 'Pista', 'dis.speed.road': 'Ruta',
