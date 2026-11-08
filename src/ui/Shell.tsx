@@ -22,6 +22,7 @@ const IC: Record<string, ReactNode> = {
   data: <><ellipse cx="12" cy="5" rx="8" ry="2.6" /><path d="M4 5v14c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6V5M4 12c0 1.4 3.6 2.6 8 2.6s8-1.2 8-2.6" /></>,
   driv: <path d="M12 3l7 3v5c0 4.6-3 8.6-7 10-4-1.4-7-5.4-7-10V6zM8.5 12l2.3 2.3L15.5 9.5" />,
   plan: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M8 3v4m8-4v4M3 10h18M7.5 14.5h3m3 0h3M7.5 17.5h3" /></>,
+  medal: <><circle cx="12" cy="14.5" r="5.5" /><path d="M9.5 9.8 6 3h4l2 4 2-4h4l-3.5 6.8M12 12.2l.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2-1.45-1.4 2-.3z" /></>,
 };
 function Icon({ k }: { k: string }) {
   return (
@@ -97,7 +98,7 @@ function Brand() {
 }
 
 const LINKS: [string, string, string][] = [
-  ['/home', 'nav.home', 'home'], ['/driv', 'nav.driv', 'driv'], ['/saisonplanung', 'nav.plan', 'plan'], ['/leaderboard', 'nav.leaderboard', 'board'],
+  ['/home', 'nav.home', 'home'], ['/driv', 'nav.driv', 'driv'], ['/international', 'nav.intl', 'medal'], ['/saisonplanung', 'nav.plan', 'plan'], ['/leaderboard', 'nav.leaderboard', 'board'],
   ['/compare', 'nav.compare', 'compare'], ['/talent', 'nav.talent', 'talent'],
   ['/federation/GER', 'nav.federation', 'fed'], ['/countries', 'nav.countries', 'globe'],
   ['/competitions', 'nav.competitions', 'comp'], ['/rechner', 'nav.calc', 'calc'], ['/methodik', 'nav.method', 'book'], ['/pricing', 'nav.pricing', 'price'],
